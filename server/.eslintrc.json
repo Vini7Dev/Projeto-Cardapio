@@ -23,6 +23,7 @@
         "prettier"
     ],
     "rules": {
+        "camelcase": "off",
         "no-console": "off",
         "import/extensions": [
             "error",
