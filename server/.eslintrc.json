@@ -31,7 +31,10 @@
                 "ts": "never"
             }
         ],
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "class-methods-use-this": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-empty-function": "off"
     },
     "settings": {
         "import/resolver": {
