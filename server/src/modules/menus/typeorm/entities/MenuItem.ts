@@ -2,7 +2,6 @@
  * MenuItem Entity
  */
 
-
 class MenuItem {
     id: string;
 
