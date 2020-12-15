@@ -1,3 +1,7 @@
+/**
+ * Category Entity
+ */
+
 class Category {
     id: number;
 

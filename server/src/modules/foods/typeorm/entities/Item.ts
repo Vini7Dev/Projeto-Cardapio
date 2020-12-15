@@ -1,3 +1,7 @@
+/**
+ * Item Entity
+ */
+
 class Item {
     id: string;
 

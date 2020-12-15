@@ -1,3 +1,7 @@
+/**
+ * Restaurant Entity
+ */
+
 class Restaurant {
     id: string;
 

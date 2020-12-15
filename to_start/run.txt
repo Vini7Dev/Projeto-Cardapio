@@ -1,0 +1,2 @@
+Create a Docker container with the Postgres DataBase:
+docker run --name e-cardapio -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d -t postgres
