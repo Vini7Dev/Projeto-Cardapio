@@ -47,6 +47,7 @@ export default class CreateItems1608147283469 implements MigrationInterface {
                     {
                         name: 'category_id',
                         type: 'smallint',
+                        isNullable: true,
                     },
                     {
                         name: 'enabled',

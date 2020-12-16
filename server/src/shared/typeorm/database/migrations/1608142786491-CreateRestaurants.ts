@@ -52,6 +52,7 @@ export default class CreateRestaurants1608142786491
                         type: 'int',
                         generationStrategy: 'increment',
                         isGenerated: true,
+                        isUnique: true,
                     },
                     {
                         name: 'created_at',
