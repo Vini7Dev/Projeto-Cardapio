@@ -3,9 +3,7 @@
  */
 
 class Menu {
-    id: string;
-
-    menu_code: number;
+    id: number;
 
     created_at: Date;
 

@@ -17,7 +17,7 @@ class Restaurant {
 
     password: string;
 
-    menu_id: string;
+    menu_id: number;
 
     created_at: Date;
 
