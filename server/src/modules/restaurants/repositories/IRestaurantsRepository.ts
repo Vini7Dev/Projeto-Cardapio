@@ -8,6 +8,7 @@ import ICreateRestaurantDTO from '../dtos/ICreateRestaurantDTO';
 
 interface IRestaurantsRepository {
     getAll(): Promise<Restaurant[] | undefined>; // Get all restaurants
+    findByEmail(email: string): Promise<Restaurant | undefined>; // Find restaurant by e-mail
     create(restaurantData: ICreateRestaurantDTO): Promise<Restaurant>; // Create restaurant
 }
 
