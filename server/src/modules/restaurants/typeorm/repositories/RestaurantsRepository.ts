@@ -26,15 +26,26 @@ class RestaurantsRepository implements IRestaurantsRepository {
 
     // Find one restaurant with id
     public async findById(id: string): Promise<Restaurant | undefined> {
-        const restaurant = await this.repository.findOne({ where: { id } });
+        const restaurantFinded = await this.repository.findOne({
+            where: { id },
+        });
 
-        return restaurant;
+        return restaurantFinded;
     }
 
     // Find one restaurant with e-mal
     public async findByEmail(email: string): Promise<Restaurant | undefined> {
         const restaurantFinded = await this.repository.findOne({
             where: { email },
+        });
+
+        return restaurantFinded;
+    }
+
+    // Find one restaurant with CNPJ
+    public async findByCNPJ(cnpj: string): Promise<Restaurant | undefined> {
+        const restaurantFinded = await this.repository.findOne({
+            where: { cnpj },
         });
 
         return restaurantFinded;

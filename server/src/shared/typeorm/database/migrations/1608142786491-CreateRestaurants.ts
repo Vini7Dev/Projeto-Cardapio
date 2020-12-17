@@ -27,6 +27,7 @@ export default class CreateRestaurants1608142786491
                         name: 'cnpj',
                         type: 'varchar',
                         length: '11',
+                        isUnique: true,
                     },
                     {
                         name: 'telephone',

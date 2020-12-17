@@ -3,12 +3,13 @@
  */
 
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
+import Restaurant from '../typeorm/entities/Restaurant';
 
 class GetAllRestaurantsService {
     constructor(private restaurantsRepository: IRestaurantsRepository) {}
 
     // Execute the service
-    public async execute() {
+    public async execute(): Promise<Restaurant[] | undefined> {
         // Getting all restaurants from database
         const allRestaurants = await this.restaurantsRepository.getAll();
 
