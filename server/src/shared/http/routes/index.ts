@@ -5,7 +5,7 @@
 import { Router } from 'express';
 import restaurantsRoutes from '../../../modules/restaurants/routes/restaurant.routes';
 import foodsRoutes from '../../../modules/foods/routes/foods.routes';
-import menusRoutes from '../../../modules/menus/routes/menus.routes';
+import menuItems from '../../../modules/menuItems/routes/menuItems.routes';
 
 // Creating a router object
 const routes = Router();
@@ -13,6 +13,6 @@ const routes = Router();
 // Create routes
 routes.use('/restaurants', restaurantsRoutes);
 routes.use('/foods', foodsRoutes);
-routes.use('/menus', menusRoutes);
+routes.use('/menus', menuItems);
 
 export default routes;

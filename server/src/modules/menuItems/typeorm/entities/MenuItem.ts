@@ -5,7 +5,7 @@
 class MenuItem {
     id: string;
 
-    menu_id: number;
+    menu_code: number;
 
     item_id: string;
 

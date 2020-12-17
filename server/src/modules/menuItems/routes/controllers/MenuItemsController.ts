@@ -5,7 +5,7 @@
 import { Request, Response } from 'express';
 
 // Controller
-class MenuController {
+class MenuItemsController {
     // Look for a menu
     public async index(request: Request, response: Response) {
         console.log('Em desenvolvimento...');
@@ -25,4 +25,4 @@ class MenuController {
     }
 }
 
-export default MenuController;
+export default MenuItemsController;
