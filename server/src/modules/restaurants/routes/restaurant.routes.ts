@@ -12,9 +12,9 @@ const restaurantsController = new RestaurantsController();
 
 // Restaurant routes
 // List restaurants
-restaurantRoutes.get('/:id', restaurantsController.index)
+restaurantRoutes.get('/', restaurantsController.index)
 
 // Create a restaurant
-restaurantRoutes.post('/:id', restaurantsController.create);
+restaurantRoutes.post('/', restaurantsController.create);
 
 export default restaurantRoutes;
