@@ -17,7 +17,4 @@ restaurantRoutes.get('/', restaurantsController.index)
 // Create a restaurant
 restaurantRoutes.post('/', restaurantsController.create);
 
-// Update the restaurant data
-restaurantRoutes.put('/', restaurantsController.update);
-
 export default restaurantRoutes;

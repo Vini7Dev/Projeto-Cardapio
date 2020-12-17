@@ -24,7 +24,14 @@ class RestaurantsRepository implements IRestaurantsRepository {
         return allRepositories;
     }
 
-    // Finde one restaurant with e-mal
+    // Find one restaurant with id
+    public async findById(id: string): Promise<Restaurant | undefined> {
+        const restaurant = await this.repository.findOne({ where: { id } });
+
+        return restaurant;
+    }
+
+    // Find one restaurant with e-mal
     public async findByEmail(email: string): Promise<Restaurant | undefined> {
         const restaurantFinded = await this.repository.findOne({ where: { email } })
 
