@@ -15,24 +15,28 @@ class CreateRestaurantService {
         telephone,
         logo,
         email,
-        password
+        password,
     }: ICreateRestaurantDTO) {
         // Search a restaurant created with a same email
-        const restaurantWithSameEmail = await this.restaurantsRepository.findByEmail(email);
+        const restaurantWithSameEmail = await this.restaurantsRepository.findByEmail(
+            email,
+        );
 
         // If exists, cancel the operation
-        if(restaurantWithSameEmail) {
-            throw new Error('Já existe um restaurante cadastrado com este e-mail.');
+        if (restaurantWithSameEmail) {
+            throw new Error(
+                'Já existe um restaurante cadastrado com este e-mail.',
+            );
         }
 
-        //Create the restaurant
+        // Create the restaurant
         const restaurantCreated = await this.restaurantsRepository.create({
             trade,
             cnpj,
             telephone,
             logo,
             email,
-            password
+            password,
         });
 
         // Return restaurant data

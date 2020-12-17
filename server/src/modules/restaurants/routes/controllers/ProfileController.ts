@@ -11,7 +11,7 @@ class ProfileController {
 
         try {
             return response.json({ message: 'OK' }).status(200);
-        } catch(error) {
+        } catch (error) {
             // When an error occurs
             return response.json({ error }).status(400);
         }
@@ -23,7 +23,7 @@ class ProfileController {
 
         try {
             return response.json({ message: 'OK' }).status(200);
-        } catch(error) {
+        } catch (error) {
             // When an error occurs
             return response.json({ error }).status(400);
         }

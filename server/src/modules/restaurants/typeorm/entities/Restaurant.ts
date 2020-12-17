@@ -2,11 +2,16 @@
  * Restaurant Entity
  */
 
- import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn,
+    UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('restaurants')
 class Restaurant {
-
     @PrimaryGeneratedColumn('uuid')
     id: string;
 

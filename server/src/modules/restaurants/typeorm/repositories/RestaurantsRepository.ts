@@ -33,13 +33,17 @@ class RestaurantsRepository implements IRestaurantsRepository {
 
     // Find one restaurant with e-mal
     public async findByEmail(email: string): Promise<Restaurant | undefined> {
-        const restaurantFinded = await this.repository.findOne({ where: { email } })
+        const restaurantFinded = await this.repository.findOne({
+            where: { email },
+        });
 
         return restaurantFinded;
     }
 
     // Creating a restaurant
-    public async create(restaurantData: ICreateRestaurantDTO): Promise<Restaurant> {
+    public async create(
+        restaurantData: ICreateRestaurantDTO,
+    ): Promise<Restaurant> {
         const restaurantCreated = await this.repository.create(restaurantData);
 
         const restaurantSaved = await this.repository.save(restaurantCreated);

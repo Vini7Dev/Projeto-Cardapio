@@ -5,7 +5,7 @@
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
 
 class GetAllRestaurantsService {
-    constructor(private restaurantsRepository: IRestaurantsRepository){}
+    constructor(private restaurantsRepository: IRestaurantsRepository) {}
 
     // Execute the service
     public async execute() {

@@ -4,7 +4,7 @@
 
 import { Router } from 'express';
 
- import ProfileController from './controllers/ProfileController';
+import ProfileController from './controllers/ProfileController';
 
 // Create a route object
 const profileRoutes = Router();
@@ -16,4 +16,4 @@ profileRoutes.get('/', profileController.show);
 // Update restaurant data
 profileRoutes.put('/', profileController.update);
 
- export default profileRoutes;
+export default profileRoutes;

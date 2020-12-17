@@ -2,7 +2,7 @@
  * Interface Restaurants Repository
  */
 
-import Restaurant from "../typeorm/entities/Restaurant";
+import Restaurant from '../typeorm/entities/Restaurant';
 
 import ICreateRestaurantDTO from '../dtos/ICreateRestaurantDTO';
 

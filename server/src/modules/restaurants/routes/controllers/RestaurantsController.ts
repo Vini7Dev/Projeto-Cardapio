@@ -15,14 +15,16 @@ class RestaurantsController {
     public async index(request: Request, response: Response) {
         try {
             // Creating an instance of sercice to list resaturants
-            const getAllRestaurantsService = new GetAllRestaurantsService(new RestaurantsRepository);
+            const getAllRestaurantsService = new GetAllRestaurantsService(
+                new RestaurantsRepository(),
+            );
 
             // Executing service
             const allRestaurants = await getAllRestaurantsService.execute();
 
             // Returning response
             return response.json({ result: allRestaurants }).status(200);
-        } catch(error) {
+        } catch (error) {
             // When an error occurs
             return response.json({ error }).status(400);
         }
@@ -32,17 +34,21 @@ class RestaurantsController {
     public async create(request: Request, response: Response) {
         try {
             // Creating an instance of service to create an restaurant
-            const createRestaurantService = new CreateRestaurantService(new RestaurantsRepository);
+            const createRestaurantService = new CreateRestaurantService(
+                new RestaurantsRepository(),
+            );
 
             // Recover request body data
             const restaurantData = request.body;
 
             // Executing the service
-            const restaurant = await createRestaurantService.execute(restaurantData);
+            const restaurant = await createRestaurantService.execute(
+                restaurantData,
+            );
 
-            //Returning response
+            // Returning response
             return response.json(restaurant).status(200);
-        } catch(error) {
+        } catch (error) {
             // When an error occurs
             return response.json({ error }).status(400);
         }
