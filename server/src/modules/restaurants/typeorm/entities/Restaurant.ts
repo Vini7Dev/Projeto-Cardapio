@@ -3,10 +3,10 @@
  */
 
  import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
- import { Exclude } from 'class-transformer';
 
 @Entity('restaurants')
 class Restaurant {
+
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -26,7 +26,6 @@ class Restaurant {
     email: string;
 
     @Column()
-    @Exclude()
     password: string;
 
     @Column('int4')

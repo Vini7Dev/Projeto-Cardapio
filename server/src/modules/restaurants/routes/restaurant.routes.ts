@@ -11,6 +11,9 @@ const restaurantRoutes = Router();
 const restaurantsController = new RestaurantsController();
 
 // Restaurant routes
+// List restaurants
+restaurantRoutes.get('/', restaurantsController.index)
+
 // Create a restaurant
 restaurantRoutes.post('/', restaurantsController.create);
 
