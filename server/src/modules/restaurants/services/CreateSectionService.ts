@@ -5,6 +5,8 @@
 import { sign } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
 
+import authConfig from '../../../config/authConfig';
+
 import Restaurant from '../typeorm/entities/Restaurant';
 
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
@@ -56,13 +58,13 @@ class CreateSectionService {
             throw new Error('As credenciais estão incorretas');
         }
 
-        // Reminder
-        console.error('=============VERIFICAR SE A SENHA BATE============');
+        // Getting token configuration
+        const { secret, expiresIn } = authConfig.token;
 
         // Create Token
-        const token = sign({}, 'd8511e6f3c23fe927f582006724c933f', {
+        const token = sign({}, secret, {
             subject: restaurantData.id,
-            expiresIn: '1d',
+            expiresIn: expiresIn,
         });
 
         // Returning the response

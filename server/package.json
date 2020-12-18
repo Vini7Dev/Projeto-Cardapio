@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "server": "ts-node-dev ./src/shared/http/server.ts —transpileOnly —ignore-watch node_modules",
+    "server": "ts-node-dev --transpile-only --inspect --ignore-watch node_modules src/shared/http/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {

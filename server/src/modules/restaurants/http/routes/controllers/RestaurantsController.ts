@@ -5,10 +5,10 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import RestaurantsRepository from '../../typeorm/repositories/RestaurantsRepository';
+import RestaurantsRepository from '../../../typeorm/repositories/RestaurantsRepository';
 
-import GetAllRestaurantsService from '../../services/GetAllRestaurantsService';
-import CreateRestaurantService from '../../services/CreateRestaurantService';
+import GetAllRestaurantsService from '../../../services/GetAllRestaurantsService';
+import CreateRestaurantService from '../../../services/CreateRestaurantService';
 
 // Controller
 class RestaurantsController {

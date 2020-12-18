@@ -5,8 +5,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import CreateSectionService from '../../services/CreateSectionService';
-import RestaurantsRepository from '../../typeorm/repositories/RestaurantsRepository';
+import CreateSectionService from '../../../services/CreateSectionService';
+import RestaurantsRepository from '../../../typeorm/repositories/RestaurantsRepository';
 
 class SectionController {
     // Creating a new section - Json Web Token
