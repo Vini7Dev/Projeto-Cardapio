@@ -3,6 +3,7 @@
  */
 
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
 import RestaurantsRepository from '../../typeorm/repositories/RestaurantsRepository';
 
@@ -15,9 +16,7 @@ class RestaurantsController {
     public async index(request: Request, response: Response) {
         try {
             // Creating an instance of sercice to list resaturants
-            const getAllRestaurantsService = new GetAllRestaurantsService(
-                new RestaurantsRepository(),
-            );
+            const getAllRestaurantsService = container.resolve(GetAllRestaurantsService);
 
             // Executing service
             const allRestaurants = await getAllRestaurantsService.execute();
@@ -34,9 +33,7 @@ class RestaurantsController {
     public async create(request: Request, response: Response) {
         try {
             // Creating an instance of service to create an restaurant
-            const createRestaurantService = new CreateRestaurantService(
-                new RestaurantsRepository(),
-            );
+            const createRestaurantService = container.resolve(CreateRestaurantService);
 
             // Recover request body data
             const restaurantData = request.body;

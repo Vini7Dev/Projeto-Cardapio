@@ -2,12 +2,18 @@
  * Create Restaurant Service
  */
 
+import { injectable, inject } from 'tsyringe';
+
 import ICreateRestaurantDTO from '../dtos/ICreateRestaurantDTO';
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
 import Restaurant from '../typeorm/entities/Restaurant';
 
+@injectable()
 class CreateRestaurantService {
-    constructor(private restaurantsRepository: IRestaurantsRepository) {}
+    constructor(
+        @inject('RestaurantsRepository')
+        private restaurantsRepository: IRestaurantsRepository
+    ) {}
 
     // Executing the service
     public async execute({

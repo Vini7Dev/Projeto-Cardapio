@@ -3,6 +3,8 @@
  */
 
 import { sign } from 'jsonwebtoken';
+import { injectable, inject } from 'tsyringe';
+
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
 import Restaurant from '../typeorm/entities/Restaurant';
 
@@ -17,8 +19,12 @@ interface IServiceResponse {
     token: string;
 }
 
+@injectable()
 class CreateSectionService {
-    constructor(private restaurantsRepository: IRestaurantsRepository) {}
+    constructor(
+        @inject('RestaurantsRepository')
+        private restaurantsRepository: IRestaurantsRepository
+    ) {}
 
     // Execute service
     public async execute({

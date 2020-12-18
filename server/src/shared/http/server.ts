@@ -4,6 +4,8 @@ import '../typeorm/database';
 import express from 'express';
 import routes from './routes';
 
+import '../container';
+
 // Create a server main controller
 const server = express();
 

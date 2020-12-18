@@ -3,6 +3,7 @@
  */
 
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
 import CreateSectionService from '../../services/CreateSectionService';
 import RestaurantsRepository from '../../typeorm/repositories/RestaurantsRepository';
@@ -12,9 +13,7 @@ class SectionController {
     public async create(request: Request, response: Response) {
         try {
             // Instantiate a service to create a section
-            const createSectionService = new CreateSectionService(
-                new RestaurantsRepository(),
-            );
+            const createSectionService = container.resolve(CreateSectionService);
 
             // Getting credentials from request body
             const { email, password } = request.body;
