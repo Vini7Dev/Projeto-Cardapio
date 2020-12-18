@@ -7,6 +7,7 @@ interface ICreateRestaurantDTO {
     cnpj: string;
     telephone: string;
     logo: string;
+    menu_id: string;
     email: string;
     password: string;
 }

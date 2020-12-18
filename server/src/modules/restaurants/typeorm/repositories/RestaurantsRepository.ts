@@ -51,7 +51,7 @@ class RestaurantsRepository implements IRestaurantsRepository {
         return restaurantFinded;
     }
 
-    // Creating a restaurant
+    // Creating a new restaurant
     public async create(
         restaurantData: ICreateRestaurantDTO,
     ): Promise<Restaurant> {

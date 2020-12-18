@@ -33,8 +33,8 @@ class Restaurant {
     @Column()
     password: string;
 
-    @Column('int4')
-    menu_code: number;
+    @Column('uuid')
+    menu_id: number;
 
     @CreateDateColumn()
     created_at: Date;

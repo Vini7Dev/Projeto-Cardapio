@@ -1,3 +1,7 @@
+/**
+ * Migration - Menu Items Table
+ */
+
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export default class MenuItems1608147875637 implements MigrationInterface {
@@ -14,8 +18,8 @@ export default class MenuItems1608147875637 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
-                        name: 'menu_code',
-                        type: 'int',
+                        name: 'menu_id',
+                        type: 'uuid',
                     },
                     {
                         name: 'item_id',

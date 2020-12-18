@@ -49,11 +49,8 @@ export default class CreateRestaurants1608142786491
                         type: 'varchar',
                     },
                     {
-                        name: 'menu_code',
-                        type: 'int',
-                        generationStrategy: 'increment',
-                        isGenerated: true,
-                        isUnique: true,
+                        name: 'menu_id',
+                        type: 'uuid',
                     },
                     {
                         name: 'created_at',

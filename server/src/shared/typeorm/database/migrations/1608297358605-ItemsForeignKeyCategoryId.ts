@@ -1,7 +1,10 @@
-import { MigrationInterface, QueryRunner, TableForeignKey } from 'typeorm';
+/**
+ * Migration - Items Foreign Key (Category Id)
+ */
 
-export default class ItemsForeignKeyCategoryId1608149828386
-    implements MigrationInterface {
+import {MigrationInterface, QueryRunner, TableForeignKey} from "typeorm";
+
+export default class ItemsForeignKeyCategoryId1608297358605 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createForeignKey(
             'items',
@@ -10,7 +13,7 @@ export default class ItemsForeignKeyCategoryId1608149828386
                 columnNames: ['category_id'],
                 referencedTableName: 'categories',
                 referencedColumnNames: ['id'],
-                onDelete: 'SET NULL',
+                onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
             }),
         );

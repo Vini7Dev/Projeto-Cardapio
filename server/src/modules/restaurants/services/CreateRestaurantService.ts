@@ -2,9 +2,11 @@
  * Create Restaurant Service
  */
 
-import { injectable, inject } from 'tsyringe';
+import { injectable, inject, container } from 'tsyringe';
 
 import Restaurant from '../typeorm/entities/Restaurant';
+
+import CreateMenuService from '../../menu/services/CreateMenuService';
 
 import ICreateRestaurantDTO from '../dtos/ICreateRestaurantDTO';
 import IHashProvider from '../providers/HashProvider/modules/IHashProvider';
@@ -56,12 +58,19 @@ class CreateRestaurantService {
         // Encrypting the password
         const hashedPassword = await this.hashProvider.generateHash(password);
 
+        // Instantiate "Create Menu Service"
+        const createMenuService =  container.resolve(CreateMenuService);
+
+        // Creating a menu for restaurant
+        const menu = await createMenuService.execute();
+
         // Create the restaurant
         const restaurantCreated = await this.restaurantsRepository.create({
             trade,
             cnpj,
             telephone,
             logo,
+            menu_id: menu.id,
             email,
             password: hashedPassword,
         });

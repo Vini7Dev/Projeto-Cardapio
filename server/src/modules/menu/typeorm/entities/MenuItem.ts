@@ -15,8 +15,8 @@ class MenuItem {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column('int4')
-    menu_code: number;
+    @Column('uuid')
+    menu_id: number;
 
     @Column('uuid')
     item_id: string;
