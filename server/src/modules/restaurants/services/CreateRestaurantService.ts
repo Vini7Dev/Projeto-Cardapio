@@ -4,15 +4,20 @@
 
 import { injectable, inject } from 'tsyringe';
 
-import ICreateRestaurantDTO from '../dtos/ICreateRestaurantDTO';
-import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
 import Restaurant from '../typeorm/entities/Restaurant';
+
+import ICreateRestaurantDTO from '../dtos/ICreateRestaurantDTO';
+import IHashProvider from '../providers/HashProvider/modules/IHashProvider';
+import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
 
 @injectable()
 class CreateRestaurantService {
     constructor(
         @inject('RestaurantsRepository')
-        private restaurantsRepository: IRestaurantsRepository
+        private restaurantsRepository: IRestaurantsRepository,
+
+        @inject('HashProvider')
+        private hashProvider: IHashProvider
     ) {}
 
     // Executing the service
@@ -48,6 +53,9 @@ class CreateRestaurantService {
             );
         }
 
+        // Encrypting the password
+        const hashedPassword = await this.hashProvider.generateHash(password);
+
         // Create the restaurant
         const restaurantCreated = await this.restaurantsRepository.create({
             trade,
@@ -55,7 +63,7 @@ class CreateRestaurantService {
             telephone,
             logo,
             email,
-            password,
+            password: hashedPassword,
         });
 
         // Return restaurant data

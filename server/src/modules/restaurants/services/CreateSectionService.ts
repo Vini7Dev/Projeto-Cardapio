@@ -5,8 +5,10 @@
 import { sign } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
 
-import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
 import Restaurant from '../typeorm/entities/Restaurant';
+
+import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
+import IHashProvider from '../providers/HashProvider/modules/IHashProvider';
 
 interface IServiceRequest {
     email: string;
@@ -23,7 +25,10 @@ interface IServiceResponse {
 class CreateSectionService {
     constructor(
         @inject('RestaurantsRepository')
-        private restaurantsRepository: IRestaurantsRepository
+        private restaurantsRepository: IRestaurantsRepository,
+
+        @inject('HashProvider')
+        private hashProvider: IHashProvider
     ) {}
 
     // Execute service
@@ -31,9 +36,6 @@ class CreateSectionService {
         email,
         password,
     }: IServiceRequest): Promise<IServiceResponse> {
-        // Reminder
-        console.error('=============CRIPTOGRAFAR AS SENHAS=============');
-
         // Search for a restaurant with this e-mail
         const restaurantData = await this.restaurantsRepository.findByEmail(
             email,
@@ -44,6 +46,14 @@ class CreateSectionService {
             throw new Error(
                 'Não existe um restaurante cadastrado com este email.',
             );
+        }
+
+        // Compare restaurant's password hashed with no hashed
+        const passwordIsCorrect = await this.hashProvider.compareHash(password, restaurantData.password);
+
+        // If is invalid, cancel the operation
+        if(!passwordIsCorrect) {
+            throw new Error('As credenciais estão incorretas');
         }
 
         // Reminder

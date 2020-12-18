@@ -18,4 +18,5 @@ server.use(routes);
 // Start the server on port 3333
 server.listen(3333, () => {
     console.log('===> Server started on port "3333" <===');
+    console.log('=> Remover o Password do retorno dos dados.')
 });
