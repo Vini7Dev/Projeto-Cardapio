@@ -2,9 +2,10 @@
  * Migration - Restaurants Foreign Key (Menu Id)
  */
 
-import {MigrationInterface, QueryRunner, TableForeignKey} from "typeorm";
+import { MigrationInterface, QueryRunner, TableForeignKey } from 'typeorm';
 
-export default class RestaurantsForeignKeyMenuId1608297307742 implements MigrationInterface {
+export default class RestaurantsForeignKeyMenuId1608297307742
+    implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createForeignKey(
             'restaurants',
@@ -15,7 +16,7 @@ export default class RestaurantsForeignKeyMenuId1608297307742 implements Migrati
                 referencedColumnNames: ['id'],
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
-            })
+            }),
         );
     }
 

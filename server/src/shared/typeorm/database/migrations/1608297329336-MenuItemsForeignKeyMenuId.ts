@@ -2,9 +2,10 @@
  * Migration - Menu Items Foreign Key (Menu Id)
  */
 
-import {MigrationInterface, QueryRunner, TableForeignKey} from "typeorm";
+import { MigrationInterface, QueryRunner, TableForeignKey } from 'typeorm';
 
-export default class MenuItemsForeignKeyMenuId1608297329336 implements MigrationInterface {
+export default class MenuItemsForeignKeyMenuId1608297329336
+    implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createForeignKey(
             'menu_items',

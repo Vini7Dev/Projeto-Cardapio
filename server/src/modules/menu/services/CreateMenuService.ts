@@ -2,14 +2,14 @@
  * Create Menu Service
  */
 
-import { inject, injectable } from "tsyringe";
-import IMenusRepository from "../repositories/IMenusRepository";
+import { inject, injectable } from 'tsyringe';
+import IMenusRepository from '../repositories/IMenusRepository';
 
- @injectable()
+@injectable()
 class CreateMenuService {
     constructor(
         @inject('MenusRepository')
-        private menusRepository: IMenusRepository
+        private menusRepository: IMenusRepository,
     ) {}
 
     // Executing the service

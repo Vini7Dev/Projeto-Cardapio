@@ -5,7 +5,7 @@
 declare namespace Express {
     export interface Request {
         restaurant: {
-            id: string
-        }
+            id: string;
+        };
     }
 }

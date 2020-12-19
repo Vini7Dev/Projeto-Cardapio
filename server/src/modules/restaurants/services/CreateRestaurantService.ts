@@ -19,7 +19,7 @@ class CreateRestaurantService {
         private restaurantsRepository: IRestaurantsRepository,
 
         @inject('HashProvider')
-        private hashProvider: IHashProvider
+        private hashProvider: IHashProvider,
     ) {}
 
     // Executing the service
@@ -59,7 +59,7 @@ class CreateRestaurantService {
         const hashedPassword = await this.hashProvider.generateHash(password);
 
         // Instantiate "Create Menu Service"
-        const createMenuService =  container.resolve(CreateMenuService);
+        const createMenuService = container.resolve(CreateMenuService);
 
         // Creating a menu for restaurant
         const menu = await createMenuService.execute();

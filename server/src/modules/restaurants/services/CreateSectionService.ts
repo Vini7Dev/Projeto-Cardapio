@@ -30,7 +30,7 @@ class CreateSectionService {
         private restaurantsRepository: IRestaurantsRepository,
 
         @inject('HashProvider')
-        private hashProvider: IHashProvider
+        private hashProvider: IHashProvider,
     ) {}
 
     // Execute service
@@ -51,10 +51,13 @@ class CreateSectionService {
         }
 
         // Compare restaurant's password hashed with no hashed
-        const passwordIsCorrect = await this.hashProvider.compareHash(password, restaurantData.password);
+        const passwordIsCorrect = await this.hashProvider.compareHash(
+            password,
+            restaurantData.password,
+        );
 
         // If is invalid, cancel the operation
-        if(!passwordIsCorrect) {
+        if (!passwordIsCorrect) {
             throw new Error('As credenciais estão incorretas');
         }
 
@@ -64,7 +67,7 @@ class CreateSectionService {
         // Create Token
         const token = sign({}, secret, {
             subject: restaurantData.id,
-            expiresIn: expiresIn,
+            expiresIn,
         });
 
         // Returning the response

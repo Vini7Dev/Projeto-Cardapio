@@ -2,8 +2,8 @@
  * BCriptJS Hash Provider
  */
 
-import IHashProvider from "../modules/IHashProvider";
 import { hash, compare } from 'bcryptjs';
+import IHashProvider from '../modules/IHashProvider';
 
 class BCryptHashProvider implements IHashProvider {
     // Generate hash
@@ -14,8 +14,11 @@ class BCryptHashProvider implements IHashProvider {
     }
 
     // Compare hash
-    public async compareHash(noHashed: string, hashed: string): Promise<boolean> {
-        const isValid = await compare(noHashed, hashed)
+    public async compareHash(
+        noHashed: string,
+        hashed: string,
+    ): Promise<boolean> {
+        const isValid = await compare(noHashed, hashed);
 
         return isValid;
     }

@@ -11,7 +11,7 @@ import Restaurant from '../typeorm/entities/Restaurant';
 class GetAllRestaurantsService {
     constructor(
         @inject('RestaurantsRepository')
-        private restaurantsRepository: IRestaurantsRepository
+        private restaurantsRepository: IRestaurantsRepository,
     ) {}
 
     // Execute the service

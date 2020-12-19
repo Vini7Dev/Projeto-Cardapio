@@ -13,7 +13,9 @@ class SectionController {
     public async create(request: Request, response: Response) {
         try {
             // Instantiate a service to create a section
-            const createSectionService = container.resolve(CreateSectionService);
+            const createSectionService = container.resolve(
+                CreateSectionService,
+            );
 
             // Getting credentials from request body
             const { email, password } = request.body;
