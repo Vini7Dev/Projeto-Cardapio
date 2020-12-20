@@ -17,11 +17,13 @@ class RestaurantsRepository implements IRestaurantsRepository {
         this.repository = getRepository(Restaurant);
     }
 
-    // Getting all restaurants from database
+    // Getting all restaurants with menu data from database
     public async getAll() {
-        const allRepositories = await this.repository.find();
+        const allRestaurants = await this.repository.find({
+            relations: ['menu'],
+        });
 
-        return allRepositories;
+        return allRestaurants;
     }
 
     // Find one restaurant with id

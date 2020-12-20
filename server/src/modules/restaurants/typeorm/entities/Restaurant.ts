@@ -8,7 +8,11 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToOne,
+    JoinColumn,
 } from 'typeorm';
+
+import Menu from '../../../menu/typeorm/entities/Menu';
 
 @Entity('restaurants')
 class Restaurant {
@@ -33,8 +37,12 @@ class Restaurant {
     @Column()
     password: string;
 
-    @Column('uuid')
-    menu_id: number;
+    @Column()
+    menu_id: string;
+
+    @OneToOne(() => Menu)
+    @JoinColumn({ name: 'menu_id' })
+    menu: Menu;
 
     @CreateDateColumn()
     created_at: Date;
