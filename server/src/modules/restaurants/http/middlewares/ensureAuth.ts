@@ -6,6 +6,7 @@ import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
 import authConfig from '../../../../config/authConfig';
+import AppError from '../../../../shared/errors/AppError';
 
 interface ITokenProps {
     sub: string;
@@ -14,17 +15,21 @@ interface ITokenProps {
 }
 
 // Function to ensure that the user is authenticated
-const ensureAuthenticated = (request: Request, response: Response, nextFunction: NextFunction) => {
+const ensureAuthenticated = (
+    request: Request,
+    response: Response,
+    nextFunction: NextFunction,
+) => {
     // Getting token from request authorization
     const { authorization } = request.headers;
 
     // If authorization not exists, cancel the operation
-    if(!authorization) {
-        throw new Error('O Token não foi informado.');
+    if (!authorization) {
+        throw new AppError('O Token não foi informado.');
     }
 
     // Remove 'Bearer' from token
-    const [ , token ] = authorization.split(' ');
+    const [, token] = authorization.split(' ');
 
     try {
         // Getting token configuration
@@ -45,8 +50,8 @@ const ensureAuthenticated = (request: Request, response: Response, nextFunction:
         return nextFunction();
     } catch (error) {
         // When checking the token results in an error (is invalid)
-        throw new Error('O token de acesso é inválido.')
+        throw new AppError('O token de acesso é inválido.', 401);
     }
-}
+};
 
 export default ensureAuthenticated;

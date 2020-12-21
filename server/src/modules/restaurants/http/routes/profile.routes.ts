@@ -21,7 +21,7 @@ const profileController = new ProfileController();
 profileRoutes.get('/:id', profileController.show);
 
 // Update restaurant data
-profileRoutes.post(
+profileRoutes.put(
     '/',
     ensureAuth,
     uploadFile.single('logo'),

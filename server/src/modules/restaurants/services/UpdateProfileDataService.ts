@@ -4,6 +4,8 @@
 
 import { injectable, inject } from 'tsyringe';
 
+import AppError from '../../../shared/errors/AppError';
+
 import IUpdateRestaurantData from '../dtos/IUpdateRestaurantData';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
@@ -38,7 +40,7 @@ class UpdateProfileDataService {
 
         // Verify if this restaurant_id is valid
         if (!restaurant) {
-            throw new Error('O restaurante não foi encontrado.');
+            throw new AppError('O restaurante não foi encontrado.', 404);
         }
 
         // Verify that the password entered is valid
@@ -49,7 +51,7 @@ class UpdateProfileDataService {
 
         // If not valid, cancel the operation
         if (!passwordIsValid) {
-            throw new Error('A senha informada é inválida.');
+            throw new AppError('A senha informada é inválida.', 401);
         }
 
         // Updating trade and telephone

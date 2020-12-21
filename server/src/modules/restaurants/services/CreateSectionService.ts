@@ -6,6 +6,7 @@ import { sign } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
 
 import authConfig from '../../../config/authConfig';
+import AppError from '../../../shared/errors/AppError';
 
 import Restaurant from '../typeorm/entities/Restaurant';
 
@@ -45,8 +46,9 @@ class CreateSectionService {
 
         // If not exists, throw a new error
         if (!restaurantData) {
-            throw new Error(
+            throw new AppError(
                 'Não existe um restaurante cadastrado com este email.',
+                404,
             );
         }
 
@@ -58,7 +60,7 @@ class CreateSectionService {
 
         // If is invalid, cancel the operation
         if (!passwordIsCorrect) {
-            throw new Error('As credenciais estão incorretas');
+            throw new AppError('As credenciais estão incorretas', 401);
         }
 
         // Getting token configuration

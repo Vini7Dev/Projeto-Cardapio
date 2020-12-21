@@ -4,6 +4,7 @@
 
 import { injectable, inject, container } from 'tsyringe';
 
+import AppError from '../../../shared/errors/AppError';
 import Restaurant from '../typeorm/entities/Restaurant';
 
 import CreateMenuService from '../../menu/services/CreateMenuService';
@@ -43,7 +44,7 @@ class CreateRestaurantService {
 
         // If exists, cancel the operation
         if (restaurantWithSameEmail) {
-            throw new Error(
+            throw new AppError(
                 'Já existe um restaurante cadastrado com este e-mail.',
             );
         }
@@ -55,7 +56,7 @@ class CreateRestaurantService {
 
         // If exists, cancel the operation
         if (restaurantWithSameCNPJ) {
-            throw new Error(
+            throw new AppError(
                 'Já existe um restaurante cadastrado com este CNPJ.',
             );
         }
