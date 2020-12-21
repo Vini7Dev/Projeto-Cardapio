@@ -10,7 +10,7 @@ import authConfig from '../../../config/authConfig';
 import Restaurant from '../typeorm/entities/Restaurant';
 
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
-import IHashProvider from '../providers/HashProvider/modules/IHashProvider';
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 interface IServiceRequest {
     email: string;

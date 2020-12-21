@@ -3,6 +3,7 @@ import '../typeorm/database';
 
 import express from 'express';
 import routes from './routes';
+import uploadConfig from '../../config/uploadConfig';
 
 import '../container';
 
@@ -11,6 +12,9 @@ const server = express();
 
 // Using JSON
 server.use(express.json());
+
+// Show uploaded files
+server.use('/files', express.static(uploadConfig.uploadsFolder));
 
 // Use the app routes
 server.use(routes);

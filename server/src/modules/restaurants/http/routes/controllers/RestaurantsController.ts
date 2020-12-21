@@ -5,8 +5,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import RestaurantsRepository from '../../../typeorm/repositories/RestaurantsRepository';
-
 import GetAllRestaurantsService from '../../../services/GetAllRestaurantsService';
 import CreateRestaurantService from '../../../services/CreateRestaurantService';
 
@@ -42,10 +40,17 @@ class RestaurantsController {
             // Recover request body data
             const restaurantData = request.body;
 
+            // Recover logo data from multer's request
+            let logo = '';
+            if (request.file) {
+                logo = request.file.filename;
+            }
+
             // Executing the service
-            const restaurant = await createRestaurantService.execute(
-                restaurantData,
-            );
+            const restaurant = await createRestaurantService.execute({
+                ...restaurantData,
+                logo,
+            });
 
             // Returning response
             return response.json(restaurant).status(200);

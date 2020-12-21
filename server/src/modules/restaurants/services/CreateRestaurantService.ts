@@ -9,8 +9,10 @@ import Restaurant from '../typeorm/entities/Restaurant';
 import CreateMenuService from '../../menu/services/CreateMenuService';
 
 import ICreateRestaurantDTO from '../dtos/ICreateRestaurantDTO';
-import IHashProvider from '../providers/HashProvider/modules/IHashProvider';
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
+
+import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 
 @injectable()
 class CreateRestaurantService {
@@ -20,6 +22,9 @@ class CreateRestaurantService {
 
         @inject('HashProvider')
         private hashProvider: IHashProvider,
+
+        @inject('StorageProvider')
+        private storageProvider: IStorageProvider,
     ) {}
 
     // Executing the service
@@ -74,6 +79,11 @@ class CreateRestaurantService {
             email,
             password: hashedPassword,
         });
+
+        // Saving file in storage
+        if (logo) {
+            await this.storageProvider.saveFile(logo);
+        }
 
         // Return restaurant data
         return restaurantCreated;

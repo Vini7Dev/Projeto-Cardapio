@@ -3,7 +3,7 @@
  */
 
 import { hash, compare } from 'bcryptjs';
-import IHashProvider from '../modules/IHashProvider';
+import IHashProvider from '../models/IHashProvider';
 
 class BCryptHashProvider implements IHashProvider {
     // Generate hash

@@ -5,6 +5,7 @@
 import { container } from 'tsyringe';
 
 import '../../modules/restaurants/providers';
+import './providers';
 
 import IRestaurantsRepository from '../../modules/restaurants/repositories/IRestaurantsRepository';
 import RestaurantsRepository from '../../modules/restaurants/typeorm/repositories/RestaurantsRepository';
