@@ -12,6 +12,7 @@ interface IRestaurantsRepository {
     findByEmail(email: string): Promise<Restaurant | undefined>; // Find restaurant by e-mail
     findByCNPJ(cnpj: string): Promise<Restaurant | undefined>; // Find restaurant by CNPJ
     create(restaurantData: ICreateRestaurantDTO): Promise<Restaurant>; // Create restaurant
+    update(restaurantData: Restaurant): Promise<Restaurant>; // Update restaurant
 }
 
 export default IRestaurantsRepository;

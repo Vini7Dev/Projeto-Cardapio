@@ -63,6 +63,13 @@ class RestaurantsRepository implements IRestaurantsRepository {
 
         return restaurantSaved;
     }
+
+    // Update restaurant's data
+    public async update(restaurantData: Restaurant): Promise<Restaurant> {
+        const restaurantUpdated = await this.repository.save(restaurantData);
+
+        return restaurantUpdated;
+    }
 }
 
 export default RestaurantsRepository;
