@@ -30,6 +30,7 @@ class RestaurantsRepository implements IRestaurantsRepository {
     public async findById(id: string): Promise<Restaurant | undefined> {
         const restaurantFinded = await this.repository.findOne({
             where: { id },
+            relations: ['menu'],
         });
 
         return restaurantFinded;
@@ -39,6 +40,7 @@ class RestaurantsRepository implements IRestaurantsRepository {
     public async findByEmail(email: string): Promise<Restaurant | undefined> {
         const restaurantFinded = await this.repository.findOne({
             where: { email },
+            relations: ['menu'],
         });
 
         return restaurantFinded;
@@ -48,6 +50,7 @@ class RestaurantsRepository implements IRestaurantsRepository {
     public async findByCNPJ(cnpj: string): Promise<Restaurant | undefined> {
         const restaurantFinded = await this.repository.findOne({
             where: { cnpj },
+            relations: ['menu'],
         });
 
         return restaurantFinded;

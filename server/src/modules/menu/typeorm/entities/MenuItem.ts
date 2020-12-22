@@ -16,7 +16,7 @@ class MenuItem {
     id: string;
 
     @Column('uuid')
-    menu_id: number;
+    menu_id: string;
 
     @Column('uuid')
     item_id: string;

@@ -13,14 +13,41 @@ import RestaurantsRepository from '../../modules/restaurants/typeorm/repositorie
 import IMenusRepository from '../../modules/menu/repositories/IMenusRepository';
 import MenusRepository from '../../modules/menu/typeorm/repositories/MenusRepository';
 
-// Gerister restaurants repository container
+import IItemsrepository from '../../modules/items/repositories/IItemsRepository';
+import ItemsRepository from '../../modules/items/typeorm/repositories/ItemsRepository';
+
+import ICategoriesRepository from '../../modules/items/repositories/ICategoriesRepository';
+import CategoriesRepository from '../../modules/items/typeorm/repositories/CategoriesRepository';
+
+import IMenuItemsRepository from '../../modules/menu/repositories/IMenuItemsRepository';
+import MenuItemsRepository from '../../modules/menu/typeorm/repositories/MenuItemsRepository';
+
+// Register restaurants repository container
 container.registerSingleton<IRestaurantsRepository>(
     'RestaurantsRepository',
     RestaurantsRepository,
 );
 
-// Gerister menus repository container
+// Register menus repository container
 container.registerSingleton<IMenusRepository>(
     'MenusRepository',
     MenusRepository,
+);
+
+// Register items repository container
+container.registerSingleton<IItemsrepository>(
+    'ItemsRepository',
+    ItemsRepository,
+);
+
+// Register categories repository container
+container.registerSingleton<ICategoriesRepository>(
+    'CategoriesRepository',
+    CategoriesRepository,
+);
+
+// Register menu items repository container
+container.registerSingleton<IMenuItemsRepository>(
+    'MenuItemsRepository',
+    MenuItemsRepository,
 );
