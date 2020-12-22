@@ -5,7 +5,7 @@
 import Menu from '../typeorm/entities/Menu';
 
 interface IMenusRepository {
-    create(): Promise<Menu>; // Create a new menun for each restaurant
+    create(): Promise<Menu>; // Create a new menun
 }
 
 export default IMenusRepository;

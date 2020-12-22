@@ -1,0 +1,117 @@
+/**
+ * Test: Update Profile Data Service
+ */
+
+import UpdateProfileDataService from './UpdateProfileDataService';
+import CreateRestaurantService from './CreateRestaurantService';
+
+import FakeRestaurantsRepository from '../repositories/fakes/FakeRestaurantsRepository';
+import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
+
+import FakeMenusRepository from '../../menu/repositories/fakes/FakeMenusRepository';
+import IMenusRepository from '../../menu/repositories/IMenusRepository';
+
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
+
+import FakeStorageProvider from '../../../shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
+import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
+
+import AppError from '../../../shared/errors/AppError';
+
+let updateProfileDataService: UpdateProfileDataService;
+let createRestaurantService: CreateRestaurantService;
+
+let restaurantsRepository: IRestaurantsRepository;
+let menusRepository: IMenusRepository;
+let hashProvider: IHashProvider;
+let storageProvider: IStorageProvider;
+
+describe('UpdateProfileDataService', () => {
+    // Instantiate services for each test
+    beforeEach(() => {
+        restaurantsRepository = new FakeRestaurantsRepository();
+        menusRepository = new FakeMenusRepository();
+        hashProvider = new FakeHashProvider();
+        storageProvider = new FakeStorageProvider();
+
+        updateProfileDataService = new UpdateProfileDataService(
+            restaurantsRepository,
+            hashProvider,
+            storageProvider,
+        );
+
+        createRestaurantService = new CreateRestaurantService(
+            restaurantsRepository,
+            menusRepository,
+            hashProvider,
+            storageProvider,
+        );
+    });
+
+    it('should be able to update profile data', async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Updating the restaurant's data
+        const updatedRestaurant = await updateProfileDataService.execute({
+            restaurant_id: restaurant.id,
+            trade: 'Restaurant-Update',
+            telephone: '22222222222',
+            logo: 'logo-update.png',
+            new_password: 'pass-update',
+            old_password: 'pass123',
+        });
+
+        // Verigfy if the restaurant's data has ben updated
+        expect(updatedRestaurant.trade).toBe('Restaurant-Update');
+        expect(updatedRestaurant.telephone).toBe('22222222222');
+        expect(updatedRestaurant.logo).toBe('logo-update.png');
+        expect(updatedRestaurant.password).toBe('pass-update');
+    });
+
+    it('should not be able to update data for a non-existent restaurant', async () => {
+        // Try to update data for a non-existent restaurant
+        await expect(
+            updateProfileDataService.execute({
+                restaurant_id: 'non-existent id',
+                trade: 'Restaurant-Update',
+                telephone: '22222222222',
+                logo: 'logo-update.png',
+                new_password: 'pass-update',
+                old_password: 'pass123',
+            }),
+        ).rejects.toBeInstanceOf(AppError);
+    });
+
+    it('should not be able to update data for a restaurant with invalid credentials', async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Try to updating the restaurant's data with wrong password
+        await expect(
+            updateProfileDataService.execute({
+                restaurant_id: restaurant.id,
+                trade: 'Restaurant-Update',
+                telephone: '22222222222',
+                logo: 'logo-update.png',
+                new_password: 'pass-update',
+                old_password: 'wrong-password',
+            }),
+        ).rejects.toBeInstanceOf(AppError);
+    });
+});

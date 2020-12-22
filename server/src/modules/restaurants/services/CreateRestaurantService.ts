@@ -2,24 +2,27 @@
  * Create Restaurant Service
  */
 
-import { injectable, inject, container } from 'tsyringe';
+import 'reflect-metadata';
+import { injectable, inject } from 'tsyringe';
 
 import AppError from '../../../shared/errors/AppError';
 import Restaurant from '../typeorm/entities/Restaurant';
 
-import CreateMenuService from '../../menu/services/CreateMenuService';
+import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
+import IMenusRepository from '../../menu/repositories/IMenusRepository';
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
+import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 
 import ICreateRestaurantDTO from '../dtos/ICreateRestaurantDTO';
-import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
-import IHashProvider from '../providers/HashProvider/models/IHashProvider';
-
-import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 
 @injectable()
 class CreateRestaurantService {
     constructor(
         @inject('RestaurantsRepository')
         private restaurantsRepository: IRestaurantsRepository,
+
+        @inject('MenusRepository')
+        private menusRepository: IMenusRepository,
 
         @inject('HashProvider')
         private hashProvider: IHashProvider,
@@ -36,7 +39,7 @@ class CreateRestaurantService {
         logo,
         email,
         password,
-    }: ICreateRestaurantDTO): Promise<Restaurant> {
+    }: Omit<ICreateRestaurantDTO, 'menu_id'>): Promise<Restaurant> {
         // Search a restaurant created with a same email
         const restaurantWithSameEmail = await this.restaurantsRepository.findByEmail(
             email,
@@ -64,11 +67,8 @@ class CreateRestaurantService {
         // Encrypting the password
         const hashedPassword = await this.hashProvider.generateHash(password);
 
-        // Instantiate "Create Menu Service"
-        const createMenuService = container.resolve(CreateMenuService);
-
         // Creating a menu for restaurant
-        const menu = await createMenuService.execute();
+        const menu = await this.menusRepository.create();
 
         // Create the restaurant
         const restaurantCreated = await this.restaurantsRepository.create({

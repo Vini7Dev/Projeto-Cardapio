@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "server": "ts-node-dev --transpile-only --inspect --ignore-watch node_modules src/shared/http/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "test": "jest"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -16,10 +17,13 @@
     "eslint-config-prettier": "^7.0.0",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-prettier": "^3.2.0",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1",
+    "ts-jest": "^26.4.4",
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "@types/jest": "^26.0.19",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
     "bcryptjs": "^2.4.3",
@@ -35,6 +39,7 @@
     "reflect-metadata": "^0.1.13",
     "ts-node-dev": "^1.1.1",
     "tsyringe": "^4.4.0",
-    "typeorm": "^0.2.29"
+    "typeorm": "^0.2.29",
+    "uuidv4": "^6.2.6"
   }
 }

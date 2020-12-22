@@ -2,6 +2,7 @@
  * Get Profile Data Service
  */
 
+import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
 import Restaurant from '../typeorm/entities/Restaurant';

@@ -2,6 +2,7 @@
  * Create Section Service
  */
 
+import 'reflect-metadata';
 import { sign } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
 
