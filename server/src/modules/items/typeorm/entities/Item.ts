@@ -34,7 +34,7 @@ class Item {
     category_id: number;
 
     @Column('boolean')
-    enabled: number;
+    enabled: boolean;
 
     @CreateDateColumn()
     created_at: Date;

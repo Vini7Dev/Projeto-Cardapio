@@ -10,7 +10,7 @@ import IItemsRepository from '../IItemsRepository';
 import AppError from '../../../../shared/errors/AppError';
 
 class FakeItemsRepository implements IItemsRepository {
-    private storage: Item[];
+    private storage: Item[] = [];
 
     // Create item
     public async create(itemData: ISaveItemDTO): Promise<Item> {
@@ -36,7 +36,7 @@ class FakeItemsRepository implements IItemsRepository {
             throw new AppError('O item não foi encontrado.', 404);
         }
 
-        await this.storage[itemIndex] = itemData;
+        this.storage[itemIndex] = itemData;
 
         return itemData;
     }
