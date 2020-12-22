@@ -86,6 +86,7 @@ class CreateItemService {
             price,
             discount_price,
             category_id,
+            restaurant_id,
             enabled: true,
         });
 

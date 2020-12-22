@@ -3,6 +3,7 @@
  */
 
 export interface IUpdateItemDTO {
+    restaurant_id: string;
     item_id: string;
     image: string;
     title: string;
@@ -20,4 +21,5 @@ export interface ISaveUpdatetedItemDTO {
     price: number;
     discount_price: number;
     category_id: string;
+    restaurant_id: string;
 }

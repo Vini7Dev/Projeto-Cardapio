@@ -13,6 +13,7 @@ export interface ICreateItemDTO {
 }
 
 export interface ISaveItemDTO {
+    restaurant_id: string;
     image: string;
     title: string;
     description: string;

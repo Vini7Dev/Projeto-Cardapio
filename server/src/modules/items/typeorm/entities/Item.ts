@@ -15,6 +15,9 @@ class Item {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
+    @Column('uuid')
+    restaurant_id: string;
+
     @Column()
     image: string;
 

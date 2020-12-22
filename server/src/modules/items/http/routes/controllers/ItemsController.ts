@@ -25,7 +25,7 @@ class FoodsController {
             category_name,
         } = request.body;
 
-        // Getting restaurant_id from request
+        // Getting restaurants id from auth request
         const restaurant_id = request.restaurant.id;
 
         // Creating a new item
@@ -60,8 +60,12 @@ class FoodsController {
             enabled,
         } = request.body;
 
+        // Getting restaurants id from auth request
+        const restaurant_id = request.restaurant.id;
+
         // Creating a new item
         const updatedItem = await updateItemService.execute({
+            restaurant_id,
             item_id,
             image,
             title,
