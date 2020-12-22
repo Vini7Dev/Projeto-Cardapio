@@ -11,17 +11,34 @@ import CreateItemService from '../../../services/CreateItemService';
 class FoodsController {
     // Create one food
     public async create(request: Request, response: Response) {
+        // Instanctiate Create Item Service
         const createItemService = container.resolve(CreateItemService);
 
-        const itemData = request.body;
+        // Getting item data from request body
+        const {
+            image,
+            title,
+            description,
+            price,
+            discount_price,
+            category_name,
+        } = request.body;
 
+        // Getting restaurant_id from request
         const restaurant_id = request.restaurant.id;
 
+        // Creating a new item
         const itemAndMenuitem = await createItemService.execute({
-            ...itemData,
             restaurant_id,
+            image,
+            title,
+            description,
+            price,
+            discount_price,
+            category_name,
         });
 
+        // Returning response
         return response.json(itemAndMenuitem).status(200);
     }
 

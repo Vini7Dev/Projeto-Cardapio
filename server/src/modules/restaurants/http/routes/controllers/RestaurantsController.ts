@@ -17,7 +17,7 @@ class RestaurantsController {
         );
 
         // Recover request body data
-        const restaurantData = request.body;
+        const { trade, cnpj, telephone, email, password } = request.body;
 
         // Recover logo data from multer's request
         let logo = '';
@@ -27,7 +27,11 @@ class RestaurantsController {
 
         // Executing the service
         const restaurant = await createRestaurantService.execute({
-            ...restaurantData,
+            trade,
+            cnpj,
+            telephone,
+            email,
+            password,
             logo,
         });
 

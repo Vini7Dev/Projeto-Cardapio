@@ -34,7 +34,7 @@ class ProfileController {
         );
 
         // Getting new restaurant's data from request body
-        const restauarntsData = request.body;
+        const { trade, telephone, new_password, old_password } = request.body;
 
         // Recover logo data from multer's request
         let logo = '';
@@ -47,7 +47,10 @@ class ProfileController {
 
         // Updating restaurant's data
         const restaurantData = await updateProfileDataService.execute({
-            ...restauarntsData,
+            trade,
+            telephone,
+            new_password,
+            old_password,
             restaurant_id,
             logo,
         });
