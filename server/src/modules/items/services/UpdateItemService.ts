@@ -2,6 +2,7 @@
  * Update Item Service
  */
 
+import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 
 import Item from '../typeorm/entities/Item';

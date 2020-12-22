@@ -35,18 +35,18 @@ let itemsRepository: IItemsRepository;
 let categoriesRepository: ICategoriesRepository;
 let restaurantsRepository: IRestaurantsRepository;
 let menusRepository: IMenusRepository;
-let menuItemsrepository: IMenuItemsRepository;
+let menuItemsRepository: IMenuItemsRepository;
 let hashProvider: IHashProvider;
 let storageProvider: IStorageProvider;
 
 describe('CreateItemService', () => {
-    // Instantiate service for each test
+    // Instantiate services for each test
     beforeEach(() => {
         itemsRepository = new FakeItemsRepository();
         categoriesRepository = new FakeCategoriesRepository();
         restaurantsRepository = new FakeRestaurantsRepository();
         menusRepository = new FakeMenusRepository();
-        menuItemsrepository = new FakeMenuItemsRepository();
+        menuItemsRepository = new FakeMenuItemsRepository();
         hashProvider = new FakeHashProvider();
         storageProvider = new FakeStorageProvider();
 
@@ -54,7 +54,7 @@ describe('CreateItemService', () => {
             itemsRepository,
             categoriesRepository,
             restaurantsRepository,
-            menuItemsrepository,
+            menuItemsRepository,
         );
 
         createRestaurantService = new CreateRestaurantService(
@@ -83,6 +83,7 @@ describe('CreateItemService', () => {
             description: 'Food Description',
             price: 10,
             discount_price: 0,
+            enabled: true,
             category_name: 'Category 1',
             restaurant_id: restaurant.id,
         });
@@ -110,6 +111,7 @@ describe('CreateItemService', () => {
             description: 'Food Description',
             price: 10,
             discount_price: 0,
+            enabled: true,
             category_name: 'Category 1',
             restaurant_id: restaurant.id,
         });
@@ -121,6 +123,7 @@ describe('CreateItemService', () => {
             description: 'Food Description',
             price: 15,
             discount_price: 10,
+            enabled: true,
             category_name: 'Category 1',
             restaurant_id: restaurant.id,
         });
@@ -144,6 +147,7 @@ describe('CreateItemService', () => {
                 description: 'Food Description',
                 price: 10,
                 discount_price: 0,
+                enabled: true,
                 category_name: 'Category 1',
                 restaurant_id: 'non-exsists-restaurant',
             }),

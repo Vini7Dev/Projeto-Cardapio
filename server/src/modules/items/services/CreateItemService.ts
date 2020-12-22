@@ -45,6 +45,7 @@ class CreateItemService {
         image,
         price,
         discount_price,
+        enabled,
         category_name,
     }: ICreateItemDTO): Promise<IServiceResponse> {
         // Getting restaurant's data
@@ -85,9 +86,9 @@ class CreateItemService {
             image,
             price,
             discount_price,
+            enabled,
             category_id,
             restaurant_id,
-            enabled: true,
         });
 
         // Create a new relation of item and menu in MenuItems table

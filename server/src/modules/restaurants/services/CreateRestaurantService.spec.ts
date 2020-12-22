@@ -44,8 +44,8 @@ describe('CreateRestaurantService', () => {
     it('should be able to create a new restaurant', async () => {
         // Restaurant form data;
         const restaurantData = {
-            cnpj: '12345678910',
             trade: 'Restaurant',
+            cnpj: '12345678910',
             telephone: '99123456789',
             logo: 'logo.png',
             email: 'example@gmail.com',

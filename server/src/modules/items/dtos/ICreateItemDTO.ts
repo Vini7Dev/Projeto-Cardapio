@@ -9,6 +9,7 @@ export interface ICreateItemDTO {
     description: string;
     price: number;
     discount_price: number;
+    enabled: boolean;
     category_name: string;
 }
 
