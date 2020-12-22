@@ -1,23 +1,23 @@
 /**
- * Create Item DTO
+ * Update Item DTO
  */
 
-export interface ICreateItemDTO {
-    restaurant_id: string;
+export interface IUpdateItemDTO {
+    item_id: string;
     image: string;
     title: string;
     description: string;
     price: number;
     discount_price: number;
     category_name: string;
+    enabled: boolean;
 }
 
-export interface ISaveItemDTO {
+export interface ISaveUpdatetedItemDTO {
     image: string;
     title: string;
     description: string;
     price: number;
     discount_price: number;
-    category_id: number;
-    enabled: boolean;
+    category_id: string;
 }

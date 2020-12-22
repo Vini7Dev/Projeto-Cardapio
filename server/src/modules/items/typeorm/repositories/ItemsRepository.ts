@@ -16,6 +16,15 @@ class ItemsRepository implements IItemsRepository {
         this.repository = getRepository(Item);
     }
 
+    // Find item by id
+    public async findById(item_id: string): Promise<Item | undefined> {
+        const findedItem = await this.repository.findOne({
+            where: { id: item_id },
+        });
+
+        return findedItem;
+    }
+
     // Creating a new item
     public async create(itemData: ISaveItemDTO): Promise<Item> {
         const createdItem = await this.repository.create(itemData);

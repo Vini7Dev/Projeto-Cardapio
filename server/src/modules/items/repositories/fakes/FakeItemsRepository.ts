@@ -12,6 +12,13 @@ import AppError from '../../../../shared/errors/AppError';
 class FakeItemsRepository implements IItemsRepository {
     private storage: Item[] = [];
 
+    // Find item by id
+    public async findById(item_id: string): Promise<Item | undefined> {
+        const findedItem = await this.storage.find(item => item.id === item_id);
+
+        return findedItem;
+    }
+
     // Create item
     public async create(itemData: ISaveItemDTO): Promise<Item> {
         const item = new Item();
