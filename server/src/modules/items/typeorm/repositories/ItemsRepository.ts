@@ -51,7 +51,7 @@ class ItemsRepository implements IItemsRepository {
             return;
         }
 
-        await this.repository.delete(findedItem);
+        await this.repository.remove(findedItem);
     }
 }
 

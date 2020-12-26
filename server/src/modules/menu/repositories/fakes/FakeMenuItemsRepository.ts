@@ -22,6 +22,14 @@ class FakeMenuItemsRepository implements IMenuItemsRepository {
 
         return menuItemSaved;
     }
+
+    public async delete(item_id: string): Promise<void> {
+        const itemIndex = await this.storage.findIndex(
+            item => item.id === item_id,
+        );
+
+        await this.storage.slice(itemIndex, 1);
+    }
 }
 
 export default FakeMenuItemsRepository;

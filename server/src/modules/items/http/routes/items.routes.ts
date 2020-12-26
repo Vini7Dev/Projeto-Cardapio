@@ -23,6 +23,6 @@ itemsRoutes.post('/', itemsController.create);
 itemsRoutes.put('/', itemsController.update);
 
 // Delete a item
-itemsRoutes.delete('/:id', itemsController.delete);
+itemsRoutes.delete('/:item_id', itemsController.delete);
 
 export default itemsRoutes;

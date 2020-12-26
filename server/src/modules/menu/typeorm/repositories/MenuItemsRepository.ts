@@ -23,6 +23,18 @@ class MenuItemsRepository implements IMenuItemsRepository {
 
         return savedMenuItem;
     }
+
+    public async delete(item_id: string): Promise<void> {
+        const itemToDelete = await this.repository.findOne({
+            where: { id: item_id },
+        });
+
+        if (!itemToDelete) {
+            return;
+        }
+
+        await this.repository.remove(itemToDelete);
+    }
 }
 
 export default MenuItemsRepository;

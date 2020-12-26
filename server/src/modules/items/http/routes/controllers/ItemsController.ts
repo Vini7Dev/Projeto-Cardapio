@@ -7,6 +7,7 @@ import { container } from 'tsyringe';
 
 import CreateItemService from '../../../services/CreateItemService';
 import UpdateItemService from '../../../services/UpdateItemService';
+import DeleteItemService from '../../../services/DeleteItemService';
 
 // Controler
 class FoodsController {
@@ -22,6 +23,7 @@ class FoodsController {
             description,
             price,
             discount_price,
+            enabled,
             category_name,
         } = request.body;
 
@@ -36,6 +38,7 @@ class FoodsController {
             description,
             price,
             discount_price,
+            enabled,
             category_name,
         });
 
@@ -82,8 +85,23 @@ class FoodsController {
 
     // Delete a item
     public async delete(request: Request, response: Response) {
-        console.log('Em desenvolvimento...');
-        return response.json({ message: 'Deletar um Alimento' }).status(200);
+        // Instanctiate Create Item Service
+        const deleteItemService = container.resolve(DeleteItemService);
+
+        // Getting item id from request params
+        const { item_id } = request.params;
+
+        // Getting restaurants id from auth request
+        const restaurant_id = request.restaurant.id;
+
+        // Deleting item
+        await deleteItemService.execute({
+            restaurant_id,
+            item_id,
+        });
+
+        // Returning response
+        return response.json().status(200);
     }
 }
 
