@@ -1,8 +1,10 @@
 /**
- * Test: Update Item Service
+ * Test: Delete Item Service
  */
 
-import UpdateItemService from './UpdateItemService';
+import AppError from '../../../shared/errors/AppError';
+
+import DeleteItemService from './DeleteItemService';
 import CreateItemService from './CreateItemService';
 import CreateRestaurantService from '../../restaurants/services/CreateRestaurantService';
 
@@ -27,9 +29,7 @@ import IHashProvider from '../../restaurants/providers/HashProvider/models/IHash
 import FakeStorageProvider from '../../../shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 
-import AppError from '../../../shared/errors/AppError';
-
-let updateItemService: UpdateItemService;
+let deleteItemService: DeleteItemService;
 let createItemService: CreateItemService;
 let createRestaurantService: CreateRestaurantService;
 
@@ -41,8 +41,7 @@ let menuItemsRepository: IMenuItemsRepository;
 let hashProvider: IHashProvider;
 let storageProvider: IStorageProvider;
 
-describe('UpdateItemService', () => {
-    // Instantiate services for each test
+describe('DeleteItemService', () => {
     beforeEach(() => {
         itemsRepository = new FakeItemsRepository();
         categoriesRepository = new FakeCategoriesRepository();
@@ -52,9 +51,8 @@ describe('UpdateItemService', () => {
         hashProvider = new FakeHashProvider();
         storageProvider = new FakeStorageProvider();
 
-        updateItemService = new UpdateItemService(
+        deleteItemService = new DeleteItemService(
             itemsRepository,
-            categoriesRepository,
             restaurantsRepository,
         );
 
@@ -73,20 +71,20 @@ describe('UpdateItemService', () => {
         );
     });
 
-    it("should be able to update an item's data", async () => {
+    it('should be able to delete item', async () => {
         // Creating a new restaurant
         const restaurant = await createRestaurantService.execute({
             trade: 'Restaurant',
             cnpj: '11111111111',
             telephone: '11111111111',
             logo: 'logo.png',
-            email: 'example@gmail.com',
+            email: 'example@mail.com',
             password: 'pass123',
         });
 
         // Creating a new item
-        const itemCreated = await createItemService.execute({
-            image: 'image1.png',
+        const item = await createItemService.execute({
+            image: 'image.png',
             title: 'Food Title',
             description: 'Food Description',
             price: 10,
@@ -96,106 +94,50 @@ describe('UpdateItemService', () => {
             restaurant_id: restaurant.id,
         });
 
-        // Update item created data (without change category)
-        const itemUpdated = await updateItemService.execute({
-            item_id: itemCreated.item.id,
-            image: 'image2.png',
-            title: 'Food Updated',
-            description: 'Food Description Updated',
-            price: 15,
-            discount_price: 11,
-            enabled: false,
-            category_name: 'Category 1',
+        // Deleting item
+        await deleteItemService.execute({
             restaurant_id: restaurant.id,
+            item_id: item.item.id,
         });
 
-        // Verify if has been updated (without change category)
-        expect(itemUpdated.title).toEqual('Food Updated');
+        // Try to find item deleted
+        const noExistsItem = await itemsRepository.findById(item.item.id);
 
-        // Update item data again (changing category)
-        const itemCategoryUpdated = await updateItemService.execute({
-            item_id: itemCreated.item.id,
-            image: 'image2.png',
-            title: 'Food Updated Again',
-            description: 'Food Description Updated',
-            price: 15,
-            discount_price: 11,
-            enabled: false,
-            category_name: 'Category 2',
-            restaurant_id: restaurant.id,
-        });
-
-        // Verify if has been updated (changing category)
-        expect(itemCategoryUpdated.title).toEqual('Food Updated Again');
+        // Expect not to find the item
+        expect(noExistsItem).toEqual(undefined);
     });
 
-    it('should not be able to update item when restaurant non-exists', async () => {
-        // Creating a new restaurant
-        const restaurant = await createRestaurantService.execute({
-            trade: 'Restaurant',
-            cnpj: '11111111111',
-            telephone: '11111111111',
-            logo: 'logo.png',
-            email: 'example@gmail.com',
-            password: 'pass123',
-        });
-
-        // Creating a new item
-        const itemCreated = await createItemService.execute({
-            image: 'image1.png',
-            title: 'Food Title',
-            description: 'Food Description',
-            price: 10,
-            discount_price: 0,
-            enabled: true,
-            category_name: 'Category 1',
-            restaurant_id: restaurant.id,
-        });
-
-        // Try to update item data with invalid restaurant id
+    it('should not be able to delete a item with non-exists restaurant', async () => {
+        // Try to delete a item with non-exists restaurant
         await expect(
-            updateItemService.execute({
-                item_id: itemCreated.item.id,
-                image: 'image2.png',
-                title: 'Food Updated',
-                description: 'Food Description Updated',
-                price: 15,
-                discount_price: 11,
-                enabled: false,
-                category_name: 'Category 2',
+            deleteItemService.execute({
                 restaurant_id: 'non-exists-restaurant',
+                item_id: 'non-exists-item',
             }),
         ).rejects.toBeInstanceOf(AppError);
     });
 
-    it('it should not be able to update item when it non-exists', async () => {
+    it('should not be able to delete a non-exists item', async () => {
         // Creating a new restaurant
         const restaurant = await createRestaurantService.execute({
             trade: 'Restaurant',
             cnpj: '11111111111',
             telephone: '11111111111',
             logo: 'logo.png',
-            email: 'example@gmail.com',
+            email: 'example@mail.com',
             password: 'pass123',
         });
 
-        // Try to update item data with non-exists item
+        // Try to delete a non-exists item
         await expect(
-            updateItemService.execute({
-                item_id: 'non-exists-item',
-                image: 'image2.png',
-                title: 'Food Updated',
-                description: 'Food Description Updated',
-                price: 15,
-                discount_price: 11,
-                enabled: false,
-                category_name: 'Category 2',
+            deleteItemService.execute({
                 restaurant_id: restaurant.id,
+                item_id: 'non-exists-item',
             }),
         ).rejects.toBeInstanceOf(AppError);
     });
 
-    it('should not be able to update item with unauthorized user (when is not the owner).', async () => {
+    it('should not be able to delete item with unauthorized user (when is not the owner', async () => {
         // Creating restaurant owner
         const restaurantOwner = await createRestaurantService.execute({
             trade: 'Restaurant Owner',
@@ -228,18 +170,11 @@ describe('UpdateItemService', () => {
             restaurant_id: restaurantOwner.id,
         });
 
-        // Try to update item with an unauthorized restaurant
+        // Try to delete item with an unauthorized restaurant
         await expect(
-            updateItemService.execute({
-                item_id: itemCreated.item.id,
-                image: 'image2.png',
-                title: 'Food Updated',
-                description: 'Food Description Updated',
-                price: 15,
-                discount_price: 11,
-                enabled: false,
-                category_name: 'Category 2',
+            deleteItemService.execute({
                 restaurant_id: restaurantUnauthorized.id,
+                item_id: itemCreated.item.id,
             }),
         ).rejects.toBeInstanceOf(AppError);
     });

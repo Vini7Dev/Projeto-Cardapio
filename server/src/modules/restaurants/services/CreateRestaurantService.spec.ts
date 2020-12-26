@@ -43,19 +43,16 @@ describe('CreateRestaurantService', () => {
 
     it('should be able to create a new restaurant', async () => {
         // Restaurant form data;
-        const restaurantData = {
+
+        // Create a new restaurant
+        const restaurantCreated = await createRestaurantService.execute({
             trade: 'Restaurant',
             cnpj: '12345678910',
             telephone: '99123456789',
             logo: 'logo.png',
             email: 'example@gmail.com',
             password: 'pass123',
-        };
-
-        // Create a new restaurant
-        const restaurantCreated = await createRestaurantService.execute(
-            restaurantData,
-        );
+        });
 
         // Expects to have been created
         expect(restaurantCreated).toHaveProperty('id');
