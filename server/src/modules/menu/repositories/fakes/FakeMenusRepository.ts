@@ -10,7 +10,23 @@ class FakeMenusRepository implements IMenusRepository {
 
     private menusStorage: Menu[] = [];
 
-    // Create a new menun
+    // Find by menu id
+    public async findById(menu_id: string): Promise<Menu | undefined> {
+        const menuFinded = this.menusStorage.find(menu => menu.id === menu_id);
+
+        return menuFinded;
+    }
+
+    // Find by menu code
+    public async findByMenuCode(menu_code: number): Promise<Menu | undefined> {
+        const menuFinded = this.menusStorage.find(
+            menu => menu.code === menu_code,
+        );
+
+        return menuFinded;
+    }
+
+    // Create a new menu
     public async create(): Promise<Menu> {
         const menu = new Menu();
 

@@ -9,6 +9,17 @@ import IMenuItemsRepository from '../IMenuItemsRepository';
 class FakeMenuItemsRepository implements IMenuItemsRepository {
     private storage: MenuItem[] = [];
 
+    // Getting all menu items
+    public async getItemsByMenuId(
+        menu_id: string,
+    ): Promise<MenuItem[] | undefined> {
+        const allMenuItems = await this.storage.filter(menuItem => {
+            return menuItem.menu_id === menu_id;
+        });
+
+        return allMenuItems;
+    }
+
     // Create a new menu item
     public async create(menuItemsData: ICreateMenuItemDTO): Promise<MenuItem> {
         const menuItem = new MenuItem();
@@ -21,14 +32,6 @@ class FakeMenuItemsRepository implements IMenuItemsRepository {
         await this.storage.push(menuItemSaved);
 
         return menuItemSaved;
-    }
-
-    public async delete(item_id: string): Promise<void> {
-        const itemIndex = await this.storage.findIndex(
-            item => item.id === item_id,
-        );
-
-        await this.storage.slice(itemIndex, 1);
     }
 }
 

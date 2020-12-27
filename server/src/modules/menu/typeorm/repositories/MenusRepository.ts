@@ -14,6 +14,24 @@ class MenusRepository implements IMenusRepository {
         this.repository = getRepository(Menu);
     }
 
+    // Find by menu id
+    public async findById(menu_id: string): Promise<Menu | undefined> {
+        const menuFinded = await this.repository.findOne({
+            where: { id: menu_id },
+        });
+
+        return menuFinded;
+    }
+
+    // Find by menu code
+    public async findByMenuCode(menu_code: number): Promise<Menu | undefined> {
+        const menuFinded = await this.repository.findOne({
+            where: { code: menu_code },
+        });
+
+        return menuFinded;
+    }
+
     // Creating a new menu
     public async create(): Promise<Menu> {
         const menuCreated = await this.repository.create();

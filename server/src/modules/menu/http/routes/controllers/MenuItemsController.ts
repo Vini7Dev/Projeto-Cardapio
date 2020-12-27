@@ -3,25 +3,25 @@
  */
 
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+
+import GetMenuItemsService from '../../../services/GetMenuItemsService';
 
 // Controller
 class MenuItemsController {
-    // Look for a menu
+    // Look for a menu with items
     public async index(request: Request, response: Response) {
-        console.log('Em desenvolvimento...');
-        return response.json({ message: 'Buscar Menu' }).status(200);
-    }
+        // Instanctiate Create Item Service
+        const getMenuItemsService = container.resolve(GetMenuItemsService);
 
-    // Create a new menu
-    public async create(request: Request, response: Response) {
-        console.log('Em desenvolvimento...');
-        return response.json({ message: 'Criar Menu' }).status(200);
-    }
+        // Getting menu code from request params
+        const { menu_code } = request.params;
 
-    // Update the menu data
-    public async update(request: Request, response: Response) {
-        console.log('Em desenvolvimento...');
-        return response.json({ message: 'Criar Menu' }).status(200);
+        // Gerring items from menu
+        const items = await getMenuItemsService.execute(Number(menu_code));
+
+        // Returning response
+        return response.json(items).status(200);
     }
 }
 

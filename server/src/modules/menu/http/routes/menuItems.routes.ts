@@ -10,13 +10,7 @@ const menuItems = Router();
 const menuController = new MenuController();
 
 // Menu routes
-// Look for a menu
-menuItems.get('/', menuController.index);
-
-// Create a restaurant
-menuItems.post('/', menuController.create);
-
-// Update the restaurant data
-menuItems.put('/', menuController.update);
+// Look for a menu with items
+menuItems.get('/:menu_code', menuController.index);
 
 export default menuItems;

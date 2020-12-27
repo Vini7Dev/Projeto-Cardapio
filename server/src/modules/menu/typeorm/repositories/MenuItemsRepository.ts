@@ -16,24 +16,25 @@ class MenuItemsRepository implements IMenuItemsRepository {
         this.repository = getRepository(MenuItem);
     }
 
+    // Getting all menu items
+    public async getItemsByMenuId(
+        menu_id: string,
+    ): Promise<MenuItem[] | undefined> {
+        const menuItemsFinded = await this.repository.find({
+            where: { menu_id },
+            relations: ['item'],
+        });
+
+        return menuItemsFinded;
+    }
+
+    // Create a new Menu Item
     public async create(menuItemData: ICreateMenuItemDTO): Promise<MenuItem> {
         const createdMenuItem = await this.repository.create(menuItemData);
 
         const savedMenuItem = await this.repository.save(createdMenuItem);
 
         return savedMenuItem;
-    }
-
-    public async delete(item_id: string): Promise<void> {
-        const itemToDelete = await this.repository.findOne({
-            where: { id: item_id },
-        });
-
-        if (!itemToDelete) {
-            return;
-        }
-
-        await this.repository.remove(itemToDelete);
     }
 }
 

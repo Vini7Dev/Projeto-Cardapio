@@ -8,7 +8,11 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
+    ManyToOne,
+    JoinColumn,
 } from 'typeorm';
+
+import Item from '../../../items/typeorm/entities/Item';
 
 @Entity('menu_items')
 class MenuItem {
@@ -20,6 +24,10 @@ class MenuItem {
 
     @Column('uuid')
     item_id: string;
+
+    @ManyToOne(() => Item)
+    @JoinColumn({ name: 'item_id' })
+    item: Item;
 
     @CreateDateColumn()
     created_at: Date;
