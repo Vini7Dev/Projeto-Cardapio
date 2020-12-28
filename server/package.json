@@ -15,6 +15,7 @@
     "@types/jest": "^26.0.19",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/multer": "^1.4.5",
+    "@types/nodemailer": "^6.4.0",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
     "eslint": "^6.8.0",

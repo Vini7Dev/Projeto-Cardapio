@@ -5,11 +5,11 @@
 class AppError {
     public readonly message: string;
 
-    public readonly code: number;
+    public readonly status: number;
 
-    constructor(message: string, code = 400) {
+    constructor(message: string, status = 400) {
         this.message = message;
-        this.code = code;
+        this.status = status;
     }
 }
 

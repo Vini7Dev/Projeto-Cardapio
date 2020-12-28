@@ -40,7 +40,7 @@ server.use(
     ) => {
         if (error instanceof AppError) {
             return response
-                .status(error.code)
+                .status(error.status)
                 .json({ status: 'error', error: error.message });
         }
 
@@ -55,7 +55,4 @@ server.use(
 // Start the server on port 3333
 server.listen(3333, () => {
     console.log('===> Server started on port "3333" <===');
-    console.log('=] Lembretes[ [=');
-    console.log('=> Trocar o secret do token;');
-    console.log('=> Remover o Password do retorno dos dados.');
 });
