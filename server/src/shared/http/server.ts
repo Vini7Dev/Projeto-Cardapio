@@ -1,6 +1,8 @@
 import 'reflect-metadata';
+import 'dotenv/config';
 import '../typeorm/database';
 
+import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 
@@ -12,6 +14,12 @@ import '../container';
 
 // Create a server main controller
 const server = express();
+
+// Using CORS
+const corsOpts = cors({
+    origin: process.env.APP_WEB_URL,
+});
+server.use(corsOpts);
 
 // Using JSON
 server.use(express.json());

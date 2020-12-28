@@ -5,7 +5,7 @@
 export default {
     // Token Configuration
     token: {
-        secret: 'd8511e6f3c23fe927f582006724c933f',
-        expiresIn: '1d',
+        secret: process.env.APP_TOKEN_SECRET,
+        expiresIn: process.env.APP_TOKEN_EXPIRES_IN,
     },
 };
