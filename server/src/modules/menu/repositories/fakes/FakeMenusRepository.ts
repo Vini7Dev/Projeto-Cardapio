@@ -30,6 +30,7 @@ class FakeMenusRepository implements IMenusRepository {
     public async create(): Promise<Menu> {
         const menu = new Menu();
 
+        menu.id = this.nextMenuCode.toString();
         menu.code = this.nextMenuCode;
 
         this.menusStorage.push(menu);

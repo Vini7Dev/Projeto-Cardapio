@@ -2,6 +2,7 @@
  * Profile Controller
  */
 
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -22,8 +23,11 @@ class ProfileController {
             restaurant_id,
         );
 
+        // Removing the password return and adding the logo_url attribute
+        const parsedRestaurant = classToClass(restaurantFinded);
+
         // Returing response
-        return response.json(restaurantFinded).status(200);
+        return response.json(parsedRestaurant).status(200);
     }
 
     // Update the restaurant data
@@ -55,8 +59,11 @@ class ProfileController {
             logo,
         });
 
+        // Removing the password return and adding the logo_url attribute
+        const parsedRestaurant = classToClass(restaurantData);
+
         // Returning response
-        return response.json(restaurantData).status(200);
+        return response.json(parsedRestaurant).status(200);
     }
 }
 

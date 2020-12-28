@@ -26,7 +26,7 @@ class FakeItemsRepository implements IItemsRepository {
         const itemToSave = {
             ...item,
             ...itemData,
-        };
+        } as Item;
 
         await this.storage.push(itemToSave);
 

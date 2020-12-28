@@ -55,6 +55,7 @@ describe('CreateItemService', () => {
             categoriesRepository,
             restaurantsRepository,
             menuItemsRepository,
+            storageProvider,
         );
 
         createRestaurantService = new CreateRestaurantService(

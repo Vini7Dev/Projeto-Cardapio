@@ -4,6 +4,7 @@
 
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import CreateSectionService from '../../../services/CreateSectionService';
 
@@ -22,8 +23,14 @@ class SectionController {
             password,
         });
 
+        // Removing the password return and adding the logo_url attribute
+        const parsedTokenRestaurant = {
+            restaurant: classToClass(sectionToken.restaurant),
+            token: sectionToken.token,
+        };
+
         // Returning response
-        return response.json({ sectionToken }).status(200);
+        return response.json(parsedTokenRestaurant).status(200);
     }
 }
 

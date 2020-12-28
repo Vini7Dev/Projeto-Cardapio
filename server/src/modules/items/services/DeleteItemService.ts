@@ -9,6 +9,7 @@ import AppError from '../../../shared/errors/AppError';
 
 import IItemsRepository from '../repositories/IItemsRepository';
 import IRestaurantsRepository from '../../restaurants/repositories/IRestaurantsRepository';
+import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 
 interface IServiceRequest {
     restaurant_id: string;
@@ -23,6 +24,9 @@ class DeleteItemService {
 
         @inject('RestaurantsRepository')
         private restaurantsRepository: IRestaurantsRepository,
+
+        @inject('StorageProvider')
+        private storageProvider: IStorageProvider,
     ) {}
 
     // Executing the service
@@ -50,6 +54,11 @@ class DeleteItemService {
             throw new AppError(
                 'O restaurante não tem permissão para apagar este item.',
             );
+        }
+
+        // Deleting image from storage
+        if (item.image) {
+            await this.storageProvider.deleteFile(item.image);
         }
 
         // Deleting item

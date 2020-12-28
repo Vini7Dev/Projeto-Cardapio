@@ -12,6 +12,7 @@ import { IUpdateItemDTO } from '../dtos/IUpdateItemDTO';
 import IItemsRepository from '../repositories/IItemsRepository';
 import ICategoriesRepository from '../repositories/ICategoriesRepository';
 import IRestaurantsRepository from '../../restaurants/repositories/IRestaurantsRepository';
+import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 
 import AppError from '../../../shared/errors/AppError';
 
@@ -26,6 +27,9 @@ class UpdateItemService {
 
         @inject('RestaurantsRepository')
         private restaurantsRepository: IRestaurantsRepository,
+
+        @inject('StorageProvider')
+        private storageProvider: IStorageProvider,
     ) {}
 
     // Executing the service
@@ -86,18 +90,28 @@ class UpdateItemService {
             category_id = findSameCategoryInDataBase.id;
         }
 
+        // If change image, delete file from storage
+        if (image !== itemToUpdate.image) {
+            await this.storageProvider.deleteFile(itemToUpdate.image);
+        }
+
         // Updating item data
-        const updatedItem = await this.itemsRepository.update({
-            ...itemToUpdate,
-            restaurant_id,
-            image,
-            title,
-            description,
-            price,
-            discount_price,
-            enabled,
-            category_id,
-        });
+        itemToUpdate.restaurant_id = restaurant_id;
+        itemToUpdate.image = image;
+        itemToUpdate.title = title;
+        itemToUpdate.description = description;
+        itemToUpdate.price = price;
+        itemToUpdate.discount_price = discount_price;
+        itemToUpdate.enabled = enabled;
+        itemToUpdate.category_id = category_id;
+
+        // Saving updated item data
+        const updatedItem = await this.itemsRepository.update(itemToUpdate);
+
+        // Saving image file in storage
+        if (image) {
+            await this.storageProvider.saveFile(image);
+        }
 
         // Returning item updated
         return updatedItem;

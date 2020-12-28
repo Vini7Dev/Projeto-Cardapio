@@ -4,6 +4,7 @@
 
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import CreateItemService from '../../../services/CreateItemService';
 import UpdateItemService from '../../../services/UpdateItemService';
@@ -18,7 +19,6 @@ class FoodsController {
 
         // Getting item data from request body
         const {
-            image,
             title,
             description,
             price,
@@ -30,8 +30,14 @@ class FoodsController {
         // Getting restaurants id from auth request
         const restaurant_id = request.restaurant.id;
 
+        // Recover logo data from multer's request
+        let image = '';
+        if (request.file) {
+            image = request.file.filename;
+        }
+
         // Creating a new item
-        const itemAndMenuitem = await createItemService.execute({
+        const itemAndMenuItem = await createItemService.execute({
             restaurant_id,
             image,
             title,
@@ -42,8 +48,14 @@ class FoodsController {
             category_name,
         });
 
+        // Add image_url attibute in item data
+        const parsedItemAndMenuItem = {
+            item: classToClass(itemAndMenuItem.item),
+            menu_iem: itemAndMenuItem.menu_item,
+        };
+
         // Returning response
-        return response.json(itemAndMenuitem).status(200);
+        return response.json(parsedItemAndMenuItem).status(200);
     }
 
     // Update item data
@@ -54,7 +66,6 @@ class FoodsController {
         // Getting item data from request body
         const {
             item_id,
-            image,
             title,
             description,
             price,
@@ -62,6 +73,12 @@ class FoodsController {
             category_name,
             enabled,
         } = request.body;
+
+        // Recover logo data from multer's request
+        let image = '';
+        if (request.file) {
+            image = request.file.filename;
+        }
 
         // Getting restaurants id from auth request
         const restaurant_id = request.restaurant.id;
@@ -79,8 +96,11 @@ class FoodsController {
             enabled,
         });
 
+        // Add image_attribule in item data
+        const parsedUpdatedItem = classToClass(updatedItem);
+
         // Returning response
-        return response.json(updatedItem).status(200);
+        return response.json(parsedUpdatedItem).status(200);
     }
 
     // Delete a item

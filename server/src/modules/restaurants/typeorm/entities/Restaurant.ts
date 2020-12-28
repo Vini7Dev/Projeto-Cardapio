@@ -11,6 +11,7 @@ import {
     OneToOne,
     JoinColumn,
 } from 'typeorm';
+import { Exclude, Expose } from 'class-transformer';
 
 import Menu from '../../../menu/typeorm/entities/Menu';
 
@@ -35,6 +36,7 @@ class Restaurant {
     email: string;
 
     @Column()
+    @Exclude()
     password: string;
 
     @Column()
@@ -49,6 +51,11 @@ class Restaurant {
 
     @UpdateDateColumn()
     updated_at: Date;
+
+    @Expose({ name: 'logo_url' })
+    getLogoURL(): string {
+        return `${process.env.APP_SERVER_URL}/files/${this.logo}`;
+    }
 }
 
 export default Restaurant;

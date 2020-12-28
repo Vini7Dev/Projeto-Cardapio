@@ -13,6 +13,7 @@ import IItemsRepository from '../repositories/IItemsRepository';
 import ICategoriesRepository from '../repositories/ICategoriesRepository';
 import IRestaurantsRepository from '../../restaurants/repositories/IRestaurantsRepository';
 import IMenuItemsRepository from '../../menu/repositories/IMenuItemsRepository';
+import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 
 import { ICreateItemDTO } from '../dtos/ICreateItemDTO';
 
@@ -35,6 +36,9 @@ class CreateItemService {
 
         @inject('MenuItemsRepository')
         private menuItemsRepository: IMenuItemsRepository,
+
+        @inject('StorageProvider')
+        private storageProvider: IStorageProvider,
     ) {}
 
     // Executing the service
@@ -96,6 +100,11 @@ class CreateItemService {
             menu_id: restaurantData.menu_id,
             item_id: itemCreated.id,
         });
+
+        // Saving image file in storage
+        if (image) {
+            await this.storageProvider.saveFile(image);
+        }
 
         // Return item created
         return {

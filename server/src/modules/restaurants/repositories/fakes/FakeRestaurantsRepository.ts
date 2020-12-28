@@ -55,7 +55,7 @@ class FakeRestaurantsRepository implements IRestaurantsRepository {
             ...restaurant,
             ...restaurantData,
             id: uuid(),
-        };
+        } as Restaurant;
 
         this.repository.push(restaurantCreated);
 

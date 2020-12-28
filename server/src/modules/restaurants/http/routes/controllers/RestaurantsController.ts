@@ -4,6 +4,7 @@
 
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import CreateRestaurantService from '../../../services/CreateRestaurantService';
 
@@ -35,8 +36,11 @@ class RestaurantsController {
             logo,
         });
 
+        // Removing the password return and adding the logo_url attribute
+        const parsedRestaurant = classToClass(restaurant);
+
         // Returning response
-        return response.json(restaurant).status(200);
+        return response.json(parsedRestaurant).status(200);
     }
 }
 

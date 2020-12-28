@@ -56,6 +56,7 @@ describe('UpdateItemService', () => {
             itemsRepository,
             categoriesRepository,
             restaurantsRepository,
+            storageProvider,
         );
 
         createItemService = new CreateItemService(
@@ -63,6 +64,7 @@ describe('UpdateItemService', () => {
             categoriesRepository,
             restaurantsRepository,
             menuItemsRepository,
+            storageProvider,
         );
 
         createRestaurantService = new CreateRestaurantService(

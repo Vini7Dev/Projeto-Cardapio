@@ -61,6 +61,7 @@ describe('GetMenuItemsService', () => {
             categoriesRepository,
             restaurantsRepository,
             menuItemsRepository,
+            storageProvider,
         );
 
         createRestaurantService = new CreateRestaurantService(
@@ -94,12 +95,18 @@ describe('GetMenuItemsService', () => {
             restaurant_id: restaurant.id,
         };
 
+        console.log(restaurant);
+
         // Saving items in menu
         await createItemService.execute(foodData);
         await createItemService.execute(foodData);
 
+        console.log(restaurant);
+
         // Getting menu items
-        const menuItems = await getMenuItemsService.execute(restaurant.menu_id);
+        const menuItems = await getMenuItemsService.execute(
+            Number(restaurant.menu_id),
+        );
 
         // Check if response is not undefined
         expect(menuItems).not.toEqual(undefined);
@@ -134,7 +141,7 @@ describe('GetMenuItemsService', () => {
 
         // Try to get menu items from a non-exists menu
         await expect(
-            getMenuItemsService.execute('non-exists-menu'),
+            getMenuItemsService.execute(9999999999),
         ).rejects.toBeInstanceOf(AppError);
     });
 });

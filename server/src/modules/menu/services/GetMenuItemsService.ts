@@ -20,9 +20,9 @@ class GetMenuItemsService {
         private menuItemsRepository: IMenuItemsRepository,
     ) {}
 
-    public async execute(menu_id: string) {
+    public async execute(menu_code: number) {
         // Check if menu exists
-        const menuFinded = await this.menusRepository.findById(menu_id);
+        const menuFinded = await this.menusRepository.findByMenuCode(menu_code);
 
         // If not exists, cancel the operation
         if (!menuFinded) {

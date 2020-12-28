@@ -54,6 +54,7 @@ describe('DeleteItemService', () => {
         deleteItemService = new DeleteItemService(
             itemsRepository,
             restaurantsRepository,
+            storageProvider,
         );
 
         createItemService = new CreateItemService(
@@ -61,6 +62,7 @@ describe('DeleteItemService', () => {
             categoriesRepository,
             restaurantsRepository,
             menuItemsRepository,
+            storageProvider,
         );
 
         createRestaurantService = new CreateRestaurantService(

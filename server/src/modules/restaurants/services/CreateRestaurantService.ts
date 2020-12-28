@@ -81,7 +81,7 @@ class CreateRestaurantService {
             password: hashedPassword,
         });
 
-        // Saving file in storage
+        // Saving logo file in storage
         if (logo) {
             await this.storageProvider.saveFile(logo);
         }
