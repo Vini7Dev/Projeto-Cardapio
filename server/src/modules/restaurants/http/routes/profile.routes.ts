@@ -17,6 +17,7 @@ const uploadFile = multer(uploadConfig);
 const profileRoutes = Router();
 const profileController = new ProfileController();
 
+// Profile Routes
 // Get restaurant data
 profileRoutes.get('/:id', profileController.show);
 
