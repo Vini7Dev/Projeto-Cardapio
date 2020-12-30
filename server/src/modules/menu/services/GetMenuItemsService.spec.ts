@@ -95,13 +95,9 @@ describe('GetMenuItemsService', () => {
             restaurant_id: restaurant.id,
         };
 
-        console.log(restaurant);
-
         // Saving items in menu
         await createItemService.execute(foodData);
         await createItemService.execute(foodData);
-
-        console.log(restaurant);
 
         // Getting menu items
         const menuItems = await getMenuItemsService.execute(

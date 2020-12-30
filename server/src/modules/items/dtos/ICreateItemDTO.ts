@@ -4,7 +4,7 @@
 
 export interface ICreateItemDTO {
     restaurant_id: string;
-    image: string;
+    image?: string;
     title: string;
     description: string;
     price: number;
@@ -15,7 +15,7 @@ export interface ICreateItemDTO {
 
 export interface ISaveItemDTO {
     restaurant_id: string;
-    image: string;
+    image?: string;
     title: string;
     description: string;
     price: number;

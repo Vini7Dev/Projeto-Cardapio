@@ -42,8 +42,6 @@ describe('CreateRestaurantService', () => {
     });
 
     it('should be able to create a new restaurant', async () => {
-        // Restaurant form data;
-
         // Create a new restaurant
         const restaurantCreated = await createRestaurantService.execute({
             trade: 'Restaurant',
@@ -56,6 +54,21 @@ describe('CreateRestaurantService', () => {
 
         // Expects to have been created
         expect(restaurantCreated).toHaveProperty('id');
+    });
+
+    it('should be able to create a new restaurant without the logo', async () => {
+        // Create a new restaurant
+        const restaurantCreated = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '12345678910',
+            telephone: '99123456789',
+            email: 'example@gmail.com',
+            password: 'pass123',
+        });
+
+        // Expects to have been created
+        expect(restaurantCreated).toHaveProperty('id');
+        expect(restaurantCreated.logo).toEqual(undefined);
     });
 
     it('should not be able to create a new restaurant with an already registered email', async () => {

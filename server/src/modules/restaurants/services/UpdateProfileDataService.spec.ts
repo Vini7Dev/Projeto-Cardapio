@@ -67,7 +67,7 @@ describe('UpdateProfileDataService', () => {
             telephone: '22222222222',
             logo: 'logo-update.png',
             new_password: 'pass-update',
-            old_password: 'pass123',
+            current_password: 'pass123',
         });
 
         // Verigfy if the restaurant's data has ben updated
@@ -75,6 +75,57 @@ describe('UpdateProfileDataService', () => {
         expect(updatedRestaurant.telephone).toBe('22222222222');
         expect(updatedRestaurant.logo).toBe('logo-update.png');
         expect(updatedRestaurant.password).toBe('pass-update');
+    });
+
+    it('should be able to update profile data without update the logo', async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Updating the restaurant's data without update logo
+        const updatedRestaurant = await updateProfileDataService.execute({
+            restaurant_id: restaurant.id,
+            trade: 'Restaurant-Update',
+            telephone: '22222222222',
+            logo: 'logo.png',
+            new_password: 'pass-update',
+            current_password: 'pass123',
+        });
+
+        // Verigfy if the restaurant's data has ben updated
+        expect(updatedRestaurant.trade).toBe('Restaurant-Update');
+        expect(updatedRestaurant.logo).toBe('logo.png');
+    });
+
+    it('should be able to update profile data without update the password', async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Updating the restaurant's data without update password
+        const updatedRestaurant = await updateProfileDataService.execute({
+            restaurant_id: restaurant.id,
+            trade: 'Restaurant-Update',
+            telephone: '22222222222',
+            logo: 'logo.png',
+            current_password: 'pass123',
+        });
+
+        // Verigfy if the restaurant's data has ben updated
+        expect(updatedRestaurant.trade).toBe('Restaurant-Update');
+        expect(updatedRestaurant.password).toBe('pass123');
     });
 
     it('should not be able to update data for a non-existent restaurant', async () => {
@@ -86,7 +137,7 @@ describe('UpdateProfileDataService', () => {
                 telephone: '22222222222',
                 logo: 'logo-update.png',
                 new_password: 'pass-update',
-                old_password: 'pass123',
+                current_password: 'pass123',
             }),
         ).rejects.toBeInstanceOf(AppError);
     });
@@ -110,7 +161,7 @@ describe('UpdateProfileDataService', () => {
                 telephone: '22222222222',
                 logo: 'logo-update.png',
                 new_password: 'pass-update',
-                old_password: 'wrong-password',
+                current_password: 'wrong-password',
             }),
         ).rejects.toBeInstanceOf(AppError);
     });

@@ -94,6 +94,33 @@ describe('CreateItemService', () => {
         expect(itemAndMenuItem).toHaveProperty('menu_item');
     });
 
+    it('should be able to create a new item without image', async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Creating a new item
+        const itemAndMenuItem = await createItemService.execute({
+            title: 'Food Title',
+            description: 'Food Description',
+            price: 10,
+            discount_price: 0,
+            enabled: true,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        });
+
+        // Check if item has been created
+        expect(itemAndMenuItem).toHaveProperty('item');
+        expect(itemAndMenuItem.item.image).toEqual(undefined);
+    });
+
     it('should be able to create a new item reusing the registered category', async () => {
         // Creating a new restaurant
         const restaurant = await createRestaurantService.execute({

@@ -22,6 +22,9 @@ import CategoriesRepository from '../../modules/items/typeorm/repositories/Categ
 import IMenuItemsRepository from '../../modules/menu/repositories/IMenuItemsRepository';
 import MenuItemsRepository from '../../modules/menu/typeorm/repositories/MenuItemsRepository';
 
+import IForgotPasswordTokensRepository from '../../modules/restaurants/repositories/IForgotPasswordTokensRepository';
+import ForgotPasswordTokensRepository from '../../modules/restaurants/typeorm/repositories/ForgotPasswordTokensRepository';
+
 // Register restaurants repository container
 container.registerSingleton<IRestaurantsRepository>(
     'RestaurantsRepository',
@@ -50,4 +53,10 @@ container.registerSingleton<ICategoriesRepository>(
 container.registerSingleton<IMenuItemsRepository>(
     'MenuItemsRepository',
     MenuItemsRepository,
+);
+
+// Register forgot password tokens repository container
+container.registerSingleton<IForgotPasswordTokensRepository>(
+    'ForgotPasswordTokensRepository',
+    ForgotPasswordTokensRepository,
 );

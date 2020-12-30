@@ -90,14 +90,13 @@ class UpdateItemService {
             category_id = findSameCategoryInDataBase.id;
         }
 
-        // If change image, delete file from storage
+        // If change image, delete old file from storage
         if (image !== itemToUpdate.image) {
             await this.storageProvider.deleteFile(itemToUpdate.image);
         }
 
         // Updating item data
         itemToUpdate.restaurant_id = restaurant_id;
-        itemToUpdate.image = image;
         itemToUpdate.title = title;
         itemToUpdate.description = description;
         itemToUpdate.price = price;
@@ -105,13 +104,14 @@ class UpdateItemService {
         itemToUpdate.enabled = enabled;
         itemToUpdate.category_id = category_id;
 
-        // Saving updated item data
-        const updatedItem = await this.itemsRepository.update(itemToUpdate);
-
-        // Saving image file in storage
+        // Updating and saving the new image file in storage
         if (image) {
+            itemToUpdate.image = image;
             await this.storageProvider.saveFile(image);
         }
+
+        // Saving updated item data
+        const updatedItem = await this.itemsRepository.update(itemToUpdate);
 
         // Returning item updated
         return updatedItem;

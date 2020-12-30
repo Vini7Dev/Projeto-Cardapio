@@ -109,6 +109,45 @@ describe('DeleteItemService', () => {
         expect(noExistsItem).toEqual(undefined);
     });
 
+    it('should be able to delete item without image', async () => {
+        // Spy delete file method
+        const deleteFile = jest.spyOn(storageProvider, 'deleteFile');
+
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Creating a new item
+        const item = await createItemService.execute({
+            title: 'Food Title',
+            description: 'Food Description',
+            price: 10,
+            discount_price: 0,
+            enabled: true,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        });
+
+        // Deleting item
+        await deleteItemService.execute({
+            restaurant_id: restaurant.id,
+            item_id: item.item.id,
+        });
+
+        // Try to find item deleted
+        const noExistsItem = await itemsRepository.findById(item.item.id);
+
+        // Expect not to find the item and not have called the method 'deleteFile'
+        expect(noExistsItem).toEqual(undefined);
+        expect(deleteFile).not.toHaveBeenCalledWith(item.item.image);
+    });
+
     it('should not be able to delete a item with non-exists restaurant', async () => {
         // Try to delete a item with non-exists restaurant
         await expect(

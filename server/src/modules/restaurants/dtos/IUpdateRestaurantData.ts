@@ -8,7 +8,7 @@ interface IUpdateRestaurantData {
     telephone: string;
     logo: string;
     new_password?: string;
-    old_password: string;
+    current_password: string;
 }
 
 export default IUpdateRestaurantData;

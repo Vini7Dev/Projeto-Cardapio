@@ -2,23 +2,22 @@
  * Fake: Forgot Password Tokens Repository
  */
 
-import ForgotPasswordToken from 'modules/restaurants/typeorm/entities/ForgotPasswordToken';
+import { uuid } from 'uuidv4';
+
 import IForgotPasswordTokensRepository from '../IForgotPasswordTokensRepository';
+import ForgotPasswordToken from '../../typeorm/entities/ForgotPasswordToken';
 
 class FakeForgotPasswordTokensRepository
     implements IForgotPasswordTokensRepository {
-    private lastIncrementToken = 1;
-
     private storage: ForgotPasswordToken[] = [];
 
     // Create a new token
     public async create(user_id: string): Promise<ForgotPasswordToken> {
         const token = new ForgotPasswordToken();
 
-        token.token = this.lastIncrementToken.toString();
-        token.user_id = user_id;
-
-        this.lastIncrementToken += 1;
+        token.id = uuid();
+        token.token = uuid();
+        token.user_id = uuid();
 
         await this.storage.push(token);
 

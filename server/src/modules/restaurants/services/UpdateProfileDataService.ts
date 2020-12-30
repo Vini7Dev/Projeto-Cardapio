@@ -32,7 +32,7 @@ class UpdateProfileDataService {
         telephone,
         logo,
         new_password,
-        old_password,
+        current_password,
     }: IUpdateRestaurantData) {
         // Getting restaurant's original data
         const restaurant = await this.restaurantsRepository.findById(
@@ -46,7 +46,7 @@ class UpdateProfileDataService {
 
         // Verify that the password entered is valid
         const passwordIsValid = await this.hashProvider.compareHash(
-            old_password,
+            current_password,
             restaurant.password,
         );
 

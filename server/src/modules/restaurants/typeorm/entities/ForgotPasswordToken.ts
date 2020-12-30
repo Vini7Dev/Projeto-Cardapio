@@ -16,7 +16,7 @@ class ForgotPasswordToken {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column('uuid')
+    @Column()
     @Generated('uuid')
     token: string;
 

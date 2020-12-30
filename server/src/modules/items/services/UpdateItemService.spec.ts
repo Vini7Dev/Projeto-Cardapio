@@ -131,6 +131,47 @@ describe('UpdateItemService', () => {
         expect(itemCategoryUpdated.title).toEqual('Food Updated Again');
     });
 
+    it("should be able to update an item's data without update image", async () => {
+        // Spy save file method
+        const saveFile = jest.spyOn(storageProvider, 'saveFile');
+
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            email: 'example@gmail.com',
+            password: 'pass123',
+        });
+
+        // Creating a new item
+        const itemCreated = await createItemService.execute({
+            title: 'Food Title',
+            description: 'Food Description',
+            price: 10,
+            discount_price: 0,
+            enabled: true,
+            category_name: 'Category',
+            restaurant_id: restaurant.id,
+        });
+
+        // Update item created data without change image
+        const itemUpdated = await updateItemService.execute({
+            item_id: itemCreated.item.id,
+            title: 'Food Updated',
+            description: 'Food Description Updated',
+            price: 15,
+            discount_price: 11,
+            enabled: false,
+            category_name: 'Category',
+            restaurant_id: restaurant.id,
+        });
+
+        // Verify if has been updated (without change category)
+        expect(itemUpdated.title).toEqual('Food Updated');
+        expect(saveFile).not.toHaveBeenCalled();
+    });
+
     it('should not be able to update item when restaurant non-exists', async () => {
         // Creating a new restaurant
         const restaurant = await createRestaurantService.execute({
