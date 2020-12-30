@@ -17,8 +17,8 @@ class ForgotPasswordTokensRepository
     }
 
     // Create token
-    public async create(user_id: string): Promise<ForgotPasswordToken> {
-        const createdToken = await this.repository.create({ user_id });
+    public async create(restaurant_id: string): Promise<ForgotPasswordToken> {
+        const createdToken = await this.repository.create({ restaurant_id });
 
         const savedToken = await this.repository.save(createdToken);
 

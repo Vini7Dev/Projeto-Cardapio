@@ -21,7 +21,7 @@ class ForgotPasswordToken {
     token: string;
 
     @Column('uuid')
-    user_id: string;
+    restaurant_id: string;
 
     @CreateDateColumn()
     created_at: Date;

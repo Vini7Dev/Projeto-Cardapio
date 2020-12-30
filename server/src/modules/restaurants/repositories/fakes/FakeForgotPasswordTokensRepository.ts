@@ -12,12 +12,14 @@ class FakeForgotPasswordTokensRepository
     private storage: ForgotPasswordToken[] = [];
 
     // Create a new token
-    public async create(user_id: string): Promise<ForgotPasswordToken> {
+    public async create(restaurant_id: string): Promise<ForgotPasswordToken> {
         const token = new ForgotPasswordToken();
 
         token.id = uuid();
         token.token = uuid();
-        token.user_id = uuid();
+        token.restaurant_id = restaurant_id;
+        token.created_at = new Date(Date.now());
+        token.updated_at = new Date(Date.now());
 
         await this.storage.push(token);
 

@@ -1,5 +1,5 @@
 /**
- * Send Forgot Password Mail
+ * Send Forgot Password Mail Service
  */
 
 import 'reflect-metadata';
@@ -12,7 +12,7 @@ import IMailProvider from '../../../shared/container/providers/MailProvider/mode
 import IForgotPasswordTokensRepository from '../repositories/IForgotPasswordTokensRepository';
 
 @injectable()
-class SendForgotPasswordMail {
+class SendForgotPasswordMailService {
     constructor(
         @inject('RestaurantsRepository')
         private restaurantsRepository: IRestaurantsRepository,
@@ -56,4 +56,4 @@ class SendForgotPasswordMail {
     }
 }
 
-export default SendForgotPasswordMail;
+export default SendForgotPasswordMailService;

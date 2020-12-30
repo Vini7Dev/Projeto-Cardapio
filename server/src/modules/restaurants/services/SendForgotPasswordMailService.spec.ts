@@ -1,10 +1,10 @@
 /**
- * Test: Send Forgot Password Mail
+ * Test: Send Forgot Password Mail Service
  */
 
 import AppError from '../../../shared/errors/AppError';
 
-import SendForgotPasswordMail from './SendForgotPasswordMail';
+import SendForgotPasswordMailService from './SendForgotPasswordMailService';
 import CreateRestaurantService from './CreateRestaurantService';
 
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
@@ -22,10 +22,10 @@ import FakeStorageProvider from '../../../shared/container/providers/StorageProv
 import IMailProvider from '../../../shared/container/providers/MailProvider/models/IMailProvider';
 import FakeMailProvider from '../../../shared/container/providers/MailProvider/fakes/IFakeMailProvider';
 
-import IForgotPasswordTokensRepositoryaa from '../repositories/IForgotPasswordTokensRepository';
+import IForgotPasswordTokensRepository from '../repositories/IForgotPasswordTokensRepository';
 import FakeForgotPasswordTokensRepository from '../repositories/fakes/FakeForgotPasswordTokensRepository';
 
-let sendForgotPasswordMail: SendForgotPasswordMail;
+let sendForgotPasswordMail: SendForgotPasswordMailService;
 let createRestaurantService: CreateRestaurantService;
 
 let restaurantsRepository: IRestaurantsRepository;
@@ -33,7 +33,7 @@ let menusRepository: IMenusRepository;
 let hashProvider: IHashProvider;
 let storageProvider: IStorageProvider;
 let mailProvider: IMailProvider;
-let forgotPasswordTokensRepository: IForgotPasswordTokensRepositoryaa;
+let forgotPasswordTokensRepository: IForgotPasswordTokensRepository;
 
 describe('SendForgotPasswordMail', () => {
     // Instantiate services for each test
@@ -45,7 +45,7 @@ describe('SendForgotPasswordMail', () => {
         mailProvider = new FakeMailProvider();
         forgotPasswordTokensRepository = new FakeForgotPasswordTokensRepository();
 
-        sendForgotPasswordMail = new SendForgotPasswordMail(
+        sendForgotPasswordMail = new SendForgotPasswordMailService(
             restaurantsRepository,
             forgotPasswordTokensRepository,
             mailProvider,
