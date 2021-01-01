@@ -51,7 +51,7 @@ class SendForgotPasswordMailService {
                 mail: restaurant.email,
             },
             subject: '[Menue] Recuperação de senha',
-            html: `Acesse o seguinte link para a recuperação da senha: ${token}`,
+            html: `Clique <a href="http://localhost:3000/password/reset/${token.token}>AQUI</a> para recuperar sua senha.`,
         });
     }
 }
