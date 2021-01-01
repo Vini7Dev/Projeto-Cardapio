@@ -2,6 +2,8 @@
  * Send Mail DTO
  */
 
+import ITemplateDataDTO from '../../TemplateMailProvider/dtos/ITemplateDataDTO';
+
 interface ISendMailDTO {
     from: {
         name: string;
@@ -12,7 +14,7 @@ interface ISendMailDTO {
         mail: string;
     };
     subject: string;
-    html: string;
+    templateData: ITemplateDataDTO;
 }
 
 export default ISendMailDTO;

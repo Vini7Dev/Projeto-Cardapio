@@ -3,13 +3,14 @@
  */
 
 import 'reflect-metadata';
+import path from 'path';
 import { inject, injectable } from 'tsyringe';
 
 import AppError from '../../../shared/errors/AppError';
 
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
-import IMailProvider from '../../../shared/container/providers/MailProvider/models/IMailProvider';
 import IForgotPasswordTokensRepository from '../repositories/IForgotPasswordTokensRepository';
+import IMailProvider from '../../../shared/container/providers/MailProvider/models/IMailProvider';
 
 @injectable()
 class SendForgotPasswordMailService {
@@ -40,6 +41,14 @@ class SendForgotPasswordMailService {
             restaurant.id,
         );
 
+        // Getting template path for email
+        const templatePath = path.resolve(
+            __dirname,
+            '..',
+            'views',
+            'forgot_password_mail.hbs',
+        );
+
         // Sending a recover password mail
         await this.mailProvider.sendMail({
             from: {
@@ -51,7 +60,13 @@ class SendForgotPasswordMailService {
                 mail: restaurant.email,
             },
             subject: '[Menue] Recuperação de senha',
-            html: `Clique <a href="http://localhost:3000/password/reset/${token.token}>AQUI</a> para recuperar sua senha.`,
+            templateData: {
+                file: templatePath,
+                variables: {
+                    name: restaurant.trade,
+                    link: `http://localhost:3000/password/reset/${token.token}`,
+                },
+            },
         });
     }
 }

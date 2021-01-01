@@ -2,7 +2,7 @@
  * Mail Provider Interface
  */
 
-import ISendMailDTO from '../dtos/iSendMailDTO';
+import ISendMailDTO from '../dtos/ISendMailDTO';
 
 interface IMailProvider {
     sendMail(mailData: ISendMailDTO): Promise<void>; // Send mail

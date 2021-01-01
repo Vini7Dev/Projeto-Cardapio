@@ -1,5 +1,5 @@
 /**
- * Mali Provider Container Controller
+ * Mail Provider Container Controller
  */
 
 import { container } from 'tsyringe';
@@ -10,5 +10,5 @@ import IMailProvider from './models/IMailProvider';
 // Register mail provider container
 container.registerInstance<IMailProvider>(
     'MailProvider',
-    new EtherealMailProvider(),
+    container.resolve(EtherealMailProvider),
 );
