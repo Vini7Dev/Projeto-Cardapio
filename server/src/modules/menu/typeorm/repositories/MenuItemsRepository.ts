@@ -23,6 +23,9 @@ class MenuItemsRepository implements IMenuItemsRepository {
         const menuItemsFinded = await this.repository.find({
             where: { menu_id },
             relations: ['item'],
+            loadRelationIds: {
+                relations: ['category'],
+            },
         });
 
         return menuItemsFinded;

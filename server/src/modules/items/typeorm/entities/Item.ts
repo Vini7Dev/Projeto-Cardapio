@@ -8,8 +8,12 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
+    ManyToOne,
+    JoinColumn,
 } from 'typeorm';
 import { Expose } from 'class-transformer';
+
+import Category from './Category';
 
 @Entity('items')
 class Item {
@@ -36,6 +40,10 @@ class Item {
 
     @Column('int2')
     category_id: number;
+
+    @ManyToOne(() => Category, { eager: true })
+    @JoinColumn({ name: 'category_id' })
+    category: Category;
 
     @Column('boolean')
     enabled: boolean;
