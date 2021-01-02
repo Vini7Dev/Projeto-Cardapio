@@ -90,11 +90,6 @@ class UpdateItemService {
             category_id = findSameCategoryInDataBase.id;
         }
 
-        // If change image, delete old file from storage
-        if (image !== itemToUpdate.image) {
-            await this.storageProvider.deleteFile(itemToUpdate.image);
-        }
-
         // Updating item data
         itemToUpdate.restaurant_id = restaurant_id;
         itemToUpdate.title = title;
@@ -106,8 +101,14 @@ class UpdateItemService {
 
         // Updating and saving the new image file in storage
         if (image) {
-            itemToUpdate.image = image;
+            // Delete old file from storage
+            await this.storageProvider.deleteFile(itemToUpdate.image);
+
+            // Updating logo in storage
             await this.storageProvider.saveFile(image);
+
+            // Updating logo in data base
+            itemToUpdate.image = image;
         }
 
         // Saving updated item data

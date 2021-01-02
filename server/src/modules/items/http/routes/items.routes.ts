@@ -4,6 +4,7 @@
 
 import { Router } from 'express';
 import multer from 'multer';
+import { celebrate, Segments, Joi } from 'celebrate';
 
 import ensureAuth from '../../../restaurants/http/middlewares/ensureAuth';
 import uploadConfig from '../../../../config/uploadConfig';
@@ -22,10 +23,47 @@ const itemsController = new ItemsController();
 itemsRoutes.use(ensureAuth);
 
 // Create a new item
-itemsRoutes.post('/', uploadFile.single('image'), itemsController.create);
+itemsRoutes.post(
+    // Route
+    '/',
+    // Upload file
+    uploadFile.single('image'),
+    // Validation data
+    celebrate({
+        [Segments.BODY]: {
+            title: Joi.string().max(35).required(),
+            description: Joi.string().required(),
+            price: Joi.number().precision(10).required(),
+            discount_price: Joi.number().precision(10).required(),
+            enabled: Joi.boolean().required(),
+            category_name: Joi.string().max(35).required(),
+        },
+    }),
+    // Run controller method
+    itemsController.create,
+);
 
 // Update a item data
-itemsRoutes.put('/', uploadFile.single('image'), itemsController.update);
+itemsRoutes.put(
+    // Route
+    '/',
+    // Upload file
+    uploadFile.single('image'),
+    // Validation data
+    celebrate({
+        [Segments.BODY]: {
+            item_id: Joi.string().uuid().required(),
+            title: Joi.string().max(35).required(),
+            description: Joi.string().required(),
+            price: Joi.number().precision(10).required(),
+            discount_price: Joi.number().precision(10).required(),
+            enabled: Joi.boolean().required(),
+            category_name: Joi.string().max(35).required(),
+        },
+    }),
+    // Run controller mehtod
+    itemsController.update,
+);
 
 // Delete a item
 itemsRoutes.delete('/:item_id', itemsController.delete);

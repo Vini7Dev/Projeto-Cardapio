@@ -5,6 +5,7 @@ import '../typeorm/database';
 import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
+import { errors } from 'celebrate';
 
 import AppError from '../errors/AppError';
 import routes from './routes';
@@ -29,6 +30,9 @@ server.use('/files', express.static(uploadConfig.uploadsFolder));
 
 // Use the app routes
 server.use(routes);
+
+// Use 'errors' for celebrate's failed validation
+server.use(errors());
 
 // Use App Error Controller
 server.use(

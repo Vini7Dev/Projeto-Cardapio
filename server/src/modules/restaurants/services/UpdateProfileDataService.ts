@@ -55,11 +55,6 @@ class UpdateProfileDataService {
             throw new AppError('A senha informada é inválida.', 401);
         }
 
-        // If change logo, delete file from storage
-        if (logo !== restaurant.logo) {
-            await this.storageProvider.deleteFile(restaurant.logo);
-        }
-
         // Updating trade and telephone
         restaurant.trade = trade;
         restaurant.telephone = telephone;
@@ -71,11 +66,14 @@ class UpdateProfileDataService {
             );
         }
 
-        // Updating logo and logo path in storage
         if (logo !== restaurant.logo && logo !== '') {
+            // Delete old logo file from storage
             await this.storageProvider.deleteFile(restaurant.logo);
+
+            // Updating logo in storage
             await this.storageProvider.saveFile(logo);
 
+            // Updating logo in data base
             restaurant.logo = logo;
         }
 
