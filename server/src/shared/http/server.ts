@@ -8,13 +8,18 @@ import 'express-async-errors';
 import { errors } from 'celebrate';
 
 import AppError from '../errors/AppError';
+
 import routes from './routes';
+import rateLimiter from './middlewares/rateLimiter';
 import uploadConfig from '../../config/uploadConfig';
 
 import '../container';
 
 // Create a server main controller
 const server = express();
+
+// Using rate limiter
+server.use(rateLimiter);
 
 // Using CORS
 const corsOpts = cors({
