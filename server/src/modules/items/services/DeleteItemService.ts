@@ -10,6 +10,7 @@ import AppError from '../../../shared/errors/AppError';
 import IItemsRepository from '../repositories/IItemsRepository';
 import IRestaurantsRepository from '../../restaurants/repositories/IRestaurantsRepository';
 import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
+import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
 
 interface IServiceRequest {
     restaurant_id: string;
@@ -27,6 +28,9 @@ class DeleteItemService {
 
         @inject('StorageProvider')
         private storageProvider: IStorageProvider,
+
+        @inject('CacheProvider')
+        private cacheProvider: ICacheProvider,
     ) {}
 
     // Executing the service
@@ -60,6 +64,9 @@ class DeleteItemService {
         if (item.image) {
             await this.storageProvider.deleteFile(item.image);
         }
+
+        // Clear cache
+        await this.cacheProvider.invalidate(`menus:${restaurant.menu_id}`);
 
         // Deleting item
         await this.itemsRepository.delete(item_id);

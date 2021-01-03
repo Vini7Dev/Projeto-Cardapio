@@ -3,6 +3,7 @@
  */
 
 import { Router } from 'express';
+
 import MenuController from './controllers/MenuItemsController';
 
 // Create a route object

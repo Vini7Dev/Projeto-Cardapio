@@ -2,6 +2,8 @@
  * Fake: Menu Items Repository
  */
 
+import { uuid } from 'uuidv4';
+
 import ICreateMenuItemDTO from '../../dtos/ICreateMenuItemDTO';
 import MenuItem from '../../typeorm/entities/MenuItem';
 import IMenuItemsRepository from '../IMenuItemsRepository';
@@ -27,6 +29,7 @@ class FakeMenuItemsRepository implements IMenuItemsRepository {
         const menuItemSaved = {
             ...menuItem,
             ...menuItemsData,
+            id: uuid(),
         };
 
         await this.storage.push(menuItemSaved);

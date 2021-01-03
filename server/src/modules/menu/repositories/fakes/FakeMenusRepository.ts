@@ -2,6 +2,7 @@
  * Fake: Menus Repository
  */
 
+import { uuid } from 'uuidv4';
 import Menu from '../../typeorm/entities/Menu';
 import IMenusRepository from '../IMenusRepository';
 

@@ -19,11 +19,11 @@ class RedisCacheProvider implements ICacheProvider {
     }
 
     // Get data from cache
-    public async recover<T>(key: string): Promise<T | null> {
+    public async recover<T>(key: string): Promise<T | undefined> {
         const findedCache = await this.redisClient.get(key);
 
         if (!findedCache) {
-            return null;
+            return undefined;
         }
 
         const parsedCache = JSON.parse(findedCache) as T;

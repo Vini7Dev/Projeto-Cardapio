@@ -2,6 +2,7 @@
  * Fake: Items Repository
  */
 
+import { uuid } from 'uuidv4';
 import Item from '../../typeorm/entities/Item';
 
 import { ISaveItemDTO } from '../../dtos/ICreateItemDTO';
@@ -26,6 +27,7 @@ class FakeItemsRepository implements IItemsRepository {
         const itemToSave = {
             ...item,
             ...itemData,
+            id: uuid(),
         } as Item;
 
         await this.storage.push(itemToSave);

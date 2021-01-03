@@ -13,6 +13,7 @@ import IItemsRepository from '../repositories/IItemsRepository';
 import ICategoriesRepository from '../repositories/ICategoriesRepository';
 import IRestaurantsRepository from '../../restaurants/repositories/IRestaurantsRepository';
 import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
+import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
 
 import AppError from '../../../shared/errors/AppError';
 
@@ -30,6 +31,9 @@ class UpdateItemService {
 
         @inject('StorageProvider')
         private storageProvider: IStorageProvider,
+
+        @inject('CacheProvider')
+        private cacheProvider: ICacheProvider,
     ) {}
 
     // Executing the service
@@ -113,6 +117,9 @@ class UpdateItemService {
 
         // Saving updated item data
         const updatedItem = await this.itemsRepository.update(itemToUpdate);
+
+        // Clear cache
+        await this.cacheProvider.invalidate(`menus:${restaurant.menu_id}`);
 
         // Returning item updated
         return updatedItem;

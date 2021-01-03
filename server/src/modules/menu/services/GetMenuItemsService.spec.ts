@@ -4,6 +4,8 @@
 
 import AppError from '../../../shared/errors/AppError';
 
+import MenuItem from '../typeorm/entities/MenuItem';
+
 import GetMenuItemsService from './GetMenuItemsService';
 import CreateItemService from '../../items/services/CreateItemService';
 import CreateRestaurantService from '../../restaurants/services/CreateRestaurantService';
@@ -29,6 +31,9 @@ import FakeHashProvider from '../../restaurants/providers/HashProvider/fakes/Fak
 import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 import FakeStorageProvider from '../../../shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 
+import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
+import FakeCacheProvider from '../../../shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
+
 let getMenuItemsService: GetMenuItemsService;
 let createItemService: CreateItemService;
 let createRestaurantService: CreateRestaurantService;
@@ -40,8 +45,10 @@ let categoriesRepository: ICategoriesRepository;
 let restaurantsRepository: IRestaurantsRepository;
 let hashProvider: IHashProvider;
 let storageProvider: IStorageProvider;
+let cacheProvider: ICacheProvider;
 
 describe('GetMenuItemsService', () => {
+    // Instantiate the services before each test
     beforeEach(() => {
         menusRepository = new FakeMenusRepository();
         menuItemsRepository = new FakeMenuItemsRepository();
@@ -50,10 +57,12 @@ describe('GetMenuItemsService', () => {
         restaurantsRepository = new FakeRestaurantsRepository();
         hashProvider = new FakeHashProvider();
         storageProvider = new FakeStorageProvider();
+        cacheProvider = new FakeCacheProvider();
 
         getMenuItemsService = new GetMenuItemsService(
             menusRepository,
             menuItemsRepository,
+            cacheProvider,
         );
 
         createItemService = new CreateItemService(
@@ -62,6 +71,7 @@ describe('GetMenuItemsService', () => {
             restaurantsRepository,
             menuItemsRepository,
             storageProvider,
+            cacheProvider,
         );
 
         createRestaurantService = new CreateRestaurantService(
@@ -106,6 +116,51 @@ describe('GetMenuItemsService', () => {
 
         // Check if response is not undefined
         expect(menuItems).not.toEqual(undefined);
+    });
+
+    it('should be able to list menu items from cache data', async () => {
+        // Spy method to recover cache data
+        const recoverCache = jest.spyOn(cacheProvider, 'recover');
+
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Creating items to menu
+        const foodData = {
+            image: 'image.png',
+            title: 'Food Title',
+            description: 'Food Description',
+            price: 10,
+            discount_price: 0,
+            enabled: true,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        };
+
+        // Saving items in menu
+        const menuItemSaved1 = await createItemService.execute(foodData);
+        const menuItemSaved2 = await createItemService.execute(foodData);
+
+        // Getting menu items in first time (from data base)
+        await getMenuItemsService.execute(Number(restaurant.menu_id));
+
+        // Getting menu items in second time (from cache)
+        await getMenuItemsService.execute(Number(restaurant.menu_id));
+
+        // Expect recover return the cache
+        expect(recoverCache.mock.results[0].value).toEqual(
+            new Promise(resolve => resolve({})),
+        );
+        expect(recoverCache.mock.results[1].value).toEqual(
+            new Promise(resolve => resolve({ menuItemSaved1, menuItemSaved2 })),
+        );
     });
 
     it('should not be able to list menu items from a non-exists menu', async () => {

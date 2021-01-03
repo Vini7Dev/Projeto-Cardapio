@@ -14,6 +14,7 @@ import ICategoriesRepository from '../repositories/ICategoriesRepository';
 import IRestaurantsRepository from '../../restaurants/repositories/IRestaurantsRepository';
 import IMenuItemsRepository from '../../menu/repositories/IMenuItemsRepository';
 import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
+import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
 
 import { ICreateItemDTO } from '../dtos/ICreateItemDTO';
 
@@ -39,6 +40,9 @@ class CreateItemService {
 
         @inject('StorageProvider')
         private storageProvider: IStorageProvider,
+
+        @inject('CacheProvider')
+        private cacheProvider: ICacheProvider,
     ) {}
 
     // Executing the service
@@ -105,6 +109,9 @@ class CreateItemService {
         if (image) {
             await this.storageProvider.saveFile(image);
         }
+
+        // Clear cache
+        await this.cacheProvider.invalidate(`menus:${restaurantData.menu_id}`);
 
         // Return item created
         return {

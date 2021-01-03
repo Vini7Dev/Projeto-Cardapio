@@ -29,6 +29,9 @@ import IHashProvider from '../../restaurants/providers/HashProvider/models/IHash
 import FakeStorageProvider from '../../../shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 
+import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
+import FakeCacheProvider from '../../../shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
+
 let deleteItemService: DeleteItemService;
 let createItemService: CreateItemService;
 let createRestaurantService: CreateRestaurantService;
@@ -40,6 +43,7 @@ let menusRepository: IMenusRepository;
 let menuItemsRepository: IMenuItemsRepository;
 let hashProvider: IHashProvider;
 let storageProvider: IStorageProvider;
+let cacheProvider: ICacheProvider;
 
 describe('DeleteItemService', () => {
     beforeEach(() => {
@@ -50,11 +54,13 @@ describe('DeleteItemService', () => {
         menuItemsRepository = new FakeMenuItemsRepository();
         hashProvider = new FakeHashProvider();
         storageProvider = new FakeStorageProvider();
+        cacheProvider = new FakeCacheProvider();
 
         deleteItemService = new DeleteItemService(
             itemsRepository,
             restaurantsRepository,
             storageProvider,
+            cacheProvider,
         );
 
         createItemService = new CreateItemService(
@@ -63,6 +69,7 @@ describe('DeleteItemService', () => {
             restaurantsRepository,
             menuItemsRepository,
             storageProvider,
+            cacheProvider,
         );
 
         createRestaurantService = new CreateRestaurantService(
