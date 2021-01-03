@@ -65,6 +65,9 @@ class ResetPasswordService {
             restaurant,
         );
 
+        // Delete token from database
+        await this.forgotPasswordTokensRepository.delete(tokenData.id);
+
         // Returning restaurant updated
         return restaurantUpdated;
     }

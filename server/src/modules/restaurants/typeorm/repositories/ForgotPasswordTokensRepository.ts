@@ -16,6 +16,15 @@ class ForgotPasswordTokensRepository
         this.repository = getRepository(ForgotPasswordToken);
     }
 
+    // Find by token
+    public async findByToken(
+        token: string,
+    ): Promise<ForgotPasswordToken | undefined> {
+        const findedToken = await this.repository.findOne({ where: { token } });
+
+        return findedToken;
+    }
+
     // Create token
     public async create(restaurant_id: string): Promise<ForgotPasswordToken> {
         const createdToken = await this.repository.create({ restaurant_id });
@@ -25,13 +34,17 @@ class ForgotPasswordTokensRepository
         return savedToken;
     }
 
-    // Find by token
-    public async findByToken(
-        token: string,
-    ): Promise<ForgotPasswordToken | undefined> {
-        const findedToken = await this.repository.findOne({ where: { token } });
+    // Delete token
+    public async delete(token_id: string): Promise<void> {
+        const tokenFinded = await this.repository.findOne({
+            where: { id: token_id },
+        });
 
-        return findedToken;
+        if (!tokenFinded) {
+            return;
+        }
+
+        await this.repository.remove(tokenFinded);
     }
 }
 

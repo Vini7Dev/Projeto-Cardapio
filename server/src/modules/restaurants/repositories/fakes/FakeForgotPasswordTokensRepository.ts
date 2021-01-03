@@ -11,6 +11,17 @@ class FakeForgotPasswordTokensRepository
     implements IForgotPasswordTokensRepository {
     private storage: ForgotPasswordToken[] = [];
 
+    // Find by token
+    public async findByToken(
+        token: string,
+    ): Promise<ForgotPasswordToken | undefined> {
+        const findedToken = await this.storage.find(
+            tokenElement => tokenElement.token === token,
+        );
+
+        return findedToken;
+    }
+
     // Create a new token
     public async create(restaurant_id: string): Promise<ForgotPasswordToken> {
         const token = new ForgotPasswordToken();
@@ -26,15 +37,13 @@ class FakeForgotPasswordTokensRepository
         return token;
     }
 
-    // Find by token
-    public async findByToken(
-        token: string,
-    ): Promise<ForgotPasswordToken | undefined> {
-        const findedToken = await this.storage.find(
-            tokenElement => tokenElement.token === token,
+    // Deleting token
+    public async delete(token_id: string): Promise<void> {
+        const tokenIndex = await this.storage.findIndex(
+            token => token.id === token_id,
         );
 
-        return findedToken;
+        await this.storage.splice(tokenIndex, 1);
     }
 }
 

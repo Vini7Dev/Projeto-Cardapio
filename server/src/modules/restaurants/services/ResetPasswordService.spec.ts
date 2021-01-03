@@ -138,4 +138,35 @@ describe('ResetPasswordService', () => {
             }),
         ).rejects.toBeInstanceOf(AppError);
     });
+
+    it('should not be able to reset two or more time the password', async () => {
+        // Create a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@gmail.com',
+            password: 'pass123',
+        });
+
+        // Generate forgot password token
+        const tokenData = await forgotPasswordTokensRepository.create(
+            restaurant.id,
+        );
+
+        // First Reset password
+        await resetPasswordService.execute({
+            token: tokenData.token,
+            new_password: 'newPass123',
+        });
+
+        // Try to reset password again
+        await expect(
+            resetPasswordService.execute({
+                token: tokenData.token,
+                new_password: 'newPass123',
+            }),
+        ).rejects.toBeInstanceOf(AppError);
+    });
 });
