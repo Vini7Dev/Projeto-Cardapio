@@ -12,8 +12,8 @@ import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
-import FakeMenusRepository from '../../menu/repositories/fakes/FakeMenusRepository';
-import IMenusRepository from '../../menu/repositories/IMenusRepository';
+import FakeMenusRepository from '../../menus/repositories/fakes/FakeMenusRepository';
+import IMenusRepository from '../../menus/repositories/IMenusRepository';
 
 import FakeStorageProvider from '../../../shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
@@ -80,7 +80,7 @@ describe('CreateSectionService', () => {
 
     it('should not be able to create a new section with wrong credentials', async () => {
         // Creating a new restaurant
-        const restaurant = await createRestaurantService.execute({
+        await createRestaurantService.execute({
             trade: 'Restaurant',
             cnpj: '11111111111',
             telephone: '11111111111',

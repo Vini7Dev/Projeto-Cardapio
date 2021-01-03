@@ -13,7 +13,7 @@ import {
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 
-import Menu from '../../../menu/typeorm/entities/Menu';
+import Menu from '../../../menus/typeorm/entities/Menu';
 
 @Entity('restaurants')
 class Restaurant {

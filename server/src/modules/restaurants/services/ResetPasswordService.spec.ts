@@ -4,16 +4,14 @@
 
 import AppError from '../../../shared/errors/AppError';
 
-import ForgotPasswordToken from '../typeorm/entities/ForgotPasswordToken';
-
 import ResetPasswordService from './ResetPasswordService';
 import CreateRestaurantService from './CreateRestaurantService';
 
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
 import FakeRestaurantsRepository from '../repositories/fakes/FakeRestaurantsRepository';
 
-import IMenusRepository from '../../menu/repositories/IMenusRepository';
-import FakeMenusRepository from '../../menu/repositories/fakes/FakeMenusRepository';
+import IMenusRepository from '../../menus/repositories/IMenusRepository';
+import FakeMenusRepository from '../../menus/repositories/fakes/FakeMenusRepository';
 
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';

@@ -7,7 +7,7 @@ import ITemplateMailProvider from '../models/ITemplateMailProvider';
 
 class FakeTemplateMailProvider implements ITemplateMailProvider {
     public async parse({ file, variables }: ITemplateDataDTO): Promise<string> {
-        return `Mail Content`;
+        return `${file}, ${variables}`;
     }
 }
 

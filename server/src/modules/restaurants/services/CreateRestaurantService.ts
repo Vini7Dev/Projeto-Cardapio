@@ -9,7 +9,7 @@ import AppError from '../../../shared/errors/AppError';
 import Restaurant from '../typeorm/entities/Restaurant';
 
 import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
-import IMenusRepository from '../../menu/repositories/IMenusRepository';
+import IMenusRepository from '../../menus/repositories/IMenusRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 

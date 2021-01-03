@@ -4,8 +4,6 @@
 
 import AppError from '../../../shared/errors/AppError';
 
-import MenuItem from '../typeorm/entities/MenuItem';
-
 import GetMenuItemsService from './GetMenuItemsService';
 import CreateItemService from '../../items/services/CreateItemService';
 import CreateRestaurantService from '../../restaurants/services/CreateRestaurantService';

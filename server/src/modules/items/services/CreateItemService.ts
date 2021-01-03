@@ -6,13 +6,13 @@ import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 
 import AppError from '../../../shared/errors/AppError';
-import MenuItem from '../../menu/typeorm/entities/MenuItem';
+import MenuItem from '../../menus/typeorm/entities/MenuItem';
 import Item from '../typeorm/entities/Item';
 
 import IItemsRepository from '../repositories/IItemsRepository';
 import ICategoriesRepository from '../repositories/ICategoriesRepository';
 import IRestaurantsRepository from '../../restaurants/repositories/IRestaurantsRepository';
-import IMenuItemsRepository from '../../menu/repositories/IMenuItemsRepository';
+import IMenuItemsRepository from '../../menus/repositories/IMenuItemsRepository';
 import IStorageProvider from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
 

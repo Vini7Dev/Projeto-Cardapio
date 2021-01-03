@@ -4,7 +4,7 @@
 
 import { getRepository, Repository } from 'typeorm';
 
-import IMenusRepository from 'modules/menu/repositories/IMenusRepository';
+import IMenusRepository from '../../repositories/IMenusRepository';
 import Menu from '../entities/Menu';
 
 class MenusRepository implements IMenusRepository {

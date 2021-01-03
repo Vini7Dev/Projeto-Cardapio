@@ -15,11 +15,11 @@ import ICategoriesRepository from '../repositories/ICategoriesRepository';
 import FakeRestaurantsRepository from '../../restaurants/repositories/fakes/FakeRestaurantsRepository';
 import IRestaurantsRepository from '../../restaurants/repositories/IRestaurantsRepository';
 
-import FakeMenusRepository from '../../menu/repositories/fakes/FakeMenusRepository';
-import IMenusRepository from '../../menu/repositories/IMenusRepository';
+import FakeMenusRepository from '../../menus/repositories/fakes/FakeMenusRepository';
+import IMenusRepository from '../../menus/repositories/IMenusRepository';
 
-import FakeMenuItemsRepository from '../../menu/repositories/fakes/FakeMenuItemsRepository';
-import IMenuItemsRepository from '../../menu/repositories/IMenuItemsRepository';
+import FakeMenuItemsRepository from '../../menus/repositories/fakes/FakeMenuItemsRepository';
+import IMenuItemsRepository from '../../menus/repositories/IMenuItemsRepository';
 
 import FakeHashProvider from '../../restaurants/providers/HashProvider/fakes/FakeHashProvider';
 import IHashProvider from '../../restaurants/providers/HashProvider/models/IHashProvider';

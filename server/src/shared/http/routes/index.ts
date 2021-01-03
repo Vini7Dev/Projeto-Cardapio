@@ -8,7 +8,7 @@ import profileRoutes from '../../../modules/restaurants/http/routes/profile.rout
 import passwordRoutes from '../../../modules/restaurants/http/routes/password.routes';
 import sectionRoutes from '../../../modules/restaurants/http/routes/section.routes';
 import itemsRoutes from '../../../modules/items/http/routes/items.routes';
-import menuItems from '../../../modules/menu/http/routes/menuItems.routes';
+import menuItems from '../../../modules/menus/http/routes/menuItems.routes';
 
 // Creating a router object
 const routes = Router();
