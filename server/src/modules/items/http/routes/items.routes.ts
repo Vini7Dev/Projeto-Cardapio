@@ -66,6 +66,17 @@ itemsRoutes.put(
 );
 
 // Delete a item
-itemsRoutes.delete('/:item_id', itemsController.delete);
+itemsRoutes.delete(
+    // Route
+    '/:item_id',
+    // Validation data
+    celebrate({
+        [Segments.PARAMS]: {
+            item_id: Joi.string().uuid().required(),
+        }
+    }),
+    // Run controller method
+    itemsController.delete
+);
 
 export default itemsRoutes;

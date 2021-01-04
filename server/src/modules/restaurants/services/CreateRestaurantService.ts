@@ -83,6 +83,16 @@ class CreateRestaurantService {
 
         // Saving logo file in storage
         if (logo) {
+            // Check if logo type file is valid
+            const logoNameDotSepared = logo.split(/[\s.]+/);
+            const logoExtention = logoNameDotSepared[logoNameDotSepared.length -1];
+
+            if(logoExtention !== 'png' && logoExtention !== 'jpg' && logoExtention !== 'jpeg') {
+                // Cancel the operation
+                throw new AppError('O tipo do arquivo enviado é inválido.');
+            }
+
+            // Saving image logo in storage
             await this.storageProvider.saveFile(logo);
         }
 

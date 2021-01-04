@@ -105,8 +105,18 @@ class CreateItemService {
             item_id: itemCreated.id,
         });
 
-        // Saving image file in storage
+        // When inform the image
         if (image) {
+            // Check if image type file is valid
+            const imageNameDotSepared = image.split(/[\s.]+/);
+            const imageExtention = imageNameDotSepared[imageNameDotSepared.length -1];
+
+            if(imageExtention !== 'png' && imageExtention !== 'jpg' && imageExtention !== 'jpeg') {
+                // Cancel the operation
+                throw new AppError('O tipo do arquivo enviado é inválido.');
+            }
+
+            // Saving image file in storage
             await this.storageProvider.saveFile(image);
         }
 

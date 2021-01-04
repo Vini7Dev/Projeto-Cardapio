@@ -56,6 +56,56 @@ describe('CreateRestaurantService', () => {
         expect(restaurantCreated).toHaveProperty('id');
     });
 
+    it('should be able to create a new restaurant with all logo file extensions accepted', async () => {
+        // Create a new restaurant with logo.png
+        const restaurantCreatedPNG = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'examplePNG@gmail.com',
+            password: 'pass123',
+        });
+        // Create a new restaurant with logo.png
+        const restaurantCreatedJPG = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '22222222222',
+            telephone: '22222222222',
+            logo: 'logo.jpg',
+            email: 'exampleJPG@gmail.com',
+            password: 'pass123',
+        });
+
+        // Create a new restaurant with logo.png
+        const restaurantCreatedJPEG = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '33333333333',
+            telephone: '33333333333',
+            logo: 'logo.jpeg',
+            email: 'exampleJPEG@gmail.com',
+            password: 'pass123',
+        });
+
+        // Expects to have been created with accepted extensions
+        expect(restaurantCreatedPNG.logo).toEqual('logo.png');
+        expect(restaurantCreatedJPG.logo).toEqual('logo.jpg');
+        expect(restaurantCreatedJPEG.logo).toEqual('logo.jpeg');
+    })
+
+    it('should not be able to create a new restaurant with invalid file extensions', async () => {
+        // Try to create a new restaurant with a invalid logo extensions
+        await expect(
+            createRestaurantService.execute({
+                trade: 'Restaurant',
+                cnpj: '11111111111',
+                telephone: '11111111111',
+                logo: 'logo.txt',
+                email: 'examplePNG@gmail.com',
+                password: 'pass123',
+            })
+        ).rejects.toBeInstanceOf(AppError);
+    })
+
     it('should be able to create a new restaurant without the logo', async () => {
         // Create a new restaurant
         const restaurantCreated = await createRestaurantService.execute({

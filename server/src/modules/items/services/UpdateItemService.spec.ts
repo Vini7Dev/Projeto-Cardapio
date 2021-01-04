@@ -138,6 +138,117 @@ describe('UpdateItemService', () => {
         expect(itemCategoryUpdated.title).toEqual('Food Updated Again');
     });
 
+    it("sshould be able to update item with all image file extensions accepted", async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@gmail.com',
+            password: 'pass123',
+        });
+
+        // Creating a new item
+        const itemCreated = await createItemService.execute({
+            image: 'image1.png',
+            title: 'Food Title',
+            description: 'Food Description',
+            price: 10,
+            discount_price: 0,
+            enabled: true,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        });
+
+        // Update item created data PNG
+        const itemUpdatedPNG = await updateItemService.execute({
+            item_id: itemCreated.item.id,
+            image: 'image.png',
+            title: 'Food Updated',
+            description: 'Food Description Updated',
+            price: 15,
+            discount_price: 11,
+            enabled: false,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        });
+
+        // Verify if has been updated PNG
+        expect(itemUpdatedPNG.image).toEqual('image.png');
+
+        // Update item data again JPG
+        const itemUpdatedJPG = await updateItemService.execute({
+            item_id: itemCreated.item.id,
+            image: 'image.jpg',
+            title: 'Food Updated Again',
+            description: 'Food Description Updated',
+            price: 15,
+            discount_price: 11,
+            enabled: false,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        });
+
+        // Verify if has been updated JPG
+        expect(itemUpdatedJPG.image).toEqual('image.jpg');
+
+        // Update item data again PPEG
+        const itemUpdatedJPEG = await updateItemService.execute({
+            item_id: itemCreated.item.id,
+            image: 'image.jpeg',
+            title: 'Food Updated Again',
+            description: 'Food Description Updated',
+            price: 15,
+            discount_price: 11,
+            enabled: false,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        });
+
+        // Verify if has been updated PPEG
+        expect(itemUpdatedJPEG.image).toEqual('image.jpeg');
+    });
+
+    it('should not be able to update item with invalid file extensions', async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Creating a new item
+        const itemCreated = await createItemService.execute({
+            image: 'image1.png',
+            title: 'Food Title',
+            description: 'Food Description',
+            price: 10,
+            discount_price: 0,
+            enabled: true,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        });
+
+        // Try to create a new item with a invalid image extensions
+        await expect(
+            updateItemService.execute({
+                item_id: itemCreated.item.id,
+                image: 'image.txt',
+                title: 'Food Title Updated',
+                description: 'Food Description Updated',
+                price: 10,
+                discount_price: 0,
+                enabled: true,
+                category_name: 'Category 1',
+                restaurant_id: restaurant.id,
+            })
+        ).rejects.toBeInstanceOf(AppError);
+    });
+
     it("should be able to update an item's data without update image", async () => {
         // Spy save file method
         const saveFile = jest.spyOn(storageProvider, 'saveFile');

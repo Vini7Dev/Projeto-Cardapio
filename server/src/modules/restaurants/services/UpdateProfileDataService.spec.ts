@@ -77,6 +77,79 @@ describe('UpdateProfileDataService', () => {
         expect(updatedRestaurant.password).toBe('pass-update');
     });
 
+    it('should be able to update restaurant data with all logo file extensions accepted', async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Updating the restaurant's data
+        const updatedRestaurantPNG = await updateProfileDataService.execute({
+            restaurant_id: restaurant.id,
+            trade: 'Restaurant-UpdatePNG',
+            telephone: '22222222222',
+            logo: 'logo-update.png',
+            current_password: 'pass123',
+        });
+
+        // Verigfy if the restaurant's logo has ben updated
+        expect(updatedRestaurantPNG.logo).toEqual('logo-update.png');
+
+
+        // Updating the restaurant's data
+        const updatedRestaurantJPG = await updateProfileDataService.execute({
+            restaurant_id: restaurant.id,
+            trade: 'Restaurant-UpdateJPG',
+            telephone: '22222222222',
+            logo: 'logo-update.jpg',
+            current_password: 'pass123',
+        });
+
+        // Verigfy if the restaurant's logo has ben updated
+        expect(updatedRestaurantJPG.logo).toEqual('logo-update.jpg');
+
+        // Updating the restaurant's data
+        const updatedRestaurantJPEG = await updateProfileDataService.execute({
+            restaurant_id: restaurant.id,
+            trade: 'Restaurant-UpdateJPEG',
+            telephone: '22222222222',
+            logo: 'logo-update.jpeg',
+            current_password: 'pass123',
+        });
+
+        // Verigfy if the restaurant's logo has ben updated
+        expect(updatedRestaurantJPEG.logo).toEqual('logo-update.jpeg');
+    });
+
+    it('should not be able to update restaurant with invalid file extensions', async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Try to update restaurant with a invalid logo extensions
+        await expect(
+            updateProfileDataService.execute({
+                restaurant_id: restaurant.id,
+                trade: 'Restaurant-Update',
+                telephone: '22222222222',
+                logo: 'logo-update.txt',
+                new_password: 'pass-update',
+                current_password: 'pass123',
+            })
+        ).rejects.toBeInstanceOf(AppError);
+    });
+
     it('should be able to update profile data without update the logo', async () => {
         // Creating a new restaurant
         const restaurant = await createRestaurantService.execute({

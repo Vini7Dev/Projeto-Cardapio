@@ -100,6 +100,86 @@ describe('CreateItemService', () => {
         expect(itemAndMenuItem).toHaveProperty('menu_item');
     });
 
+    it('should be able to create a new item with all image file extensions accepted', async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Creating a new item PNG
+        const itemAndMenuItemPNG = await createItemService.execute({
+            image: 'image.png',
+            title: 'Food Title',
+            description: 'Food Description',
+            price: 10,
+            discount_price: 0,
+            enabled: true,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        });
+
+        // Creating a new item JPG
+        const itemAndMenuItemJPG = await createItemService.execute({
+            image: 'image.jpg',
+            title: 'Food Title',
+            description: 'Food Description',
+            price: 10,
+            discount_price: 0,
+            enabled: true,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        });
+
+        // Creating a new item JPEG
+        const itemAndMenuItemJPEG = await createItemService.execute({
+            image: 'image.jpeg',
+            title: 'Food Title',
+            description: 'Food Description',
+            price: 10,
+            discount_price: 0,
+            enabled: true,
+            category_name: 'Category 1',
+            restaurant_id: restaurant.id,
+        });
+
+        // Expects to have been created with accepted extensions
+        expect(itemAndMenuItemPNG.item.image).toEqual('image.png');
+        expect(itemAndMenuItemJPG.item.image).toEqual('image.jpg');
+        expect(itemAndMenuItemJPEG.item.image).toEqual('image.jpeg');
+
+    });
+
+    it('should not be able to create a new item with invalid file extensions', async () => {
+        // Creating a new restaurant
+        const restaurant = await createRestaurantService.execute({
+            trade: 'Restaurant',
+            cnpj: '11111111111',
+            telephone: '11111111111',
+            logo: 'logo.png',
+            email: 'example@mail.com',
+            password: 'pass123',
+        });
+
+        // Try to create a new item with a invalid image extensions
+        await expect(
+            createItemService.execute({
+                image: 'image.txt',
+                title: 'Food Title',
+                description: 'Food Description',
+                price: 10,
+                discount_price: 0,
+                enabled: true,
+                category_name: 'Category 1',
+                restaurant_id: restaurant.id,
+            })
+        ).rejects.toBeInstanceOf(AppError);
+    });
+
     it('should be able to create a new item without image', async () => {
         // Creating a new restaurant
         const restaurant = await createRestaurantService.execute({
