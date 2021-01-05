@@ -12,23 +12,36 @@ interface IInputProps {
 }
 
 export const Container = styled.div<IInputProps>`
-    input {
-        height: 80px;
-        width: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        // Input border radius configuration
-        border-top-left-radius: ${ props => props.borderTL}px;
-        border-top-right-radius: ${ props => props.borderTR}px;
-        border-bottom-left-radius: ${ props => props.borderBL}px;
-        border-bottom-right-radius: ${ props => props.borderBR}px;
+    height: 80px;
+    width: 480px;
+
+    // Input border radius configuration
+    border-top-left-radius: ${ props => props.borderTL}px;
+    border-top-right-radius: ${ props => props.borderTR}px;
+    border-bottom-left-radius: ${ props => props.borderBL}px;
+    border-bottom-right-radius: ${ props => props.borderBR}px;
+
+    background-color: #FFFFFF;
+    box-shadow: 1px 1px 3px #000000;
+    margin-bottom: 20px;
+
+    svg {
+        margin: 20px;
+        color: #959595;
+    }
+
+    input {
+        height: 100%;
+        width: 100%;
+
+        padding: 0 10px;
+        border-radius: 25px;
         border: none;
 
-        box-shadow: 1px 1px 3px #000000;
-
-        padding: 10px;
-        margin-bottom: 20px;
-
-        text-align: center;
         font-size: 25px;
         font-family: 'Archivo', sans-serif;
 

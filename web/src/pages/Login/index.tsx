@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FiAtSign, FiLock } from 'react-icons/fi'
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -23,14 +24,18 @@ const Login: React.FC = () => {
             borderTopLeft={25}
             borderTopRight={25}
             type="email"
-          />
+          >
+            <FiAtSign size={40} />
+          </Input>
 
           <Input
             placeholder="Informe sua senha"
             borderBottomLeft={25}
             borderBottonRigth={25}
             type="password"
-          />
+          >
+            <FiLock size={40} />
+          </Input>
 
           {/** Create section */}
           <Button buttonName="Entrar" />

@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FiBriefcase, FiCreditCard, FiPhone, FiAtSign, FiLock } from 'react-icons/fi';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -27,17 +28,23 @@ const Logon: React.FC = () => {
               placeholder="Nome fantasia"
               borderTopLeft={25}
               borderTopRight={25}
-            />
+            >
+              <FiBriefcase size={40} />
+            </Input>
 
             <Input
               placeholder="CNPJ"
-            />
+            >
+              <FiCreditCard size={40} />
+            </Input>
 
             <Input
               placeholder="Telefone para contato"
               borderBottomLeft={25}
               borderBottonRigth={25}
-            />
+            >
+              <FiPhone size={40} />
+            </Input>
           </InputGroup>
 
           {/** Login data */}
@@ -47,19 +54,25 @@ const Logon: React.FC = () => {
               borderTopLeft={25}
               borderTopRight={25}
               type="email"
-            />
+            >
+              <FiAtSign size={40} />
+            </Input>
 
             <Input
               placeholder="Senha"
               type="password"
-            />
+            >
+              <FiLock size={40} />
+            </Input>
 
             <Input
               placeholder="Confirme a senha"
               borderBottomLeft={25}
               borderBottonRigth={25}
               type="password"
-            />
+            >
+              <FiLock size={40} />
+            </Input>
           </InputGroup>
 
           {/** Create account button */}

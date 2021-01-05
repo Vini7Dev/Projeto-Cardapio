@@ -21,6 +21,7 @@ const Input: React.FC<IInputProps> = ({
     borderTopRight = 0,
     borderBottomLeft = 0,
     borderBottonRigth = 0,
+    children,
     ...rest
 }: IInputProps) => {
     return (
@@ -30,6 +31,8 @@ const Input: React.FC<IInputProps> = ({
         borderBL={borderBottomLeft}
         borderBR={borderBottonRigth}
       >
+        {children}
+
         <input
           type="text"
           placeholder={placeholder}
