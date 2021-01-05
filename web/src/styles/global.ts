@@ -11,4 +11,15 @@ export default createGlobalStyle`
         outline: 0;
         box-sizing: border-box;
     }
+
+    body {
+        background-color: #C90000;
+        height: 100vh;
+        width: 100vw;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    button:hover, input:hover {
+        cursor: pointer;
+    }
 `;

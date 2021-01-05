@@ -6,7 +6,7 @@ import GlobalStyles from './styles/global';
 
 import Routes from './routes';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <BrowserRouter>

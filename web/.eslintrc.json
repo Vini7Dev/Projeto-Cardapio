@@ -43,7 +43,10 @@
       ],
       "no-use-before-define": "off",
       "no-console": "off",
-      "prettier/prettier": "off"
+      "prettier/prettier": "off",
+      "react/button-has-type": "off",
+      "react/require-default-props": "off",
+      "default-case": "off"
     },
     "settings": {
       "import/resolver": {
