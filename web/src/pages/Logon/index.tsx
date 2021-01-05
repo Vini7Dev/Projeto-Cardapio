@@ -9,6 +9,7 @@ import { FiBriefcase, FiCreditCard, FiPhone, FiAtSign, FiLock } from 'react-icon
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import InputGroup from '../../components/InputGroup';
+import AddLogo from '../../components/AddLogo';
 
 // Component styles
 import { Container } from './styles';
@@ -18,7 +19,7 @@ const Logon: React.FC = () => {
       <Container>
         <h1>Cadastrar-se</h1>
 
-        <h2>ADICIONAR FOTO</h2>
+        <AddLogo />
 
         {/** Logon form */}
         <form>
