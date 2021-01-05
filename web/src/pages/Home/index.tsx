@@ -15,6 +15,7 @@ const Home: React.FC = () => {
       <Container>
         <h1>Você deseja:</h1>
 
+        {/** Navigation choice */}
         <div>
           <Link to="/menu-code">
             <Button

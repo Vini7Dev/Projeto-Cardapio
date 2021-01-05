@@ -8,6 +8,7 @@ import React, { ButtonHTMLAttributes } from 'react';
 import { Container } from './styles';
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    size?: 'normal' | 'small';
     label?: string;
     buttonName: string;
     color?: 'orange' | 'brown';
@@ -15,15 +16,25 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: React.FC<IButtonProps> = ({
+    size = 'normal',
     label = '',
     buttonName,
     color = 'orange',
     buttonAction = () => { return 0 },
+    ...rest
 }: IButtonProps) => {
     return (
-      <Container color={color}>
+      <Container
+        color={color}
+        size={size}
+      >
         <h3>{label}</h3>
-        <button onClick={() => buttonAction()}>{buttonName}</button>
+        <button
+          onClick={() => buttonAction()}
+          {...rest}
+        >
+          {buttonName}
+        </button>
       </Container>
     );
 }

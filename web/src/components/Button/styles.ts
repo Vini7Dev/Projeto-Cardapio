@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 interface IColorProps {
+    size: string;
     color: string;
 }
 
@@ -16,10 +17,12 @@ export const Container = styled.div<IColorProps>`
         color: #FFFFFF;
         font-size: 25px;
         margin-left: 3px;
+        font-weight: 400;
         text-decoration: none;
     }
 
     button {
+        // Button color configuration
         background-color: ${
             props => {
                 switch(props.color) {
@@ -35,18 +38,47 @@ export const Container = styled.div<IColorProps>`
         border-radius: 25px;
         border: none;
 
-        height: 80px;
-        width: 480px;
+        // Size configuration
+        // Height
+        height: ${
+            props => {
+                switch(props.size) {
+                    case 'normal':
+                        return  80;
+                    case 'small':
+                        return 60;
+                    default:
+                        return 80;
+                }
+            }
+        }px;
+        // Width
+        width: ${
+            props => {
+                switch(props.size) {
+                    case 'normal':
+                        return  480;
+                    case 'small':
+                        return 440;
+                    default:
+                        return 80;
+                }
+            }
+        }px;
 
-        font-size: 30px;
+        // Font size and weight configuration
+        font-size: ${props => props.size === 'small' ? 20 : 25}px;
+        font-weight: ${props => props.size === 'small' ? 400 : 600};
+
         font-family: 'Poppins', 'sans-serif';
         color: #FFFFFF;
-        box-shadow: 1px 1px 3px black;
+        box-shadow: 1px 1px 3px #000000;
 
         transition: background-color 0.2s;
     }
 
     button:hover {
+        // Button hover color configuration
         background-color: ${
             props => {
                 switch(props.color) {
