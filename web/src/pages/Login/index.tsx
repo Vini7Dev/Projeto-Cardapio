@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -31,6 +32,7 @@ const Login: React.FC = () => {
             type="password"
           />
 
+          {/** Create section */}
           <Button buttonName="Entrar" />
         </form>
 
@@ -42,12 +44,14 @@ const Login: React.FC = () => {
         </p>
 
         {/** Logon button option */}
-        <Button
-          label="Não tem uma conta?"
-          buttonName="Cadastrar-se GRÁTIS"
-          color="brown"
-          size="small"
-        />
+        <Link to="logon">
+          <Button
+            label="Não tem uma conta?"
+            buttonName="Cadastrar-se GRÁTIS"
+            color="brown"
+            size="small"
+          />
+        </Link>
       </Container>
     )
 }
