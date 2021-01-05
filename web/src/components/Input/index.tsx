@@ -2,12 +2,14 @@
  * Component: Input
  */
 
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
+import { useField } from '@unform/core';
 
 // Component styles
 import { Container } from './styles';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+    name: string,
     placeholder: string;
     borderTopLeft?: number;
     borderTopRight?: number;
@@ -16,6 +18,7 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: React.FC<IInputProps> = ({
+    name,
     placeholder,
     borderTopLeft = 0,
     borderTopRight = 0,
@@ -24,6 +27,19 @@ const Input: React.FC<IInputProps> = ({
     children,
     ...rest
 }: IInputProps) => {
+    // Input reference in form
+    const inputRef = useRef<HTMLInputElement>(null);
+    const { fieldName, defaultValue, registerField, error } = useField(name);
+
+    // Register field
+    useEffect(() => {
+        registerField({
+            name: fieldName,
+            ref: inputRef.current,
+            path: 'value'
+        });
+    }, [fieldName, registerField]);
+
     return (
       <Container
         borderTL={borderTopLeft}
@@ -34,7 +50,8 @@ const Input: React.FC<IInputProps> = ({
         {children}
 
         <input
-          type="text"
+          ref={inputRef}
+          defaultValue={defaultValue}
           placeholder={placeholder}
           {...rest}
         />

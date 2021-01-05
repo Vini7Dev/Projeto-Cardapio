@@ -2,9 +2,10 @@
  * Page: Login
  */
 
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FiAtSign, FiLock } from 'react-icons/fi'
+import { Form } from '@unform/web';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -13,13 +14,18 @@ import Input from '../../components/Input';
 import { Container } from './styles';
 
 const Login: React.FC = () => {
+    const handleSubmitLogin = useCallback((data) => {
+        console.log(data);
+    }, []);
+
     return (
       <Container>
         <h1>Entrar</h1>
 
         {/** Login form */}
-        <form>
+        <Form onSubmit={handleSubmitLogin}>
           <Input
+            name="email"
             placeholder="Informe seu e-mail"
             borderTopLeft={25}
             borderTopRight={25}
@@ -29,6 +35,7 @@ const Login: React.FC = () => {
           </Input>
 
           <Input
+            name="password"
             placeholder="Informe sua senha"
             borderBottomLeft={25}
             borderBottonRigth={25}
@@ -38,8 +45,8 @@ const Login: React.FC = () => {
           </Input>
 
           {/** Create section */}
-          <Button buttonName="Entrar" />
-        </form>
+          <Button buttonName="Entrar" type="submit" />
+        </Form>
 
         {/** Forgot password option */}
         <p>

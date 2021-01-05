@@ -2,9 +2,10 @@
  * Page: Logon
  */
 
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FiBriefcase, FiCreditCard, FiPhone, FiAtSign, FiLock } from 'react-icons/fi';
+import { Form } from '@unform/web';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -15,6 +16,10 @@ import AddLogo from '../../components/AddLogo';
 import { Container } from './styles';
 
 const Logon: React.FC = () => {
+    const handleSubmitLogon = useCallback((data) => {
+        console.log(data);
+    }, []);
+
     return (
       <Container>
         <h1>Cadastrar-se</h1>
@@ -22,10 +27,11 @@ const Logon: React.FC = () => {
         <AddLogo />
 
         {/** Logon form */}
-        <form>
+        <Form onSubmit={handleSubmitLogon}>
           {/** Restaurant data */}
           <InputGroup label="Dados do restaurante:">
             <Input
+              name="trade"
               placeholder="Nome fantasia"
               borderTopLeft={25}
               borderTopRight={25}
@@ -34,12 +40,14 @@ const Logon: React.FC = () => {
             </Input>
 
             <Input
+              name="cnpj"
               placeholder="CNPJ"
             >
               <FiCreditCard size={40} />
             </Input>
 
             <Input
+              name="telephone"
               placeholder="Telefone para contato"
               borderBottomLeft={25}
               borderBottonRigth={25}
@@ -51,6 +59,7 @@ const Logon: React.FC = () => {
           {/** Login data */}
           <InputGroup label="Dados do login:">
             <Input
+              name="email"
               placeholder="E-mail"
               borderTopLeft={25}
               borderTopRight={25}
@@ -60,6 +69,7 @@ const Logon: React.FC = () => {
             </Input>
 
             <Input
+              name="password"
               placeholder="Senha"
               type="password"
             >
@@ -67,6 +77,7 @@ const Logon: React.FC = () => {
             </Input>
 
             <Input
+              name="password_confirm"
               placeholder="Confirme a senha"
               borderBottomLeft={25}
               borderBottonRigth={25}
@@ -80,7 +91,7 @@ const Logon: React.FC = () => {
           <Button
             buttonName="Cadastrar-se"
           />
-        </form>
+        </Form>
 
         {/** Login button option */}
         <Link to="login">
