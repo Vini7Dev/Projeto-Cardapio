@@ -16,6 +16,7 @@ import AddLogo from '../../components/AddLogo';
 import { Container } from './styles';
 
 const Logon: React.FC = () => {
+    // Submit form data
     const handleSubmitLogon = useCallback((data) => {
         console.log(data);
     }, []);

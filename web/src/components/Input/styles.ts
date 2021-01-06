@@ -2,13 +2,15 @@
  * Styles: Input
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface IInputProps {
     borderTL: number;
     borderTR: number;
     borderBL: number;
     borderBR: number;
+    isFocus: boolean;
+    isFilled: boolean;
 }
 
 export const Container = styled.div<IInputProps>`
@@ -29,9 +31,29 @@ export const Container = styled.div<IInputProps>`
     box-shadow: 1px 1px 3px #000000;
     margin-bottom: 20px;
 
+    // Focus border effect
+    ${
+        props => props.isFocus && css`border: 5px solid #770000;`
+    }
+
+    // Input filled border effect
+    ${
+        props => props.isFilled && css`border: 5px solid #FF5C00;`
+    }
+
     svg {
         margin: 20px;
         color: #959595;
+
+        // Focus border effect
+        ${
+            props => props.isFocus && css`color: #770000;`
+        }
+
+        // Input filled border effect
+        ${
+            props => props.isFilled && css`color: #FF5C00;`
+        }
     }
 
     input {

@@ -2,7 +2,7 @@
  * Component: Input
  */
 
-import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
+import React, { FocusEvent, InputHTMLAttributes, useCallback, useEffect, useRef, useState } from 'react';
 import { useField } from '@unform/core';
 
 // Component styles
@@ -27,6 +27,10 @@ const Input: React.FC<IInputProps> = ({
     children,
     ...rest
 }: IInputProps) => {
+    // Input states (blur and focus)
+    const [ isFocus, setIsFocus ] = useState(false);
+    const [ isFilled, setIsFilled ] = useState(false);
+
     // Input reference in form
     const inputRef = useRef<HTMLInputElement>(null);
     const { fieldName, defaultValue, registerField, error } = useField(name);
@@ -40,16 +44,34 @@ const Input: React.FC<IInputProps> = ({
         });
     }, [fieldName, registerField]);
 
+    // Enable focus in input
+    const handleSetIsFocus = useCallback(() => {
+        setIsFocus(true);
+    }, [setIsFocus]);
+
+    // Desable focus in input
+    const handleSetIsBlur = useCallback((e: FocusEvent<HTMLInputElement>) => {
+        // Setting the focus to false
+        setIsFocus(false);
+
+        // Define whether the input has filled
+        setIsFilled(!! e.target.value.length);
+    }, [setIsFocus, setIsFilled]);
+
     return (
       <Container
         borderTL={borderTopLeft}
         borderTR={borderTopRight}
         borderBL={borderBottomLeft}
         borderBR={borderBottonRigth}
+        isFocus={isFocus}
+        isFilled={isFilled}
       >
         {children}
 
         <input
+          onBlur={handleSetIsBlur}
+          onFocus={handleSetIsFocus}
           ref={inputRef}
           defaultValue={defaultValue}
           placeholder={placeholder}

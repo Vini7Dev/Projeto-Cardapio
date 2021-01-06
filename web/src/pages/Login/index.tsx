@@ -14,6 +14,7 @@ import Input from '../../components/Input';
 import { Container } from './styles';
 
 const Login: React.FC = () => {
+    // Submit form data
     const handleSubmitLogin = useCallback((data) => {
         console.log(data);
     }, []);
