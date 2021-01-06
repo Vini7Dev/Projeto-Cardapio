@@ -19,7 +19,7 @@ export const Container = styled.div<IInputProps>`
     align-items: center;
 
     height: 80px;
-    width: 480px;
+    width: 100%;
 
     // Input border radius configuration
     border-top-left-radius: ${ props => props.borderTL}px;

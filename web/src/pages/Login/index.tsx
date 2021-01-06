@@ -21,50 +21,52 @@ const Login: React.FC = () => {
 
     return (
       <Container>
-        <h1>Entrar</h1>
+        <div id="page-content">
+          <h1>Entrar</h1>
 
-        {/** Login form */}
-        <Form onSubmit={handleSubmitLogin}>
-          <Input
-            name="email"
-            placeholder="Informe seu e-mail"
-            borderTopLeft={25}
-            borderTopRight={25}
-            type="email"
-          >
-            <FiAtSign size={40} />
-          </Input>
+          {/** Login form */}
+          <Form onSubmit={handleSubmitLogin}>
+            <Input
+              name="email"
+              placeholder="Informe seu e-mail"
+              borderTopLeft={25}
+              borderTopRight={25}
+              type="email"
+            >
+              <FiAtSign size={40} />
+            </Input>
 
-          <Input
-            name="password"
-            placeholder="Informe sua senha"
-            borderBottomLeft={25}
-            borderBottonRigth={25}
-            type="password"
-          >
-            <FiLock size={40} />
-          </Input>
+            <Input
+              name="password"
+              placeholder="Informe sua senha"
+              borderBottomLeft={25}
+              borderBottonRigth={25}
+              type="password"
+            >
+              <FiLock size={40} />
+            </Input>
 
-          {/** Create section */}
-          <Button buttonName="Entrar" type="submit" />
-        </Form>
+            {/** Create section */}
+            <Button buttonName="Entrar" type="submit" />
+          </Form>
 
-        {/** Forgot password option */}
-        <p>
-          Esqueceu sua senha? Clique
-          {' '}
-          <strong>AQUI</strong>
-        </p>
+          {/** Forgot password option */}
+          <p>
+            Esqueceu sua senha? Clique
+            {' '}
+            <strong>AQUI</strong>
+          </p>
 
-        {/** Logon button option */}
-        <Link to="logon">
-          <Button
-            label="Não tem uma conta?"
-            buttonName="Cadastrar-se GRÁTIS"
-            color="brown"
-            size="small"
-          />
-        </Link>
+          {/** Logon button option */}
+          <Link to="logon">
+            <Button
+              label="Não tem uma conta?"
+              buttonName="Cadastrar-se GRÁTIS"
+              color="brown"
+              size="small"
+            />
+          </Link>
+        </div>
       </Container>
     )
 }

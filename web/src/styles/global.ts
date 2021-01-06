@@ -12,7 +12,7 @@ export default createGlobalStyle`
         box-sizing: border-box;
     }
 
-    body {
+    body, html {
         background-color: #C90000;
         height: 100vh;
         width: 100vw;

@@ -8,8 +8,9 @@ import { shade } from 'polished';
 import AddLogoBackground from '../../assets/images/AddLogoBackground.png';
 
 export const Container = styled.div`
+    width: 200px;
     position: relative;
-    margin-bottom: 30px;
+    margin: 30px auto;
 
     div {
         background-image: url(${AddLogoBackground});

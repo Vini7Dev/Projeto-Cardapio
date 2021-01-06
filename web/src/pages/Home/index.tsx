@@ -13,10 +13,10 @@ import { Container } from './styles';
 const Home: React.FC = () => {
     return (
       <Container>
-        <h1>Você deseja:</h1>
+        <div id="page-content">
+          <h1>Você deseja:</h1>
 
-        {/** Navigation choice */}
-        <div>
+          {/** Navigation choice */}
           <Link to="/menu-code">
             <Button
               buttonName="Acessar um cardápio"

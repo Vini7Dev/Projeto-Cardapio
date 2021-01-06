@@ -12,6 +12,7 @@ interface IColorProps {
 
 export const Container = styled.div<IColorProps>`
     margin-top: 25px;
+    width: 100%;
 
     h3 {
         color: #FFFFFF;
@@ -53,27 +54,16 @@ export const Container = styled.div<IColorProps>`
             }
         }px;
         // Width
-        width: ${
-            props => {
-                switch(props.size) {
-                    case 'normal':
-                        return  480;
-                    case 'small':
-                        return 440;
-                    default:
-                        return 80;
-                }
-            }
-        }px;
+        width: 100%;
 
         // Font size and weight configuration
         font-size: ${props => props.size === 'small' ? 20 : 25}px;
         font-weight: ${props => props.size === 'small' ? 400 : 600};
 
+        padding: 0 20px;
         font-family: 'Poppins', 'sans-serif';
         color: #FFFFFF;
         box-shadow: 1px 1px 3px #000000;
-
         transition: background-color 0.2s;
     }
 
@@ -91,5 +81,11 @@ export const Container = styled.div<IColorProps>`
                 }
             }
         };
+    }
+
+    @media (max-width: 768px) {
+        h3 {
+            font-size: 20px;
+        }
     }
 `;
