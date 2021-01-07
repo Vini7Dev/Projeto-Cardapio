@@ -3,7 +3,7 @@
  */
 
 import React, { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiBriefcase, FiCreditCard, FiPhone, FiAtSign, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 
@@ -12,10 +12,23 @@ import Input from '../../components/Input';
 import InputGroup from '../../components/InputGroup';
 import AddLogo from '../../components/AddLogo';
 
+import api from '../../services/api';
+
 // Component styles
 import { Container } from './styles';
 
+interface ICreateRestaurant {
+    trade: string;
+    cnpj: string;
+    telephone: string;
+    email: string;
+    password: string;
+}
+
 const Logon: React.FC = () => {
+    // Navigation state
+    const history = useHistory();
+
     // Logo file selected
     const [selectedLogo, setSelectedLogo] = useState<File | null>(null);
 
@@ -25,11 +38,34 @@ const Logon: React.FC = () => {
     }, []);
 
     // Submit logon form data
-    const handleSubmitLogon = useCallback((data) => {
-        console.log(data);
+    const handleSubmitLogon = useCallback(async ({
+        trade,
+        cnpj,
+        telephone,
+        email,
+        password,
+    }: ICreateRestaurant) => {
+        try {
+            // Saving form data
+            const formData = new FormData();
+            formData.append('trade', trade);
+            formData.append('cnpj', cnpj);
+            formData.append('telephone', telephone);
+            formData.append('email', email);
+            formData.append('password', password);
+            if(selectedLogo) {
+                formData.append('logo', selectedLogo);
+            }
 
-        console.log(selectedLogo);
-    }, [selectedLogo]);
+            // Creating restaurant
+            await api.post('/restaurants', formData);
+
+            // Go back to login page
+            history.push('/login');
+        } catch (error) {
+            console.log(error);
+        }
+    }, [selectedLogo, history]);
 
     return (
       <Container>

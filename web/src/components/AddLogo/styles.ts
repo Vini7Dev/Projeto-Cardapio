@@ -6,13 +6,14 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
-    width: 200px;
+    width: 100%;
+    max-width: 300px;
     position: relative;
     margin: 30px auto;
 
     img {
-        width: 200px;
-        height: 200px;
+        width: 100%;
+        height: 100%;
         border-radius: 50%;
     }
 
@@ -38,5 +39,9 @@ export const Container = styled.div`
 
     label:hover {
         background-color: ${shade(0.2, '#FF5C00')}
+    }
+
+    @media (max-width: 768px) {
+        max-width: 200px;
     }
 `;
