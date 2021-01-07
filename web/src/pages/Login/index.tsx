@@ -87,7 +87,7 @@ const Login: React.FC = () => {
           <p>
             Esqueceu sua senha? Clique
             {' '}
-            <Link to="/forgot">AQUI</Link>
+            <Link to="/forgot-password">AQUI</Link>
           </p>
 
           {/** Logon button option */}

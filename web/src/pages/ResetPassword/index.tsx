@@ -3,49 +3,44 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 
-import GoBackButton from '../../components/GoBackButton';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 // Component styles
 import { Container } from './stylest';
 
-const ForgotPassword: React.FC = () => {
+const ResetPassword: React.FC = () => {
 
     return (
       <Container>
         <div id="page-content">
-          <h1>Recuperar senha</h1>
+          <h1>Alterar a senha</h1>
 
-          {/** Forgot password form */}
+          {/** Reset password form */}
           <Form onSubmit={(data) => {console.log(data)}}>
             <Input
-              name="email"
-              type="email"
-              placeholder="Informe seu e-mail"
+              name="password"
+              type="password"
+              placeholder="Informe a nova senha"
               borderTopLeft={25}
               borderTopRight={25}
+            />
+
+            <Input
+              name="password"
+              type="password"
+              placeholder="Confirme a nova senha"
               borderBottomLeft={25}
               borderBottonRigth={25}
             />
 
             <Button buttonName="Recuperar" />
           </Form>
-
-          <Link to="/login">
-            <Button
-              label="Não deseja recuperar a senha?"
-              buttonName="Voltar"
-              color="brown"
-              size="small"
-            />
-          </Link>
         </div>
       </Container>
     )
 }
 
-export default ForgotPassword;
+export default ResetPassword;
