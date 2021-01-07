@@ -6,11 +6,15 @@ import GlobalStyles from './styles/global';
 
 import Routes from './routes';
 
+import ContextProvider from './hooks';
+
 const App: React.FC = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes />
+        <ContextProvider>
+          <Routes />
+        </ContextProvider>
       </BrowserRouter>
       <GlobalStyles />
     </div>
