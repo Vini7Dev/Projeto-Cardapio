@@ -19,7 +19,7 @@ export default createGlobalStyle`
         font-family: 'Poppins', sans-serif;
     }
 
-    button:hover, input:hover {
+    button:hover, input:hover, a:hover {
         cursor: pointer;
     }
 `;

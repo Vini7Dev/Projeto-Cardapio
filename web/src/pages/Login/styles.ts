@@ -15,27 +15,30 @@ export const Container = styled.div`
 
     div#page-content {
         width: 60%;
-    }
 
-    h1 {
-        color: #FFFFFF;
-        font-size: 60px;
-        margin-bottom: 20px;
-    }
+        h1 {
+            color: #FFFFFF;
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
 
-    p {
-        margin-top: 20px;
-        font-family: 'Poppins', 'sans-serif';
-        font-size: 25px;
-        color: #FFFFFF;
-    }
+        p {
+            text-align: right;
+            margin-top: 20px;
+            font-family: 'Poppins', 'sans-serif';
+            font-size: 25px;
+            color: #FFFFFF;
+        }
 
-    p strong {
-        color: #FF8A00;
-    }
+        p a {
+            font-weight: 600;
+            color: #FF8A00;
+            text-decoration: underline;
+        }
 
-    a {
-        text-decoration: none;
+        a {
+            text-decoration: none;
+        }
     }
 
 

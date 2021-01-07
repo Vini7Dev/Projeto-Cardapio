@@ -1,12 +1,12 @@
 /**
- * Styles: Logon
+ * Styles: Forgot Password
  */
 
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    height: 100%;
-    width: 100vw;
+    height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,8 +25,8 @@ export const Container = styled.div`
         a {
             text-decoration: none;
         }
-
     }
+
     @media (max-width: 768px) {
         padding: 60px 0;
 
