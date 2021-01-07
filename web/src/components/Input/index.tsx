@@ -40,7 +40,7 @@ const Input: React.FC<IInputProps> = ({
         registerField({
             name: fieldName,
             ref: inputRef.current,
-            path: 'value'
+            path: 'value',
         });
     }, [fieldName, registerField]);
 

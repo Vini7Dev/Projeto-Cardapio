@@ -2,7 +2,7 @@
  * Page: Logon
  */
 
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiBriefcase, FiCreditCard, FiPhone, FiAtSign, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
@@ -16,21 +16,31 @@ import AddLogo from '../../components/AddLogo';
 import { Container } from './styles';
 
 const Logon: React.FC = () => {
-    // Submit form data
+    // Logo file selected
+    const [selectedLogo, setSelectedLogo] = useState<File | null>(null);
+
+    // Save data from the selected logo file
+    const handleSetSelectedLogo = useCallback((file: File | null) => {
+        setSelectedLogo(file);
+    }, []);
+
+    // Submit logon form data
     const handleSubmitLogon = useCallback((data) => {
         console.log(data);
-    }, []);
+
+        console.log(selectedLogo);
+    }, [selectedLogo]);
 
     return (
       <Container>
         <div id="page-content">
           <h1>Cadastrar-se</h1>
 
-          <AddLogo />
-
           {/** Logon form */}
           <Form onSubmit={handleSubmitLogon}>
             {/** Restaurant data */}
+            <AddLogo setSelectedFile={handleSetSelectedLogo} />
+
             <InputGroup label="Dados do restaurante:">
               <Input
                 name="trade"
