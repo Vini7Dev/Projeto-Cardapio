@@ -10,14 +10,44 @@ import { Form } from '@unform/web';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
+import { useAuth } from '../../hooks/auth';
+
 // Component styles
 import { Container } from './styles';
 
+interface IRestaurant {
+    id: string;
+    trade: string;
+    cnpj: string;
+    telephone: string;
+    logo_url: string;
+    email: string;
+    menu: {
+        id: string;
+        menu_code: number;
+    }
+}
+
+interface ILoginResponse {
+    restaurant: IRestaurant;
+    token: string;
+}
+
 const Login: React.FC = () => {
-    // Submit form data
-    const handleSubmitLogin = useCallback((data) => {
-        console.log(data);
-    }, []);
+    // Use authentication data and functions
+    const auth = useAuth();
+
+    // Submit login form
+    const handleSubmitLogin = useCallback(async (data) => {
+        // Getting form data
+        const { email, password } = data;
+
+        // Run login
+        await auth.login({
+            email,
+            password,
+        });
+    }, [auth]);
 
     return (
       <Container>

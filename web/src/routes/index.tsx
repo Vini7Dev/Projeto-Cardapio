@@ -3,7 +3,9 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+
+import MyRoutes from './MyRoutes';
 
 // Pages - No authenticated
 import Home from '../pages/Home';
@@ -17,12 +19,12 @@ const Routes: React.FC = () => {
     return (
       <Switch>
         {/** No authenticated routes */}
-        <Route path="/" component={Home} exact />
-        <Route path="/login" component={Login} exact />
-        <Route path="/logon" component={Logon} exact />
+        <MyRoutes path="/" component={Home} exact />
+        <MyRoutes path="/login" component={Login} exact />
+        <MyRoutes path="/logon" component={Logon} exact />
 
         {/** Authenticated routes */}
-        <Route path="/menu" component={Menu} exact />
+        <MyRoutes path="/menu" component={Menu} exact isPrivate />
       </Switch>
     );
 }
