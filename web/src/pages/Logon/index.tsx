@@ -7,6 +7,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { FiBriefcase, FiCreditCard, FiPhone, FiAtSign, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 
+import GoBackButton from '../../components/GoBackButton';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import InputGroup from '../../components/InputGroup';
@@ -26,7 +27,7 @@ interface ICreateRestaurant {
 }
 
 const Logon: React.FC = () => {
-    // Navigation state
+    // Navigation
     const history = useHistory();
 
     // Logo file selected
@@ -69,6 +70,8 @@ const Logon: React.FC = () => {
 
     return (
       <Container>
+        <GoBackButton />
+
         <div id="page-content">
           <h1>Cadastrar-se</h1>
 
