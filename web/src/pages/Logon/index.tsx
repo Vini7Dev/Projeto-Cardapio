@@ -2,10 +2,12 @@
  * Page: Logon
  */
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiBriefcase, FiCreditCard, FiPhone, FiAtSign, FiLock } from 'react-icons/fi';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
+import * as Yup from 'yup';
 
 import GoBackButton from '../../components/GoBackButton';
 import Button from '../../components/Button';
@@ -14,6 +16,7 @@ import InputGroup from '../../components/InputGroup';
 import AddLogo from '../../components/AddLogo';
 
 import api from '../../services/api';
+import getValidationErrors from '../../utils/getValidationErrors';
 
 // Component styles
 import { Container } from './styles';
@@ -24,9 +27,13 @@ interface ICreateRestaurant {
     telephone: string;
     email: string;
     password: string;
+    confirm_password: string;
 }
 
 const Logon: React.FC = () => {
+    // Form reference
+    const formRef = useRef<FormHandles>(null);
+
     // Navigation
     const history = useHistory();
 
@@ -45,13 +52,49 @@ const Logon: React.FC = () => {
         telephone,
         email,
         password,
+        confirm_password,
     }: ICreateRestaurant) => {
         try {
+            // Reset form errors
+            formRef.current?.setErrors({});
+
+            // Creating a schema validation for the data
+            const schema = Yup.object().shape({
+                trade: Yup.string().max(25, 'O nome deve ter no máximo 25 caracteres.').required('O nome é obrigatório.'),
+                cnpj: Yup.string().max(11, 'O cnpj deve ter no máximo 11 caracteres.').min(11, 'O cnpj deve ter no mínimo 11 caracteres.').required('O cnpj é obrigatório.'),
+                telephone: Yup.string().max(11, 'O telefone deve ter no máximo 11 caracteres.').required('O telefone é obrigatório.'),
+                email: Yup.string().email('O email deve ser válido.').required('O email é obrigatório.'),
+                password: Yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres.').required('A senha é obrigatório.'),
+                confirm_password: Yup.string().oneOf(
+                    [Yup.ref('password')], 'A confirmação deve ser igual a nova senha.'
+                ).required('A confirmação da senha é obrigatória.'),
+            });
+
+            // Transform cnpj in number
+            let cnpjOnlyNumbers = cnpj.split('.').join('');
+            cnpjOnlyNumbers = cnpjOnlyNumbers.split('-').join('');
+            cnpjOnlyNumbers = cnpjOnlyNumbers.split('/').join('');
+
+            // Transform telephone in number
+            let telephoneOnlyNumber = telephone.split('(').join('');
+            telephoneOnlyNumber = telephoneOnlyNumber.split(')').join('');
+            telephoneOnlyNumber = telephoneOnlyNumber.split('-').join('');
+
+            // Validate data
+            await schema.validate({
+                trade,
+                cnpj: cnpjOnlyNumbers,
+                telephone: telephoneOnlyNumber,
+                email,
+                password,
+                confirm_password,
+            }, { abortEarly: false });
+
             // Saving form data
             const formData = new FormData();
             formData.append('trade', trade);
-            formData.append('cnpj', cnpj);
-            formData.append('telephone', telephone);
+            formData.append('cnpj', cnpjOnlyNumbers.toString());
+            formData.append('telephone', telephoneOnlyNumber.toString());
             formData.append('email', email);
             formData.append('password', password);
             if(selectedLogo) {
@@ -64,7 +107,11 @@ const Logon: React.FC = () => {
             // Go back to login page
             history.push('/login');
         } catch (error) {
-            console.log(error);
+            if(error instanceof Yup.ValidationError) {
+                const errors = getValidationErrors(error);
+
+                formRef.current?.setErrors(errors);
+            }
         }
     }, [selectedLogo, history]);
 
@@ -76,7 +123,7 @@ const Logon: React.FC = () => {
           <h1>Cadastrar-se</h1>
 
           {/** Logon form */}
-          <Form onSubmit={handleSubmitLogon}>
+          <Form onSubmit={handleSubmitLogon} ref={formRef}>
             {/** Restaurant data */}
             <AddLogo setSelectedFile={handleSetSelectedLogo} />
 
@@ -123,7 +170,7 @@ const Logon: React.FC = () => {
               />
 
               <Input
-                name="password_confirm"
+                name="confirm_password"
                 placeholder="Confirme a senha"
                 icon={FiLock}
                 borderBottomLeft={25}
