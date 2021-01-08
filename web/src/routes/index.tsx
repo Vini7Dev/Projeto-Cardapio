@@ -25,7 +25,7 @@ const Routes: React.FC = () => {
         <MyRoutes path="/login" component={Login} exact />
         <MyRoutes path="/logon" component={Logon} exact />
         <MyRoutes path="/forgot-password" component={ForgotPassword} exact />
-        <MyRoutes path="/reset-password" component={ResetPassword} exact />
+        <MyRoutes path="/reset-password/:token" component={ResetPassword} exact />
 
         {/** Authenticated routes */}
         <MyRoutes path="/menu" component={Menu} exact isPrivate />

@@ -29,11 +29,6 @@ interface IRestaurant {
     }
 }
 
-interface ILoginResponse {
-    restaurant: IRestaurant;
-    token: string;
-}
-
 const Login: React.FC = () => {
     // Use authentication data and functions
     const auth = useAuth();
@@ -62,22 +57,20 @@ const Login: React.FC = () => {
             <Input
               name="email"
               placeholder="Informe seu e-mail"
+              icon={FiAtSign}
               borderTopLeft={25}
               borderTopRight={25}
               type="email"
-            >
-              <FiAtSign size={40} />
-            </Input>
+            />
 
             <Input
               name="password"
               placeholder="Informe sua senha"
+              icon={FiLock}
               borderBottomLeft={25}
               borderBottonRigth={25}
               type="password"
-            >
-              <FiLock size={40} />
-            </Input>
+            />
 
             {/** Create section */}
             <Button buttonName="Entrar" type="submit" />

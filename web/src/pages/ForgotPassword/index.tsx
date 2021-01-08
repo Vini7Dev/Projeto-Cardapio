@@ -5,8 +5,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
+import { FiAtSign } from 'react-icons/fi';
 
-import GoBackButton from '../../components/GoBackButton';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
@@ -26,6 +26,7 @@ const ForgotPassword: React.FC = () => {
               name="email"
               type="email"
               placeholder="Informe seu e-mail"
+              icon={FiAtSign}
               borderTopLeft={25}
               borderTopRight={25}
               borderBottomLeft={25}

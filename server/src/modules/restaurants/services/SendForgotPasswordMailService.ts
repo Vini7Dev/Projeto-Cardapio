@@ -64,7 +64,7 @@ class SendForgotPasswordMailService {
                 file: templatePath,
                 variables: {
                     name: restaurant.trade,
-                    link: `http://localhost:3000/password/reset/${token.token}`,
+                    link: `http://localhost:3000/reset-password/${token.token}`,
                 },
             },
         });

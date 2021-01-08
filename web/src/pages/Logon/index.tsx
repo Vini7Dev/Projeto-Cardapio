@@ -84,27 +84,24 @@ const Logon: React.FC = () => {
               <Input
                 name="trade"
                 placeholder="Nome fantasia"
+                icon={FiBriefcase}
                 borderTopLeft={25}
                 borderTopRight={25}
-              >
-                <FiBriefcase size={40} />
-              </Input>
+              />
 
               <Input
                 name="cnpj"
                 placeholder="CNPJ"
-              >
-                <FiCreditCard size={40} />
-              </Input>
+                icon={FiCreditCard}
+              />
 
               <Input
                 name="telephone"
                 placeholder="Telefone para contato"
+                icon={FiPhone}
                 borderBottomLeft={25}
                 borderBottonRigth={25}
-              >
-                <FiPhone size={40} />
-              </Input>
+              />
             </InputGroup>
 
             {/** Login data */}
@@ -112,30 +109,27 @@ const Logon: React.FC = () => {
               <Input
                 name="email"
                 placeholder="E-mail"
+                icon={FiAtSign}
                 borderTopLeft={25}
                 borderTopRight={25}
                 type="email"
-              >
-                <FiAtSign size={40} />
-              </Input>
+              />
 
               <Input
                 name="password"
                 placeholder="Senha"
+                icon={FiLock}
                 type="password"
-              >
-                <FiLock size={40} />
-              </Input>
+              />
 
               <Input
                 name="password_confirm"
                 placeholder="Confirme a senha"
+                icon={FiLock}
                 borderBottomLeft={25}
                 borderBottonRigth={25}
                 type="password"
-              >
-                <FiLock size={40} />
-              </Input>
+              />
             </InputGroup>
 
             {/** Create account button */}

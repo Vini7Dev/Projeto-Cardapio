@@ -4,13 +4,15 @@
 
 import React, { FocusEvent, InputHTMLAttributes, useCallback, useEffect, useRef, useState } from 'react';
 import { useField } from '@unform/core';
+import { IconBaseProps } from 'react-icons';
 
 // Component styles
 import { Container } from './styles';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-    name: string,
+    name: string;
     placeholder: string;
+    icon?: React.ComponentType<IconBaseProps>;
     borderTopLeft?: number;
     borderTopRight?: number;
     borderBottomLeft?: number;
@@ -20,6 +22,7 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input: React.FC<IInputProps> = ({
     name,
     placeholder,
+    icon: Icon,
     borderTopLeft = 0,
     borderTopRight = 0,
     borderBottomLeft = 0,
@@ -67,7 +70,7 @@ const Input: React.FC<IInputProps> = ({
         isFocus={isFocus}
         isFilled={isFilled}
       >
-        {children}
+        { Icon && <Icon size={40} /> }
 
         <input
           onBlur={handleSetIsBlur}
