@@ -57,11 +57,11 @@ const SignIn: React.FC = () => {
             });
         } catch(error) {
             if(error instanceof Yup.ValidationError) {
-                console.log(error);
+                // Getting validation errors
+                const validationErrors = getValidationErrors(error);
 
-                const errors = getValidationErrors(error);
-
-                formRef.current?.setErrors(errors);
+                // Setting validation errors in form
+                formRef.current?.setErrors(validationErrors);
             }
         }
     }, [auth]);

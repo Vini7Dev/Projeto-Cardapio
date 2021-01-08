@@ -108,9 +108,11 @@ const SignUp: React.FC = () => {
             history.push('/signin');
         } catch (error) {
             if(error instanceof Yup.ValidationError) {
-                const errors = getValidationErrors(error);
+                // Getting validation errors
+                const validationErrors = getValidationErrors(error);
 
-                formRef.current?.setErrors(errors);
+                // Setting validation errors in form
+                formRef.current?.setErrors(validationErrors);
             }
         }
     }, [selectedLogo, history]);
