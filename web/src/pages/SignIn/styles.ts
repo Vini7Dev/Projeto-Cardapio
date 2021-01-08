@@ -1,5 +1,5 @@
 /**
- * Styles: Login
+ * Styles: Sign In
  */
 
 import styled from 'styled-components';

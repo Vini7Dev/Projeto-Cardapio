@@ -50,7 +50,7 @@ const ResetPassword: React.FC = () => {
             });
 
             // Go back to login page
-            history.push('/login');
+            history.push('/signin');
         } catch(error) {
             console.log(error);
         }

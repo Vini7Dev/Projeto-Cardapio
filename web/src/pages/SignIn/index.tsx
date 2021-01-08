@@ -1,5 +1,5 @@
 /**
- * Page: Login
+ * Page: Sign In
  */
 
 import React, { useCallback, useRef } from 'react';
@@ -20,20 +20,20 @@ import { useAuth } from '../../hooks/auth';
 // Component styles
 import { Container } from './styles';
 
-interface ILoginCredentials {
+interface ISignInCredentials {
     email: string;
     password: string;
 }
 
-const Login: React.FC = () => {
+const SignIn: React.FC = () => {
     // Form reference
     const formRef = useRef<FormHandles>(null);
 
     // Use authentication data and functions
     const auth = useAuth();
 
-    // Submit login form
-    const handleSubmitLogin = useCallback(async (data: ILoginCredentials) => {
+    // Submit Sign In form
+    const handleSubmitSignIn = useCallback(async (data: ISignInCredentials) => {
         // Getting form data
         const { email, password } = data;
 
@@ -50,7 +50,7 @@ const Login: React.FC = () => {
             // Validate data
             await schema.validate({ email, password }, { abortEarly: false })
 
-            // Run login
+            // Run Sign In
             await auth.login({
                 email,
                 password,
@@ -73,8 +73,8 @@ const Login: React.FC = () => {
         <div id="page-content">
           <h1>Entrar</h1>
 
-          {/** Login form */}
-          <Form onSubmit={handleSubmitLogin} ref={formRef}>
+          {/** Sign In form */}
+          <Form onSubmit={handleSubmitSignIn} ref={formRef}>
             <Input
               name="email"
               placeholder="Informe seu e-mail"
@@ -105,7 +105,7 @@ const Login: React.FC = () => {
           </p>
 
           {/** Logon button option */}
-          <Link to="logon">
+          <Link to="/signup">
             <Button
               label="Não tem uma conta?"
               buttonName="Cadastrar-se GRÁTIS"
@@ -118,4 +118,4 @@ const Login: React.FC = () => {
     )
 }
 
-export default Login;
+export default SignIn;

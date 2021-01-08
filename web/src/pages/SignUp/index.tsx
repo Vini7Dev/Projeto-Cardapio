@@ -1,5 +1,5 @@
 /**
- * Page: Logon
+ * Page: Sign Up
  */
 
 import React, { useCallback, useState, useRef } from 'react';
@@ -30,7 +30,7 @@ interface ICreateRestaurant {
     confirm_password: string;
 }
 
-const Logon: React.FC = () => {
+const SignUp: React.FC = () => {
     // Form reference
     const formRef = useRef<FormHandles>(null);
 
@@ -45,8 +45,8 @@ const Logon: React.FC = () => {
         setSelectedLogo(file);
     }, []);
 
-    // Submit logon form data
-    const handleSubmitLogon = useCallback(async ({
+    // Submit Sign Up form data
+    const handleSubmitSignUp = useCallback(async ({
         trade,
         cnpj,
         telephone,
@@ -105,7 +105,7 @@ const Logon: React.FC = () => {
             await api.post('/restaurants', formData);
 
             // Go back to login page
-            history.push('/login');
+            history.push('/signin');
         } catch (error) {
             if(error instanceof Yup.ValidationError) {
                 const errors = getValidationErrors(error);
@@ -122,8 +122,8 @@ const Logon: React.FC = () => {
         <div id="page-content">
           <h1>Cadastrar-se</h1>
 
-          {/** Logon form */}
-          <Form onSubmit={handleSubmitLogon} ref={formRef}>
+          {/** Sign Up form */}
+          <Form onSubmit={handleSubmitSignUp} ref={formRef}>
             {/** Restaurant data */}
             <AddLogo setSelectedFile={handleSetSelectedLogo} />
 
@@ -186,7 +186,7 @@ const Logon: React.FC = () => {
           </Form>
 
           {/** Login button option */}
-          <Link to="login">
+          <Link to="/signin">
             <Button
               buttonName="Entrar"
               label="Já tem uma conta?"
@@ -199,4 +199,4 @@ const Logon: React.FC = () => {
     )
 }
 
-export default Logon;
+export default SignUp;

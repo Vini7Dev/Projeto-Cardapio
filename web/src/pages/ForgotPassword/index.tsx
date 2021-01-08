@@ -32,7 +32,7 @@ const ForgotPassword: React.FC = () => {
             api.post('/password/forgot', { email });
 
             // Go back to login page
-            hsitory.push('/login');
+            hsitory.push('/signin');
         } catch (error) {
             console.log(error);
         }
@@ -61,7 +61,7 @@ const ForgotPassword: React.FC = () => {
           </Form>
 
           {/** Back to login page option */}
-          <Link to="/login">
+          <Link to="/signin">
             <Button
               label="Não deseja recuperar a senha?"
               buttonName="Voltar"

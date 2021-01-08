@@ -9,8 +9,8 @@ import MyRoutes from './MyRoutes';
 
 // Pages - No authenticated
 import Home from '../pages/Home';
-import Login from '../pages/Login';
-import Logon from '../pages/Logon';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
 
@@ -22,8 +22,8 @@ const Routes: React.FC = () => {
       <Switch>
         {/** No authenticated routes */}
         <MyRoutes path="/" component={Home} exact />
-        <MyRoutes path="/login" component={Login} exact />
-        <MyRoutes path="/logon" component={Logon} exact />
+        <MyRoutes path="/signin" component={SignIn} exact />
+        <MyRoutes path="/signup" component={SignUp} exact />
         <MyRoutes path="/forgot-password" component={ForgotPassword} exact />
         <MyRoutes path="/reset-password/:token" component={ResetPassword} exact />
 

@@ -24,7 +24,7 @@ const Home: React.FC = () => {
             />
           </Link>
 
-          <Link to="login">
+          <Link to="/signin">
             <Button
               buttonName="Administrar um cardápio"
               label="Restaurante"
