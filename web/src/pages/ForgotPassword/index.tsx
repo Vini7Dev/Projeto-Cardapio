@@ -3,7 +3,7 @@
  */
 
 import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FiAtSign } from 'react-icons/fi';
 
@@ -20,13 +20,19 @@ interface IForgotPasswordCredentials {
 }
 
 const ForgotPassword: React.FC = () => {
+    // Navigation
+    const hsitory = useHistory();
+
     // When submitting the form, send a request to receive a password reset email
     const handleSubmitForgotPasswordForm = useCallback(async ({
         email
     }: IForgotPasswordCredentials) => {
         try {
             // Sending request to back-end
-            await api.post('/password/forgot', { email });
+            api.post('/password/forgot', { email });
+
+            // Go back to login page
+            hsitory.push('/login');
         } catch (error) {
             console.log(error);
         }

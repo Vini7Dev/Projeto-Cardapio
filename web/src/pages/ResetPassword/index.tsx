@@ -2,17 +2,59 @@
  * Page: Forgot Password
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Form } from '@unform/web';
 import { FiLock } from 'react-icons/fi';
+import { useParams, useHistory } from 'react-router-dom';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
+import api from '../../services/api';
+
 // Component styles
 import { Container } from './stylest';
 
+interface IResetPasswordCredentials {
+    new_password: string;
+    confirm_password: string;
+}
+
+interface IRouteParams {
+    token: string;
+    new_password: string;
+}
+
 const ResetPassword: React.FC = () => {
+    // Route params
+    const params = useParams() as IRouteParams;
+
+    // Navigation
+    const history = useHistory();
+
+    // Reset passowrd when the form has submit
+    const handleSubmitResetPasswordForm = useCallback(async ({
+        new_password,
+        confirm_password
+    }: IResetPasswordCredentials) => {
+        try {
+            // ADD VALIDATION DATA
+
+            // Getting token from route params
+            const { token } = params;
+
+            // Reset password in back-en
+            await api.post('/password/reset', {
+                token,
+                new_password
+            });
+
+            // Go back to login page
+            history.push('/login');
+        } catch(error) {
+            console.log(error);
+        }
+    }, []);
 
     return (
       <Container>
@@ -20,9 +62,9 @@ const ResetPassword: React.FC = () => {
           <h1>Alterar a senha</h1>
 
           {/** Reset password form */}
-          <Form onSubmit={(data) => {console.log(data)}}>
+          <Form onSubmit={handleSubmitResetPasswordForm}>
             <Input
-              name="password"
+              name="new_password"
               type="password"
               placeholder="Informe a nova senha"
               icon={FiLock}
@@ -31,7 +73,7 @@ const ResetPassword: React.FC = () => {
             />
 
             <Input
-              name="password"
+              name="confirm_password"
               type="password"
               placeholder="Confirme a nova senha"
               icon={FiLock}
