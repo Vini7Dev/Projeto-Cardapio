@@ -2,15 +2,18 @@
  * Page: Forgot Password
  */
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { FiLock } from 'react-icons/fi';
 import { useParams, useHistory } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import api from '../../services/api';
+import getValidationErrors from '../../utils/getValidationErrors';
 
 // Component styles
 import { Container } from './stylest';
@@ -26,6 +29,9 @@ interface IRouteParams {
 }
 
 const ResetPassword: React.FC = () => {
+    // Form reference
+    const formRef = useRef<FormHandles>(null);
+
     // Route params
     const params = useParams() as IRouteParams;
 
@@ -38,7 +44,22 @@ const ResetPassword: React.FC = () => {
         confirm_password
     }: IResetPasswordCredentials) => {
         try {
-            // ADD VALIDATION DATA
+            // Reset form errors
+            formRef.current?.setErrors({});
+
+            // Creating shedule validation data
+            const schedule = Yup.object().shape({
+                new_password: Yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres.').required('A nova senha é obrigatória.'),
+                confirm_password: Yup.string().oneOf(
+                    [Yup.ref('new_password')], 'A confirmação deve ser igual a nova senha.',
+                ).required('A confirmação da senha é obrigatória.')
+            });
+
+            // Validate form data
+            await schedule.validate({
+                new_password,
+                confirm_password,
+            }, { abortEarly: false });
 
             // Getting token from route params
             const { token } = params;
@@ -52,7 +73,13 @@ const ResetPassword: React.FC = () => {
             // Go back to login page
             history.push('/signin');
         } catch(error) {
-            console.log(error);
+            if(error instanceof Yup.ValidationError) {
+                // Getting validation errors
+                const validationErrors = getValidationErrors(error);
+
+                // Setting validation errors in form
+                formRef.current?.setErrors(validationErrors);
+            }
         }
     }, []);
 
@@ -62,7 +89,7 @@ const ResetPassword: React.FC = () => {
           <h1>Alterar a senha</h1>
 
           {/** Reset password form */}
-          <Form onSubmit={handleSubmitResetPasswordForm}>
+          <Form onSubmit={handleSubmitResetPasswordForm} ref={formRef}>
             <Input
               name="new_password"
               type="password"
