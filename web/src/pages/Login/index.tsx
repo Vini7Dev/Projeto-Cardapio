@@ -16,17 +16,9 @@ import { useAuth } from '../../hooks/auth';
 // Component styles
 import { Container } from './styles';
 
-interface IRestaurant {
-    id: string;
-    trade: string;
-    cnpj: string;
-    telephone: string;
-    logo_url: string;
+interface ILoginCredentials {
     email: string;
-    menu: {
-        id: string;
-        menu_code: number;
-    }
+    password: string;
 }
 
 const Login: React.FC = () => {
@@ -34,7 +26,7 @@ const Login: React.FC = () => {
     const auth = useAuth();
 
     // Submit login form
-    const handleSubmitLogin = useCallback(async (data) => {
+    const handleSubmitLogin = useCallback(async (data: ILoginCredentials) => {
         // Getting form data
         const { email, password } = data;
 

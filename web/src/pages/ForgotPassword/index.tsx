@@ -2,7 +2,7 @@
  * Page: Forgot Password
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FiAtSign } from 'react-icons/fi';
@@ -10,10 +10,27 @@ import { FiAtSign } from 'react-icons/fi';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
+import api from '../../services/api';
+
 // Component styles
 import { Container } from './stylest';
 
+interface IForgotPasswordCredentials {
+    email: string;
+}
+
 const ForgotPassword: React.FC = () => {
+    // When submitting the form, send a request to receive a password reset email
+    const handleSubmitForgotPasswordForm = useCallback(async ({
+        email
+    }: IForgotPasswordCredentials) => {
+        try {
+            // Sending request to back-end
+            await api.post('/password/forgot', { email });
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
 
     return (
       <Container>
@@ -21,7 +38,7 @@ const ForgotPassword: React.FC = () => {
           <h1>Recuperar senha</h1>
 
           {/** Forgot password form */}
-          <Form onSubmit={(data) => {console.log(data)}}>
+          <Form onSubmit={handleSubmitForgotPasswordForm}>
             <Input
               name="email"
               type="email"

@@ -27,7 +27,6 @@ const Input: React.FC<IInputProps> = ({
     borderTopRight = 0,
     borderBottomLeft = 0,
     borderBottonRigth = 0,
-    children,
     ...rest
 }: IInputProps) => {
     // Input states (blur and focus)
