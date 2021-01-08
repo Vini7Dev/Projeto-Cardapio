@@ -81,7 +81,8 @@ const ResetPassword: React.FC = () => {
               borderBottonRigth={25}
             />
 
-            <Button buttonName="Recuperar" />
+            {/** Reset password button */}
+            <Button buttonName="Alterar" />
           </Form>
         </div>
       </Container>

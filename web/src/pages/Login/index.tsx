@@ -6,6 +6,10 @@ import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FiAtSign, FiLock } from 'react-icons/fi'
 import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
+
+import getValidationErrors from '../../utils/getValidationErrors';
 
 import GoBackButton from '../../components/GoBackButton';
 import Button from '../../components/Button';
@@ -22,6 +26,9 @@ interface ILoginCredentials {
 }
 
 const Login: React.FC = () => {
+    // Form reference
+    const formRef = useRef<FormHandles>(null);
+
     // Use authentication data and functions
     const auth = useAuth();
 
@@ -30,11 +37,33 @@ const Login: React.FC = () => {
         // Getting form data
         const { email, password } = data;
 
-        // Run login
-        await auth.login({
-            email,
-            password,
-        });
+        try {
+            // Reset form errors
+            formRef.current?.setErrors({});
+
+            // Creating a schema validation for the data
+            const schema = Yup.object().shape({
+                email: Yup.string().email('Digite um email válido').required('O email é obrigatório.'),
+                password: Yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres.').required('A senha é obrigatória.'),
+            });
+
+            // Validate data
+            await schema.validate({ email, password }, { abortEarly: false })
+
+            // Run login
+            await auth.login({
+                email,
+                password,
+            });
+        } catch(error) {
+            if(error instanceof Yup.ValidationError) {
+                console.log(error);
+
+                const errors = getValidationErrors(error);
+
+                formRef.current?.setErrors(errors);
+            }
+        }
     }, [auth]);
 
     return (
@@ -45,7 +74,7 @@ const Login: React.FC = () => {
           <h1>Entrar</h1>
 
           {/** Login form */}
-          <Form onSubmit={handleSubmitLogin}>
+          <Form onSubmit={handleSubmitLogin} ref={formRef}>
             <Input
               name="email"
               placeholder="Informe seu e-mail"

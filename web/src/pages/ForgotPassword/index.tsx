@@ -56,9 +56,11 @@ const ForgotPassword: React.FC = () => {
               borderBottonRigth={25}
             />
 
+            {/** Send mail to reset password */}
             <Button buttonName="Recuperar" />
           </Form>
 
+          {/** Back to login page option */}
           <Link to="/login">
             <Button
               label="Não deseja recuperar a senha?"
