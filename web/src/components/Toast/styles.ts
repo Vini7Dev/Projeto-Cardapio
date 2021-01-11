@@ -46,4 +46,17 @@ export const Container = styled.button<IToastContainerProps>`
         font-family: 'Archivo', 'sans-serif';
         font-size: 20px;
     }
+
+    @media (max-width: 768px) {
+        margin: 0 0 2px;
+        width: 100%;
+
+        h1 {
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    }
 `;
