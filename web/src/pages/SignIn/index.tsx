@@ -16,6 +16,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 
 import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 // Component styles
 import { Container } from './styles';
@@ -29,8 +30,12 @@ const SignIn: React.FC = () => {
     // Form reference
     const formRef = useRef<FormHandles>(null);
 
+    // To use toast
+    const toast = useToast();
+
     // Use authentication data and functions
     const auth = useAuth();
+
 
     // Submit Sign In form
     const handleSubmitSignIn = useCallback(async (data: ISignInCredentials) => {
@@ -62,9 +67,15 @@ const SignIn: React.FC = () => {
 
                 // Setting validation errors in form
                 formRef.current?.setErrors(validationErrors);
+            } else {
+                // Create error toast
+                toast.addToast({
+                    title: 'Falha ao entrar na conta.',
+                    description: 'Tente novamente.'
+                });
             }
         }
-    }, [auth]);
+    }, [auth, toast]);
 
     return (
       <Container>

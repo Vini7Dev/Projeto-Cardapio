@@ -5,7 +5,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 20px;
 `;

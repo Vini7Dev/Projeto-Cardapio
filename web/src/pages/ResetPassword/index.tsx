@@ -15,6 +15,8 @@ import Button from '../../components/Button';
 import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
+import { useToast } from '../../hooks/toast';
+
 // Component styles
 import { Container } from './stylest';
 
@@ -37,6 +39,9 @@ const ResetPassword: React.FC = () => {
 
     // Navigation
     const history = useHistory();
+
+    // To use toast
+    const toast = useToast();
 
     // Reset passowrd when the form has submit
     const handleSubmitResetPasswordForm = useCallback(async ({
@@ -70,6 +75,13 @@ const ResetPassword: React.FC = () => {
                 new_password
             });
 
+            // Create success toast
+            toast.addToast({
+                title: 'Senha alterada.',
+                description: 'Efetue seu Login com sua nova senha.',
+                status: 'success',
+            });
+
             // Go back to login page
             history.push('/signin');
         } catch(error) {
@@ -79,9 +91,15 @@ const ResetPassword: React.FC = () => {
 
                 // Setting validation errors in form
                 formRef.current?.setErrors(validationErrors);
+            } else {
+                // Create error toast
+                toast.addToast({
+                    title: 'Falha ao alterar a senha.',
+                    description: 'Tente novamente.',
+                });
             }
         }
-    }, [history, params]);
+    }, [history, params, toast]);
 
     return (
       <Container>

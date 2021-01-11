@@ -35,7 +35,6 @@ export const Container = styled.button<IToastContainerProps>`
     border-radius: 15px;
     margin: 10px 0;
     padding: 15px 25px;
-    text-align: center;
 
     h1 {
         font-family: 'Poppins', 'sans-serif';
@@ -43,6 +42,7 @@ export const Container = styled.button<IToastContainerProps>`
     }
 
     p {
+        text-align: left;
         font-family: 'Archivo', 'sans-serif';
         font-size: 20px;
     }

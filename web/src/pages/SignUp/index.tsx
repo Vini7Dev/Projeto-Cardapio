@@ -18,6 +18,8 @@ import AddLogo from '../../components/AddLogo';
 import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
+import { useToast } from '../../hooks/toast';
+
 // Component styles
 import { Container } from './styles';
 
@@ -36,6 +38,9 @@ const SignUp: React.FC = () => {
 
     // Navigation
     const history = useHistory();
+
+    // To use toast
+    const toast = useToast();
 
     // Logo file selected
     const [selectedLogo, setSelectedLogo] = useState<File | null>(null);
@@ -104,6 +109,13 @@ const SignUp: React.FC = () => {
             // Creating restaurant
             await api.post('/restaurants', formData);
 
+            // Create success toast
+            toast.addToast({
+                title: 'Conta criada com sucesso.',
+                description: 'Agora você já pode efetuar seu login.',
+                status: 'success',
+            });
+
             // Go back to login page
             history.push('/signin');
         } catch (error) {
@@ -113,9 +125,15 @@ const SignUp: React.FC = () => {
 
                 // Setting validation errors in form
                 formRef.current?.setErrors(validationErrors);
+            } else {
+                // Create error toast
+                toast.addToast({
+                     title: 'Falha ao criar a conta.',
+                     description: 'Reveja as credenciais e tente novamente.',
+                });
             }
         }
-    }, [selectedLogo, history]);
+    }, [selectedLogo, history, toast]);
 
     return (
       <Container>

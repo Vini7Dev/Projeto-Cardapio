@@ -26,6 +26,7 @@ const ToastContainer: React.FC<IToastContainerProps> = ({ toasts }) => {
         {
             toasts.map(toast => (
               <Toast
+                key={toast.id}
                 id={toast.id}
                 title={toast.title}
                 description={toast.description}

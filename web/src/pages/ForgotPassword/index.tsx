@@ -15,6 +15,8 @@ import Button from '../../components/Button';
 import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
+import { useToast } from '../../hooks/toast';
+
 // Component styles
 import { Container } from './stylest';
 
@@ -28,6 +30,9 @@ const ForgotPassword: React.FC = () => {
 
     // Navigation
     const history = useHistory();
+
+    // To use toast
+    const toast = useToast();
 
     // When submitting the form, send a request to receive a password reset email
     const handleSubmitForgotPasswordForm = useCallback(async ({
@@ -46,7 +51,14 @@ const ForgotPassword: React.FC = () => {
             await schema.validate({ email }, { abortEarly: false });
 
             // Sending request to back-end
-            api.post('/password/forgot', { email });
+            await api.post('/password/forgot', { email });
+
+            // Create success toast
+            toast.addToast({
+                title: 'Recuperação realizada com sucesso!',
+                description: 'Acesse o link enviado ao seu email para restaurar sua senha.',
+                status: 'success',
+            });
 
             // Go back to login page
             history.push('/signin');
@@ -57,9 +69,15 @@ const ForgotPassword: React.FC = () => {
 
                 // Setting validation errors in form
                 formRef.current?.setErrors(validationErrors);
+            } else {
+                // Create error toast
+                toast.addToast({
+                    title: 'Falha ao recuperar a senha.',
+                    description: 'Tente novamente.',
+                });
             }
         }
-    }, [history]);
+    }, [history, toast]);
 
     return (
       <Container>
