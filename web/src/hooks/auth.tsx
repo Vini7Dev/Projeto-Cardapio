@@ -43,6 +43,10 @@ const AuthContext = createContext<IProviderValue>({} as IProviderValue);
 export const useAuth = (): IProviderValue => {
     const authContext = useContext(AuthContext);
 
+    if(!authContext) {
+        throw new Error('useAuth nececita do AuthProvider para funcionar.');
+    }
+
     return authContext;
 }
 

@@ -4,12 +4,15 @@
 
 import React from 'react';
 
+import ToastProvider from './toast';
 import AuthProvider from './auth';
 
 const ContextProvider: React.FC = ({ children }) => {
     return (
       <AuthProvider>
-        {children}
+        <ToastProvider>
+          {children}
+        </ToastProvider>
       </AuthProvider>
     )
 }

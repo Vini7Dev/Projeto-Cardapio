@@ -81,7 +81,7 @@ const ResetPassword: React.FC = () => {
                 formRef.current?.setErrors(validationErrors);
             }
         }
-    }, []);
+    }, [history, params]);
 
     return (
       <Container>

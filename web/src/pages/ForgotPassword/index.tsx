@@ -27,7 +27,7 @@ const ForgotPassword: React.FC = () => {
     const formRef = useRef<FormHandles>(null);
 
     // Navigation
-    const hsitory = useHistory();
+    const history = useHistory();
 
     // When submitting the form, send a request to receive a password reset email
     const handleSubmitForgotPasswordForm = useCallback(async ({
@@ -49,7 +49,7 @@ const ForgotPassword: React.FC = () => {
             api.post('/password/forgot', { email });
 
             // Go back to login page
-            hsitory.push('/signin');
+            history.push('/signin');
         } catch (error) {
             if(error instanceof Yup.ValidationError) {
                 // Getting validation errors
@@ -59,7 +59,7 @@ const ForgotPassword: React.FC = () => {
                 formRef.current?.setErrors(validationErrors);
             }
         }
-    }, []);
+    }, [history]);
 
     return (
       <Container>
