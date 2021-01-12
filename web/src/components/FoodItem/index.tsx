@@ -12,6 +12,7 @@ import {
     Container,
     RemoveItemButton,
     ItemContent,
+    ItemImageContent,
     ItemDataContent,
     EditItemButton,
 } from './styles';
@@ -26,7 +27,13 @@ const FoodItem: React.FC = () => {
 
         {/** Item data content */}
         <ItemContent>
-          <img src={DefaultFoodImage} alt="FoodFoodImage" />
+          <ItemImageContent>
+            <img src={DefaultFoodImage} alt="FoodFoodImage" />
+
+            <div>
+              <span>Desabilitado</span>
+            </div>
+          </ItemImageContent>
 
           <div className="discount-percent">
             <p>-20%</p>

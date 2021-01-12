@@ -10,7 +10,6 @@ import { useAuth } from '../../hooks/auth';
 import FoodItem from '../../components/FoodItem';
 
 import DefaultLogo from '../../assets/images/DefaultLogo.png';
-import DefaultFoodImage from '../../assets/images/DefaultFoodImage.png';
 
 // Component styles
 import {
@@ -71,9 +70,7 @@ const Menu: React.FC = () => {
 
               <ul className="category-items-list">
                 <FoodItem />
-
                 <FoodItem />
-
                 <FoodItem />
               </ul>
             </section>

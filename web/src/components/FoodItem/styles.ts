@@ -17,12 +17,14 @@ export const Container = styled.li`
     background-color: #FFFFFF;
     box-shadow: 1px 1px 3px #757575;
 
-    margin: 0 10px 15px;
+    margin: 10px;
     border-radius: 10px;
     list-style: none;
 `;
 
 export const RemoveItemButton = styled.button`
+    z-index: 10;
+
     position: absolute;
     display: flex;
     align-items: center;
@@ -54,10 +56,6 @@ export const ItemContent = styled.div`
     text-align: left;
     border-radius: 10px;
 
-    img {
-        width: 100%;
-    }
-
     div.discount-percent {
         position: absolute;
         background-color: #0050C9;
@@ -74,9 +72,37 @@ export const ItemContent = styled.div`
     }
 `;
 
+export const ItemImageContent = styled.div`
+    position: relative;
+    box-shadow: 0 2px 1px #000000;
+
+    img {
+        width: 100%;
+        margin-bottom: -7px;
+    }
+
+    div {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 10px 10px 0 0;
+
+        font-weight: 600;
+        font-size: 25px;
+    }
+`;
+
 export const ItemDataContent = styled.div`
     background-color: #FFFFFF;
-    margin-top: -10px;
+    margin-top: -5px;
     padding: 5px;
 
     div.item-data {
