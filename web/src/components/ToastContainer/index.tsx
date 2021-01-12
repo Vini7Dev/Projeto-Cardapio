@@ -4,6 +4,8 @@
 
 import React from 'react';
 
+import { useTransition } from 'react-spring';
+
 import Toast from '../Toast';
 
 // Component styles
@@ -21,16 +23,24 @@ interface IToastContainerProps {
 }
 
 const ToastContainer: React.FC<IToastContainerProps> = ({ toasts }) => {
+    // Transition animation
+    const transition = useTransition(toasts, toast => toast.id, {
+        from: { opacity: 0 },
+        enter: { opacity: 1 },
+        leave: { opacity: 0 },
+    });
+
     return (
       <Container>
         {
-            toasts.map(toast => (
+            transition.map(toast => (
               <Toast
-                key={toast.id}
-                id={toast.id}
-                title={toast.title}
-                description={toast.description}
-                status={toast.status || 'error'}
+                styles={toast.props}
+                key={toast.key}
+                id={toast.item.id}
+                title={toast.item.title}
+                description={toast.item.description}
+                status={toast.item.status || 'error'}
               />
             ))
         }

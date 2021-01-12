@@ -50,7 +50,8 @@
       "react/jsx-props-no-spreading": "off",
       "react/prop-types": "off",
       "@typescript-eslint/no-unused-vars": "off",
-      "camelcase": "off"
+      "camelcase": "off",
+      "@typescript-eslint/ban-types": "off"
     },
     "settings": {
       "import/resolver": {

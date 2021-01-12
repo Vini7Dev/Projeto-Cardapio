@@ -14,13 +14,15 @@ interface IToastProps {
     title: string;
     description?: string;
     status: 'success' | 'error';
+    styles: object;
 }
 
 const Toast: React.FC<IToastProps> = ({
     id,
     title,
     description,
-    status
+    status,
+    styles,
 }) => {
     // Use toast functions
     const toast = useToast();
@@ -36,9 +38,11 @@ const Toast: React.FC<IToastProps> = ({
     }, [toast, id]);
 
     return (
-      <Container status={status} onClick={handleRemoveToastOnClick}>
-        <h1>{title}</h1>
-        <p>{description}</p>
+      <Container status={status} style={styles}>
+        <button onClick={handleRemoveToastOnClick}>
+          <h1>{title}</h1>
+          <p>{description}</p>
+        </button>
       </Container>
     );
 }
