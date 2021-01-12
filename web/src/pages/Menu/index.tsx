@@ -7,6 +7,8 @@ import { FiLogOut, FiEdit3 } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
 
+import FoodItem from '../../components/FoodItem';
+
 import DefaultLogo from '../../assets/images/DefaultLogo.png';
 import DefaultFoodImage from '../../assets/images/DefaultFoodImage.png';
 
@@ -68,44 +70,11 @@ const Menu: React.FC = () => {
               <h2>Lanches</h2>
 
               <ul className="category-items-list">
-                <li>
-                  <img src={DefaultFoodImage} alt="FoodImage" />
-                  <p>X-Bacon</p>
-                </li>
+                <FoodItem />
 
-                <li>
-                  <img src={DefaultFoodImage} alt="FoodImage" />
-                  <p>X-Calabresa</p>
-                </li>
+                <FoodItem />
 
-
-                <li>
-                  <img src={DefaultFoodImage} alt="FoodImage" />
-                  <p>X-Bacon</p>
-                </li>
-
-                <li>
-                  <img src={DefaultFoodImage} alt="FoodImage" />
-                  <p>X-Calabresa</p>
-                </li>
-                <li>
-                  <img src={DefaultFoodImage} alt="FoodImage" />
-                  <p>X-Bacon</p>
-                </li>
-
-                <li>
-                  <img src={DefaultFoodImage} alt="FoodImage" />
-                  <p>X-Calabresa</p>
-                </li>
-                <li>
-                  <img src={DefaultFoodImage} alt="FoodImage" />
-                  <p>X-Bacon</p>
-                </li>
-
-                <li>
-                  <img src={DefaultFoodImage} alt="FoodImage" />
-                  <p>X-Calabresa</p>
-                </li>
+                <FoodItem />
               </ul>
             </section>
 
@@ -113,15 +82,8 @@ const Menu: React.FC = () => {
               <h2>Bebidas</h2>
 
               <ul className="category-items-list">
-                <li>
-                  <img src={DefaultFoodImage} alt="FoodImage" />
-                  <p>Refrigerante</p>
-                </li>
-
-                <li>
-                  <img src={DefaultFoodImage} alt="FoodImage" />
-                  <p>Suco</p>
-                </li>
+                <FoodItem />
+                <FoodItem />
               </ul>
             </section>
           </MenuArea>

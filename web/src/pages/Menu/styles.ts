@@ -62,7 +62,7 @@ export const OptionsBar = styled.aside`
 `;
 
 export const MenuSide = styled.main`
-    background-color: #e6e6e6;
+    background-color: #E6E6E6;
     width: 100%;
     height: 100%;
 `;
@@ -190,15 +190,6 @@ export const MenuArea = styled.section`
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-        }
-
-        ul.category-items-list li {
-            list-style: none;
-
-            img {
-                max-width: 250px;
-                width: 100%;
-            }
         }
     }
 `;
