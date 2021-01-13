@@ -2,7 +2,7 @@
  * Component: Add Photo
  */
 
-import React, { useCallback, ChangeEvent } from 'react';
+import React, { useCallback, ChangeEvent, useEffect } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
 import AddLogoBackground from '../../assets/images/AddLogoBackground.png';
@@ -12,9 +12,23 @@ import { Container } from './styles';
 
 interface IAddLogoProps {
     setSelectedFile(file: File | null): void;
+    defaultFileURL?: string;
 }
 
-const AddLogo: React.FC<IAddLogoProps> = ({ setSelectedFile }) => {
+const AddLogo: React.FC<IAddLogoProps> = ({ setSelectedFile, defaultFileURL }) => {
+    // When exists a default file, update the preview
+    useEffect(() => {
+        if(defaultFileURL) {
+            // Getting image preview element
+            const logoPreview = document.querySelector<HTMLImageElement>('#logo-preview');
+
+            if(logoPreview && defaultFileURL) {
+                // Add URL to image preview
+                logoPreview.src = defaultFileURL;
+            }
+        }
+    }, [defaultFileURL, setSelectedFile]);
+
     // Update logo selected file
     const handleSelectFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         // Getting image preview element

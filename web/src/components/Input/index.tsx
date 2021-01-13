@@ -48,6 +48,20 @@ const Input: React.FC<IInputProps> = ({
         });
     }, [fieldName, registerField]);
 
+    // When a default value exists, set 'isFilled' to true
+    useEffect(() => {
+        // Getting input element
+        const input = document.getElementsByName(name)
+
+        // Getting input value
+        const startValue = input[0].getAttribute('value');
+
+        // If value exists, set 'isFilled' to true
+        if(startValue && !!startValue.length) {
+            setIsFilled(true);
+        }
+    }, [name]);
+
     // Enable focus in input
     const handleSetIsFocus = useCallback(() => {
         setIsFocus(true);
@@ -75,6 +89,7 @@ const Input: React.FC<IInputProps> = ({
         { Icon && <Icon size={40} /> }
 
         <input
+          name={name}
           onBlur={handleSetIsBlur}
           onFocus={handleSetIsFocus}
           ref={inputRef}

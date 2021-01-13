@@ -149,7 +149,7 @@ const EditProfile: React.FC = () => {
           {/** Sign Up form */}
           <Form onSubmit={handleSubmitUpdateProfile} ref={formRef}>
             {/** Restaurant data */}
-            <AddLogo setSelectedFile={handleSetSelectedLogo} />
+            <AddLogo setSelectedFile={handleSetSelectedLogo} defaultFileURL={auth.restaurant.logo_url} />
 
             <InputGroup label="Dados do restaurante:">
               <Input
@@ -158,6 +158,7 @@ const EditProfile: React.FC = () => {
                 icon={FiBriefcase}
                 borderTopLeft={25}
                 borderTopRight={25}
+                defaultValue={auth.restaurant.trade}
               />
 
               <Input
@@ -166,6 +167,7 @@ const EditProfile: React.FC = () => {
                 icon={FiPhone}
                 borderBottomLeft={25}
                 borderBottonRigth={25}
+                defaultValue={auth.restaurant.telephone}
               />
             </InputGroup>
 
