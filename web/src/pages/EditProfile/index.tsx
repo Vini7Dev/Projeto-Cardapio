@@ -11,6 +11,7 @@ import AddLogo from '../../components/AddLogo';
 import InputGroup from '../../components/InputGroup';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import GoBackButton from '../../components/GoBackButton';
 
 // Component styles
 import { Container } from './styles';
@@ -25,6 +26,8 @@ const EditProfile: React.FC = () => {
 
     return (
       <Container>
+        <GoBackButton />
+
         <div id="page-content">
           <h1>Editar os dados</h1>
 

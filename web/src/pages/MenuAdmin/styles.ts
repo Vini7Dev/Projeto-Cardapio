@@ -24,6 +24,11 @@ export const OptionsBar = styled.aside`
 
     padding: 15px 15px;
 
+    a {
+        text-decoration: none;
+        margin-top: 10px;
+    }
+
     button {
         display: flex;
         justify-content: center;

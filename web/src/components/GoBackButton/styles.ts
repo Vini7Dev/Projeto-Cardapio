@@ -5,7 +5,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.button`
-    position: absolute;
+    position: fixed;
     top: 25px;
     left: 25px;
 

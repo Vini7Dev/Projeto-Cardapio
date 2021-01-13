@@ -3,6 +3,7 @@
  */
 
 import React , { useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { FiLogOut, FiEdit3 } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
@@ -42,10 +43,12 @@ const Menu: React.FC = () => {
             Sair
           </button>
 
-          <button>
-            <FiEdit3 />
-            Editar Conta
-          </button>
+          <Link to="/profile">
+            <button>
+              <FiEdit3 />
+              Editar Conta
+            </button>
+          </Link>
         </OptionsBar>
 
         {/** Menu side */}
