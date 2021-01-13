@@ -69,9 +69,9 @@ const SignUp: React.FC = () => {
                 cnpj: Yup.string().max(11, 'O cnpj deve ter no máximo 11 caracteres.').min(11, 'O cnpj deve ter no mínimo 11 caracteres.').required('O cnpj é obrigatório.'),
                 telephone: Yup.string().max(11, 'O telefone deve ter no máximo 11 caracteres.').required('O telefone é obrigatório.'),
                 email: Yup.string().email('O email deve ser válido.').required('O email é obrigatório.'),
-                password: Yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres.').required('A senha é obrigatório.'),
+                password: Yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres.').required('A senha é obrigatória.'),
                 confirm_password: Yup.string().oneOf(
-                    [Yup.ref('password')], 'A confirmação deve ser igual a nova senha.'
+                    [Yup.ref('password')], 'A confirmação deve ser igual a senha.'
                 ).required('A confirmação da senha é obrigatória.'),
             });
 
@@ -84,6 +84,7 @@ const SignUp: React.FC = () => {
             let telephoneOnlyNumber = telephone.split('(').join('');
             telephoneOnlyNumber = telephoneOnlyNumber.split(')').join('');
             telephoneOnlyNumber = telephoneOnlyNumber.split('-').join('');
+            telephoneOnlyNumber = telephoneOnlyNumber.split(' ').join('');
 
             // Validate data
             await schema.validate({

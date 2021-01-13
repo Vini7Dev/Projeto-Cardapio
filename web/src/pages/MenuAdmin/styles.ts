@@ -38,9 +38,11 @@ export const OptionsBar = styled.aside`
         box-shadow: 1px 1px 3px #000000;
         color: #FFFFFF;
 
+        width: 100%;
+        padding: 10px 15px;
+
         border: none;
         border-radius: 10px;
-        padding: 10px 15px;
 
         font-size: 20px;
         font-family: 'Poppins', 'sans-serif';
