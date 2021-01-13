@@ -15,7 +15,7 @@ import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
 
 // Pages - Authenticated
-import Menu from '../pages/Menu';
+import MenuAdmin from '../pages/MenuAdmin';
 
 const Routes: React.FC = () => {
     return (
@@ -28,7 +28,7 @@ const Routes: React.FC = () => {
         <MyRoutes path="/reset-password/:token" component={ResetPassword} exact />
 
         {/** Authenticated routes */}
-        <MyRoutes path="/menu" component={Menu} exact isPrivate />
+        <MyRoutes path="/menu" component={MenuAdmin} exact isPrivate />
       </Switch>
     );
 }
