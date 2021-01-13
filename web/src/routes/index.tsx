@@ -16,6 +16,7 @@ import ResetPassword from '../pages/ResetPassword';
 
 // Pages - Authenticated
 import MenuAdmin from '../pages/MenuAdmin';
+import EditProfile from '../pages/EditProfile';
 
 const Routes: React.FC = () => {
     return (
@@ -29,6 +30,7 @@ const Routes: React.FC = () => {
 
         {/** Authenticated routes */}
         <MyRoutes path="/menu" component={MenuAdmin} exact isPrivate />
+        <MyRoutes path='/profile' component={EditProfile} exact isPrivate />
       </Switch>
     );
 }
