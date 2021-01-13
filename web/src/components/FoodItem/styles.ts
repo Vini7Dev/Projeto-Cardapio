@@ -2,8 +2,12 @@
  * Styles: Food Item
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
+
+interface IImageProps {
+    image_url: string;
+}
 
 export const Container = styled.li`
     position: relative;
@@ -12,8 +16,9 @@ export const Container = styled.li`
     justify-content: space-between;
     align-items: center;
 
+    width: 100%;
     max-width: 250px;
-    min-height: 300px;
+    min-height: 250px;
     background-color: #FFFFFF;
     box-shadow: 1px 1px 3px #757575;
 
@@ -52,9 +57,15 @@ export const RemoveItemButton = styled.button`
 `;
 
 export const ItemContent = styled.div`
+    position: relative;
+    height: 100%;
+    width: 100%;
+    max-width: 250px;
+    padding-bottom: 30px;
+
     border: none;
-    text-align: left;
     border-radius: 10px;
+    text-align: left;
 
     div.discount-percent {
         position: absolute;
@@ -72,16 +83,27 @@ export const ItemContent = styled.div`
     }
 `;
 
-export const ItemImageContent = styled.div`
+export const ItemImageContent = styled.div<IImageProps>`
     position: relative;
     box-shadow: 0 2px 1px #000000;
+    min-height: 120px;
 
-    img {
+    background-color: #FFBD80;
+
+    div.item-image {
+        /** Display image in background */
+        ${
+            props => css`background: url(${props.image_url}) no-repeat center center;`
+        }
+
+        display: block;
         width: 100%;
-        margin-bottom: -7px;
+        height: 150px;
+
+        border-radius: 10px 10px 0 0;
     }
 
-    div {
+    div.desable-info {
         position: absolute;
         display: flex;
         align-items: center;
@@ -91,6 +113,8 @@ export const ItemImageContent = styled.div`
         left: 0;
         width: 100%;
         height: 100%;
+
+        border-radius: 1px solid blue;
 
         background-color: rgba(255, 255, 255, 0.5);
         border-radius: 10px 10px 0 0;
@@ -104,6 +128,8 @@ export const ItemDataContent = styled.div`
     background-color: #FFFFFF;
     margin-top: -5px;
     padding: 5px;
+
+    border-radius: 10px;
 
     div.item-data {
         strong.item-title {
@@ -121,12 +147,12 @@ export const ItemDataContent = styled.div`
     }
 
     div.item-price {
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
 
-        text-align: right;
-        margin-top: 20px;
+        display: flex;
+        align-items: flex-end;
 
         font-family: 'Poppins', 'sans-serif';
 

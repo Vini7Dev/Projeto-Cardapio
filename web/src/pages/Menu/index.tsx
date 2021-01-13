@@ -69,9 +69,27 @@ const Menu: React.FC = () => {
               <h2>Lanches</h2>
 
               <ul className="category-items-list">
-                <FoodItem />
-                <FoodItem />
-                <FoodItem />
+                <FoodItem
+                  admin_mode
+                  id="1"
+                  title="X-Bacon"
+                  description="Pão, hamburguer, bacon, ..."
+                  image_url=""
+                  price={14.9}
+                  discount_price={0}
+                  enabled
+                />
+
+                <FoodItem
+                  admin_mode
+                  id="2"
+                  title="X-Calabresa"
+                  description="Pão, hamburguer, calabresa, ..."
+                  image_url=""
+                  price={14.9}
+                  discount_price={11.9}
+                  enabled={false}
+                />
               </ul>
             </section>
 
@@ -79,8 +97,7 @@ const Menu: React.FC = () => {
               <h2>Bebidas</h2>
 
               <ul className="category-items-list">
-                <FoodItem />
-                <FoodItem />
+                <li>Temp</li>
               </ul>
             </section>
           </MenuArea>
