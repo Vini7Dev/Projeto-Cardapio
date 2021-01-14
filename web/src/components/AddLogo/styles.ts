@@ -2,12 +2,18 @@
  * Styles: Add Photo
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
-export const Container = styled.div`
-    width: 100%;
+interface IImageProps {
+    imageURL: string;
+}
+
+export const Container = styled.div<IImageProps>`
+    width: 100vw;
+    height: 100vh;
     max-width: 300px;
+    max-height: 300px;
     position: relative;
     margin: 30px auto;
 
@@ -15,6 +21,17 @@ export const Container = styled.div`
         width: 100%;
         height: 100%;
         border-radius: 50%;
+    }
+
+    div.preview-image-show {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+
+        ${
+            props => css`background: url(${props.imageURL}) no-repeat center;`
+        }
+        background-size: 100%;
     }
 
     label {
@@ -43,5 +60,6 @@ export const Container = styled.div`
 
     @media (max-width: 768px) {
         max-width: 200px;
+        max-height: 200px;
     }
 `;

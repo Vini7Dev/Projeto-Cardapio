@@ -2,7 +2,7 @@
  * Component: Add Photo
  */
 
-import React, { useCallback, ChangeEvent, useEffect } from 'react';
+import React, { useCallback, ChangeEvent, useEffect, useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
 import AddLogoBackground from '../../assets/images/AddLogoBackground.png';
@@ -16,39 +16,33 @@ interface IAddLogoProps {
 }
 
 const AddLogo: React.FC<IAddLogoProps> = ({ setSelectedFile, defaultFileURL }) => {
-    // When exists a default file, update the preview
+    // Logo URL state
+    const [imageURL, setImageURL] = useState('');
+
+    // When exists a default file, update the image URL
     useEffect(() => {
         if(defaultFileURL) {
-            // Getting image preview element
-            const logoPreview = document.querySelector<HTMLImageElement>('#logo-preview');
-
-            if(logoPreview && defaultFileURL) {
-                // Add URL to image preview
-                logoPreview.src = defaultFileURL;
-            }
+            setImageURL(defaultFileURL);
         }
     }, [defaultFileURL, setSelectedFile]);
 
     // Update logo selected file
     const handleSelectFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        // Getting image preview element
-        const logoPreview = document.querySelector<HTMLImageElement>('#logo-preview');
-
         // Getting file data
         const fileSelected = e.target.files?.item(0);
 
-        if(logoPreview && fileSelected) {
-            // Add URL to image preview
-            logoPreview.src = URL.createObjectURL(fileSelected);
-
+        if(fileSelected) {
             // Update data from selected logo file
             setSelectedFile(fileSelected);
+
+            // Update preview image URL
+            setImageURL(URL.createObjectURL(fileSelected));
         }
     }, [setSelectedFile]);
 
     return (
-      <Container>
-        <img id="logo-preview" alt="Logo Preview" src={AddLogoBackground} />
+      <Container imageURL={imageURL || AddLogoBackground}>
+        <div className="preview-image-show" />
 
         <label htmlFor="file-input">
           <FiPlus size={40} color="#FFFFFF" />

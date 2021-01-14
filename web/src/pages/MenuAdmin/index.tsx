@@ -110,8 +110,7 @@ const Menu: React.FC = () => {
                   admin_mode
                   id="2"
                   title="X-Calabresa"
-                  description="Pão, hamburguer, calabresa, ..."
-                  image_url=""
+                  description=""
                   price={14.9}
                   discount_price={11.9}
                   enabled={false}
