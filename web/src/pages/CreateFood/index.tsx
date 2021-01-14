@@ -12,6 +12,7 @@ import OptionsBar from '../../components/PageElements/OptionsBar';
 import Button from '../../components/InputAndButtons/Button';
 import ItemInput from '../../components/InputAndButtons/ItemInput';
 import ItemTextArea from '../../components/InputAndButtons/ItemTextArea';
+import ItemCheckBox from '../../components/InputAndButtons/ItemCheckBox';
 
 // Component styles
 import {
@@ -69,13 +70,7 @@ const CreateFood: React.FC = () => {
               label="Informe a categoria do prato:"
             />
 
-            <div id="add-enable-checkbox">
-              <strong>Habilitado</strong>
-
-              <span id="custom-checkbox">
-                <FiX />
-              </span>
-            </div>
+            <ItemCheckBox />
           </CreateItemArea>
 
           <div id="add-item-button">

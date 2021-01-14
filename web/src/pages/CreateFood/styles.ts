@@ -91,64 +91,6 @@ export const CreateItemArea = styled.section`
         }
     }
 
-    div#add-item-textarea {
-        width: 90%;
-
-        margin-bottom: 25px;
-
-        strong {
-            margin-left: 15px;
-
-            font-size: 25px;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 50px;
-
-            padding: 15px;
-
-            border: none;
-            border-radius: 25px;
-
-            box-shadow: 1px 1px 3px #757575;
-            background-color: #ECECEC;
-
-            font-family: 'Poppins', 'sans-serif';
-            font-size: 20px;
-        }
-    }
-
-    div#add-enable-checkbox {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        strong {
-            margin-right: 10px;
-            font-size: 25px;
-        }
-
-        span#custom-checkbox {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            width: 40px;
-            height: 40px;
-
-            border-radius: 5px;
-
-            background-color: #39B100;
-            color: #FFFFFF;
-
-            font-size: 50px;
-            font-family: 'Archivo', 'sans-serif';
-        }
-
-        margin-bottom: 25px;
-    }
-
     @media (max-width: 768px) {
         div#add-item-image {
             div#image-preview {
