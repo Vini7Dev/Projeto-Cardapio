@@ -12,6 +12,7 @@ interface IRestaurantData {
     cnpj: string;
     telephone: string;
     email: string;
+    logo: string;
     logo_url: string;
     menu: {
         id: string;

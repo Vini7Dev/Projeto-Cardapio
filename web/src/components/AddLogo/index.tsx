@@ -12,19 +12,26 @@ import { Container } from './styles';
 
 interface IAddLogoProps {
     setSelectedFile(file: File | null): void;
+    defaultFileName?: string;
     defaultFileURL?: string;
 }
 
-const AddLogo: React.FC<IAddLogoProps> = ({ setSelectedFile, defaultFileURL }) => {
+const AddLogo: React.FC<IAddLogoProps> = ({
+    setSelectedFile,
+    defaultFileName,
+    defaultFileURL
+}) => {
     // Logo URL state
     const [imageURL, setImageURL] = useState('');
 
     // When exists a default file, update the image URL
     useEffect(() => {
-        if(defaultFileURL) {
+        if(defaultFileName && defaultFileURL) {
             setImageURL(defaultFileURL);
+        } else {
+            setImageURL(AddLogoBackground);
         }
-    }, [defaultFileURL, setSelectedFile]);
+    }, [defaultFileName, defaultFileURL, setSelectedFile]);
 
     // Update logo selected file
     const handleSelectFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {

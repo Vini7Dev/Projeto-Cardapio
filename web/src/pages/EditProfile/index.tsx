@@ -149,7 +149,11 @@ const EditProfile: React.FC = () => {
           {/** Sign Up form */}
           <Form onSubmit={handleSubmitUpdateProfile} ref={formRef}>
             {/** Restaurant data */}
-            <AddLogo setSelectedFile={handleSetSelectedLogo} defaultFileURL={auth.restaurant.logo_url} />
+            <AddLogo
+              setSelectedFile={handleSetSelectedLogo}
+              defaultFileName={auth.restaurant.logo}
+              defaultFileURL={auth.restaurant.logo_url}
+            />
 
             <InputGroup label="Dados do restaurante:">
               <Input

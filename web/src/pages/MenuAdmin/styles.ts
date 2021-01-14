@@ -24,40 +24,6 @@ export const MenuSide = styled.main`
     height: 100%;
 `;
 
-export const MenuHeader = styled.header`
-    display: flex;
-    justify-content: initial;
-    align-items: center;
-
-    background-color: #FFFFFF;
-    border-bottom: 2px solid #757575;
-
-    padding: 15px 5px;
-
-    img {
-        max-width: 100px;
-        width: 100%;
-        margin-right: 5px;
-    }
-
-    h1 {
-        color: #2F2F2F;
-        font-size: 50px;
-    }
-
-    @media (max-width: 768px) {
-        justify-content: center;
-
-        img {
-            max-width: 75px;
-        }
-
-        h1 {
-            font-size: 35px;
-        }
-    }
-`;
-
 export const MenuCode = styled.section`
     position: relative;
     display: flex;

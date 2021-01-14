@@ -13,15 +13,14 @@ import formatCNPJ from '../../utils/formatCNPJ';
 import formatTelephone from '../../utils/formatTelephone';
 
 import OptionsBar from '../../components/OptionsBar';
-import FoodItem from '../../components/FoodItem';
+import MenuHeader from '../../components/MenuHeader';
 
-import DefaultLogo from '../../assets/images/DefaultLogo.png';
+import FoodItem from '../../components/FoodItem';
 
 // Component styles
 import {
     Container,
     MenuSide,
-    MenuHeader,
     MenuCode,
     MenuArea,
     AddItemButtonArea,
@@ -73,14 +72,13 @@ const Menu: React.FC = () => {
         {/** Menu side */}
         <MenuSide>
           {/** Menu header */}
-          <MenuHeader>
-            <img src={DefaultLogo} alt="Restaurant Logo" />
-            <h1>
-              Cardápio -
-              {' '}
-              {auth.restaurant.trade}
-            </h1>
-          </MenuHeader>
+          <MenuHeader
+            title={
+                `Cardápio - ${auth.restaurant.trade}`
+            }
+            logo={auth.restaurant.logo}
+            logo_url={auth.restaurant.logo_url}
+          />
 
           {/** Menu code */}
           <MenuCode id="menu-code">
