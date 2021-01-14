@@ -11,6 +11,7 @@ import OptionsBar from '../../components/PageElements/OptionsBar';
 
 import Button from '../../components/InputAndButtons/Button';
 import ItemInput from '../../components/InputAndButtons/ItemInput';
+import ItemTextArea from '../../components/InputAndButtons/ItemTextArea';
 
 // Component styles
 import {
@@ -49,10 +50,12 @@ const CreateFood: React.FC = () => {
               label="Informe o nome do prato:"
             />
 
-            <div id="add-item-textarea">
-              <strong>Informe a descrição do prato:</strong>
-              <textarea cols={30} rows={3} style={{ resize: 'none' }} />
-            </div>
+            <ItemTextArea
+              label="Informe a descrição do produto:"
+              cols={30}
+              rows={3}
+              style={{ resize: 'none' }}
+            />
 
             <ItemInput
               label="Informe o preço original do prato:"

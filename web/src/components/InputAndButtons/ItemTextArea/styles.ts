@@ -1,5 +1,5 @@
 /**
- * Styles: Item Input
+ * Styles: Add Text Area
  */
 
 import styled from 'styled-components';
@@ -15,11 +15,11 @@ export const Container = styled.div`
         font-size: 25px;
     }
 
-    input {
+    textarea {
         width: 100%;
         min-height: 50px;
 
-        padding: 0 15px;
+        padding: 15px;
 
         border: none;
         border-radius: 25px;

@@ -1,5 +1,5 @@
 /**
- * Component: Add Item Input
+ * Component: Item Text
  */
 
 import React, { InputHTMLAttributes } from 'react';
