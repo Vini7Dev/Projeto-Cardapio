@@ -31,6 +31,8 @@ export const Container = styled.div<IColorProps>`
                         return '#FF5C00';
                     case 'brown':
                         return '#770000';
+                    case 'green':
+                        return '#39B100';
                     default:
                         return '#FFFFFF';
                 }
@@ -76,6 +78,8 @@ export const Container = styled.div<IColorProps>`
                         return shade(0.2, '#FF5C00');
                     case 'brown':
                         return shade(0.2, '#770000');
+                    case 'green':
+                        return shade(0.2, '#39B100');
                     default:
                         return shade(0.2, '#FFFFFF');
                 }

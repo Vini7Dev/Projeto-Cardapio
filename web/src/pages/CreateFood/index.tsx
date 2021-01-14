@@ -81,7 +81,7 @@ const CreateFood: React.FC = () => {
           <div id="add-item-button">
             <Button
               buttonName="Adicionar item"
-              size="normal"
+              color="green"
             />
           </div>
 

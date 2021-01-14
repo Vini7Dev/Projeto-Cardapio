@@ -11,7 +11,7 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     size?: 'normal' | 'small';
     label?: string;
     buttonName: string;
-    color?: 'orange' | 'brown';
+    color?: 'orange' | 'brown' | 'green';
     buttonAction?(): void;
 }
 
