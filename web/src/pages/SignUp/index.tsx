@@ -66,7 +66,7 @@ const SignUp: React.FC = () => {
             // Creating a schema validation for the data
             const schema = Yup.object().shape({
                 trade: Yup.string().max(25, 'O nome deve ter no máximo 25 caracteres.').required('O nome é obrigatório.'),
-                cnpj: Yup.string().max(11, 'O cnpj deve ter no máximo 11 caracteres.').min(11, 'O cnpj deve ter no mínimo 11 caracteres.').required('O cnpj é obrigatório.'),
+                cnpj: Yup.string().max(14, 'O cnpj deve ter no máximo 14 caracteres.').min(14, 'O cnpj deve ter no mínimo 14 caracteres.').required('O cnpj é obrigatório.'),
                 telephone: Yup.string().max(11, 'O telefone deve ter no máximo 11 caracteres.').required('O telefone é obrigatório.'),
                 email: Yup.string().email('O email deve ser válido.').required('O email é obrigatório.'),
                 password: Yup.string().min(6, 'A senha deve ter no mínimo 6 caracteres.').required('A senha é obrigatória.'),

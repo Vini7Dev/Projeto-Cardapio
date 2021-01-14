@@ -27,7 +27,7 @@ restaurantRoutes.post(
     celebrate({
         [Segments.BODY]: {
             trade: Joi.string().max(25).required(),
-            cnpj: Joi.string().required().max(11).min(11),
+            cnpj: Joi.string().required().max(14).min(14),
             telephone: Joi.string().required().max(11),
             email: Joi.string().email().required(),
             password: Joi.string().min(6).required(),
