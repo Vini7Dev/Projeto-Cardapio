@@ -10,6 +10,7 @@ import MenuFooter from '../../components/PageElements/MenuFooter';
 import OptionsBar from '../../components/PageElements/OptionsBar';
 
 import Button from '../../components/InputAndButtons/Button';
+import ItemInput from '../../components/InputAndButtons/ItemInput';
 
 // Component styles
 import {
@@ -44,30 +45,26 @@ const CreateFood: React.FC = () => {
               </button>
             </div>
 
-            <div className="add-item-input">
-              <strong>Informe o nome do prato:</strong>
-              <input type="text" />
-            </div>
+            <ItemInput
+              label="Informe o nome do prato:"
+            />
 
             <div id="add-item-textarea">
               <strong>Informe a descrição do prato:</strong>
               <textarea cols={30} rows={3} style={{ resize: 'none' }} />
             </div>
 
-            <div className="add-item-input">
-              <strong>Informe o preço original do prato:</strong>
-              <input type="text" />
-            </div>
+            <ItemInput
+              label="Informe o preço original do prato:"
+            />
 
-            <div className="add-item-input">
-              <strong>Informe o preço com desconto (se houver):</strong>
-              <input type="text" />
-            </div>
+            <ItemInput
+              label="Informe o preço com desconto (se houver):"
+            />
 
-            <div className="add-item-input">
-              <strong>Informe a categoria do prato:</strong>
-              <input type="text" />
-            </div>
+            <ItemInput
+              label="Informe a categoria do prato:"
+            />
 
             <div id="add-enable-checkbox">
               <strong>Habilitado</strong>
