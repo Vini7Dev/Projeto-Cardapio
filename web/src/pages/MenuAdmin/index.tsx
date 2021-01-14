@@ -9,11 +9,9 @@ import { FiLogOut, FiEdit3 } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
-import formatCNPJ from '../../utils/formatCNPJ';
-import formatTelephone from '../../utils/formatTelephone';
-
-import OptionsBar from '../../components/OptionsBar';
 import MenuHeader from '../../components/MenuHeader';
+import MenuFooter from '../../components/MenuFooter';
+import OptionsBar from '../../components/OptionsBar';
 
 import FoodItem from '../../components/FoodItem';
 
@@ -24,7 +22,6 @@ import {
     MenuCode,
     MenuArea,
     AddItemButtonArea,
-    MenuFooter,
 } from './styles';
 
 const Menu: React.FC = () => {
@@ -131,23 +128,11 @@ const Menu: React.FC = () => {
           </AddItemButtonArea>
 
           {/** Menu footer */}
-          <MenuFooter>
-            <p>
-              Restaurante:
-              {' '}
-              {auth.restaurant.trade}
-            </p>
-            <p>
-              CNPJ:
-              {' '}
-              {formatCNPJ(auth.restaurant.cnpj)}
-            </p>
-            <p>
-              Telefone:
-              {' '}
-              {formatTelephone(auth.restaurant.telephone)}
-            </p>
-          </MenuFooter>
+          <MenuFooter
+            trade={auth.restaurant.trade}
+            cnpj={auth.restaurant.cnpj}
+            telephone={auth.restaurant.telephone}
+          />
         </MenuSide>
       </Container>
     )

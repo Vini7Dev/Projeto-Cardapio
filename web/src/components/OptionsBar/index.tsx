@@ -28,8 +28,8 @@ const OptionsBar: React.FC<IOptionsBarProps> = ({
                  text,
                  icon: Icon,
                  action
-             }) => (
-               <button onClick={action}>
+             }, index) => (
+               <button key={index.toString()} onClick={action}>
                  { Icon && <Icon /> }
 
                  { text }
