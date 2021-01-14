@@ -2,11 +2,15 @@
  * Page: Menu
  */
 
-import React , { useCallback } from 'react';
+import React , { useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiLogOut, FiEdit3 } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
+
+import formatCNPJ from '../../utils/formatCNPJ';
+import formatTelephone from '../../utils/formatTelephone';
 
 import FoodItem from '../../components/FoodItem';
 
@@ -27,6 +31,21 @@ import {
 const Menu: React.FC = () => {
     // Use authentication data and functions
     const auth = useAuth();
+
+    // Load menu items
+    useEffect(() => {
+        const loadMenuItems = async () => {
+            try {
+                const response = await api.get(`/menus/${auth.restaurant.menu.code}`);
+
+                console.log(response.data);
+            } catch(error) {
+                console.log(error);
+            }
+        }
+
+        loadMenuItems();
+    }, [auth]);
 
     // Logout button
     const handleLogOut = useCallback(() => {
@@ -56,13 +75,17 @@ const Menu: React.FC = () => {
           {/** Menu header */}
           <MenuHeader>
             <img src={DefaultLogo} alt="Restaurant Logo" />
-            <h1>Cardápio</h1>
+            <h1>
+              Cardápio -
+              {' '}
+              {auth.restaurant.trade}
+            </h1>
           </MenuHeader>
 
           {/** Menu code */}
           <MenuCode id="menu-code">
             <p>Código do cardápio:</p>
-            <strong>ABC-ZYX-123</strong>
+            <strong>{(auth.restaurant.menu.code + 100000).toString(16).toUpperCase()}</strong>
             <button>Copiar Link</button>
           </MenuCode>
 
@@ -112,9 +135,21 @@ const Menu: React.FC = () => {
 
           {/** Menu footer */}
           <MenuFooter>
-            <p>Restaurante: Fome Burguer</p>
-            <p>CNPJ: 12.345.678/0000-00</p>
-            <p>Telefone: (99) 12345-6789</p>
+            <p>
+              Restaurante:
+              {' '}
+              {auth.restaurant.trade}
+            </p>
+            <p>
+              CNPJ:
+              {' '}
+              {formatCNPJ(auth.restaurant.cnpj)}
+            </p>
+            <p>
+              Telefone:
+              {' '}
+              {formatTelephone(auth.restaurant.telephone)}
+            </p>
           </MenuFooter>
         </MenuSide>
       </Container>
