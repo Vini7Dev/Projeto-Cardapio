@@ -4,8 +4,8 @@
 
 import React from 'react';
 
-import formatCNPJ from '../../utils/formatCNPJ';
-import formatTelephone from '../../utils/formatTelephone';
+import formatCNPJ from '../../../utils/formatCNPJ';
+import formatTelephone from '../../../utils/formatTelephone';
 
 // Component styles
 import { Container } from './styled';

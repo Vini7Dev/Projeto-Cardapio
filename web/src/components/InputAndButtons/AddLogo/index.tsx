@@ -5,7 +5,7 @@
 import React, { useCallback, ChangeEvent, useEffect, useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
-import AddLogoBackground from '../../assets/images/AddLogoBackground.png';
+import AddLogoBackground from '../../../assets/images/AddLogoBackground.png';
 
 // Component styles
 import { Container } from './styles';

@@ -7,7 +7,6 @@ import { useField } from '@unform/core';
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 
-
 // Component styles
 import { Container, ErrorAlert } from './styles';
 

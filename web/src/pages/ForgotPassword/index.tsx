@@ -9,8 +9,8 @@ import { Form } from '@unform/web';
 import { FiAtSign } from 'react-icons/fi';
 import * as Yup from 'yup';
 
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Input from '../../components/InputAndButtons/Input';
+import Button from '../../components/InputAndButtons/Button';
 
 import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';

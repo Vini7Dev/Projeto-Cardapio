@@ -9,11 +9,11 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
-import GoBackButton from '../../components/GoBackButton';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import InputGroup from '../../components/InputGroup';
-import AddLogo from '../../components/AddLogo';
+import GoBackButton from '../../components/InputAndButtons/GoBackButton';
+import Button from '../../components/InputAndButtons/Button';
+import Input from '../../components/InputAndButtons/Input';
+import InputGroup from '../../components/InputAndButtons/InputGroup';
+import AddLogo from '../../components/InputAndButtons/AddLogo';
 
 import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';

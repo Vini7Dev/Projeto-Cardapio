@@ -9,9 +9,9 @@ import { FiLogOut, FiEdit3 } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
-import MenuHeader from '../../components/MenuHeader';
-import MenuFooter from '../../components/MenuFooter';
-import OptionsBar from '../../components/OptionsBar';
+import MenuHeader from '../../components/PageElements/MenuHeader';
+import MenuFooter from '../../components/PageElements/MenuFooter';
+import OptionsBar from '../../components/PageElements/OptionsBar';
 
 import FoodItem from '../../components/FoodItem';
 

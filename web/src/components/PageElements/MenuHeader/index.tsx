@@ -4,7 +4,7 @@
 
 import React from 'react';
 
-import DefaultLogo from '../../assets/images/DefaultLogo.png';
+import DefaultLogo from '../../../assets/images/DefaultLogo.png';
 
 // Component styles
 import { Container } from './styles';
@@ -20,8 +20,6 @@ const MenuHeader: React.FC<IMenuHeaderProps> = ({
     logo,
     logo_url
 }) => {
-    console.log(logo_url);
-
     return (
       <Container>
         <img

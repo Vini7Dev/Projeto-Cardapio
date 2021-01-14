@@ -4,7 +4,7 @@
 
 import React, { useCallback, useEffect } from 'react';
 
-import { useToast } from '../../hooks/toast';
+import { useToast } from '../../../hooks/toast';
 
 // Component styles
 import { Container } from './styles';

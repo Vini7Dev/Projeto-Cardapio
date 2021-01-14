@@ -11,9 +11,9 @@ import * as Yup from 'yup';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
-import GoBackButton from '../../components/GoBackButton';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
+import GoBackButton from '../../components/InputAndButtons/GoBackButton';
+import Button from '../../components/InputAndButtons/Button';
+import Input from '../../components/InputAndButtons/Input';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
