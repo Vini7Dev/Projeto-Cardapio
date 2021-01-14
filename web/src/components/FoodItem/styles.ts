@@ -88,6 +88,7 @@ export const ItemImageContent = styled.div<IImageProps>`
     box-shadow: 0 2px 1px #000000;
     min-height: 120px;
 
+    border-radius: 10px 10px 0 0;
     background-color: #FFBD80;
 
     div.item-image {
