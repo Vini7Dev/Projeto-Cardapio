@@ -13,6 +13,7 @@ export const Container = styled.div`
         margin-left: 15px;
 
         font-size: 25px;
+        line-height: 15px;
     }
 
     textarea {
@@ -29,5 +30,15 @@ export const Container = styled.div`
 
         font-family: 'Poppins', 'sans-serif';
         font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+        strong {
+            font-size: 20px;
+        }
+
+        textarea {
+            font-size: 18px;
+        }
     }
 `;
