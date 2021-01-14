@@ -3,7 +3,7 @@
  */
 
 import React , { useCallback, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FiLogOut, FiEdit3 } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
@@ -12,6 +12,7 @@ import api from '../../services/api';
 import formatCNPJ from '../../utils/formatCNPJ';
 import formatTelephone from '../../utils/formatTelephone';
 
+import OptionsBar from '../../components/OptionsBar';
 import FoodItem from '../../components/FoodItem';
 
 import DefaultLogo from '../../assets/images/DefaultLogo.png';
@@ -19,7 +20,6 @@ import DefaultLogo from '../../assets/images/DefaultLogo.png';
 // Component styles
 import {
     Container,
-    OptionsBar,
     MenuSide,
     MenuHeader,
     MenuCode,
@@ -29,6 +29,9 @@ import {
 } from './styles';
 
 const Menu: React.FC = () => {
+    // Use navigation with history
+    const history = useHistory();
+
     // Use authentication data and functions
     const auth = useAuth();
 
@@ -52,23 +55,20 @@ const Menu: React.FC = () => {
         auth.logout();
     }, [auth]);
 
+    // Navigate to edit profile page
+    const handleGoToEditProfile = useCallback(() => {
+        history.push('/profile');
+    }, [history]);
+
     return (
       <Container>
         {/** Options bar side */}
-        <OptionsBar>
-
-          <button onClick={handleLogOut}>
-            <FiLogOut />
-            Sair
-          </button>
-
-          <Link to="/profile">
-            <button>
-              <FiEdit3 />
-              Editar Conta
-            </button>
-          </Link>
-        </OptionsBar>
+        <OptionsBar
+          buttonsArray={[
+                { text: 'Sair', icon: FiLogOut, action: handleLogOut },
+                { text: 'Editar Conta', icon: FiEdit3, action: handleGoToEditProfile },
+            ]}
+        />
 
         {/** Menu side */}
         <MenuSide>
