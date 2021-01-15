@@ -15,8 +15,9 @@ const App: React.FC = () => {
         <ContextProvider>
           <Routes />
         </ContextProvider>
+
+        <GlobalStyles />
       </BrowserRouter>
-      <GlobalStyles />
     </div>
   );
 }

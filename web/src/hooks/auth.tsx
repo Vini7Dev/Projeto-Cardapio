@@ -85,7 +85,7 @@ const AuthProvider: React.FC = ({ children }) => {
         localStorage.setItem('@Menue:restaurant', JSON.stringify(restaurant));
 
         // Saving restaurant's token
-        api.defaults.headers.authorization = token;
+        api.defaults.headers.authorization = `Bearer ${token}`;
 
         // Saving authentication data in context
         setAuthData({
