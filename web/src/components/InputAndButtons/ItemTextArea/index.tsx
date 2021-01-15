@@ -19,14 +19,14 @@ const ItemTextArea: React.FC<IItemTextArea> = ({
     ...rest
 }) => {
     // Input reference in form
-    const inputRef = useRef<HTMLInputElement>(null);
+    const textAreaRef = useRef<HTMLTextAreaElement>(null);
     const { fieldName, registerField, defaultValue, error } = useField(name);
 
     // Register field
     useEffect(() => {
         registerField({
             name: fieldName,
-            ref: inputRef.current,
+            ref: textAreaRef.current,
             path: 'value',
         });
     }, [fieldName, registerField]);
@@ -36,6 +36,7 @@ const ItemTextArea: React.FC<IItemTextArea> = ({
         <strong>{label}</strong>
         <textarea
           name={name}
+          ref={textAreaRef}
           defaultValue={defaultValue}
           {...rest}
         />
