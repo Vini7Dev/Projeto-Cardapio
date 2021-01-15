@@ -13,7 +13,8 @@ import MenuHeader from '../../components/PageElements/MenuHeader';
 import MenuFooter from '../../components/PageElements/MenuFooter';
 import OptionsBar from '../../components/PageElements/OptionsBar';
 
-import FoodItem from '../../components/FoodItem';
+import FoodItemCategory from '../../components/FoodItemCategory';
+import FoodItem from '../../components/FoodItemCategory/FoodItem';
 
 // Component styles
 import {
@@ -91,40 +92,28 @@ const Menu: React.FC = () => {
 
           {/** Menu area */}
           <MenuArea>
-            <section className="category-content">
-              <h2>Lanches</h2>
+            <FoodItemCategory>
+              <FoodItem
+                admin_mode
+                id="1"
+                title="X-Bacon"
+                description="Pão, hamburguer, bacon, ..."
+                image_url=""
+                price={14.9}
+                discount_price={0}
+                enabled
+              />
 
-              <ul className="category-items-list">
-                <FoodItem
-                  admin_mode
-                  id="1"
-                  title="X-Bacon"
-                  description="Pão, hamburguer, bacon, ..."
-                  image_url=""
-                  price={14.9}
-                  discount_price={0}
-                  enabled
-                />
-
-                <FoodItem
-                  admin_mode
-                  id="2"
-                  title="X-Calabresa"
-                  description=""
-                  price={14.9}
-                  discount_price={11.9}
-                  enabled={false}
-                />
-              </ul>
-            </section>
-
-            <section className="category-content">
-              <h2>Bebidas</h2>
-
-              <ul className="category-items-list">
-                <li>Temp</li>
-              </ul>
-            </section>
+              <FoodItem
+                admin_mode
+                id="2"
+                title="X-Calabresa"
+                description=""
+                price={14.9}
+                discount_price={11.9}
+                enabled={false}
+              />
+            </FoodItemCategory>
           </MenuArea>
 
           {/** Add item button */}

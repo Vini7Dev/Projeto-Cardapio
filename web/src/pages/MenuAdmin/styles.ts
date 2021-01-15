@@ -91,30 +91,6 @@ export const MenuArea = styled.section`
     justify-content: center;
 
     padding: 20px 0;
-
-    section.category-content {
-        width: 95%;
-
-        text-align: center;
-
-        h2 {
-            background-color: #FF7A00;
-            color: #FFFFFF;
-            border: 1px solid #FFFFFF;
-            border-radius: 15px;
-
-            margin-bottom: 20px;
-
-            font-size: 40px;
-            line-height: 70px;
-        }
-
-        ul.category-items-list {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-    }
 `;
 
 export const AddItemButtonArea = styled.div`

@@ -5,9 +5,9 @@
 import React, { useCallback } from 'react';
 import { FiTrash2, FiEdit3 } from 'react-icons/fi';
 
-import formatPrice from '../../utils/formatPrice';
+import formatPrice from '../../../utils/formatPrice';
 
-import DefaultFoodImage from '../../assets/images/DefaultFoodImage.png';
+import DefaultFoodImage from '../../../assets/images/DefaultFoodImage.png';
 
 // Component styles
 import {
