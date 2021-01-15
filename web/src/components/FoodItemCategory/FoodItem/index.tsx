@@ -121,7 +121,7 @@ const FoodItem: React.FC<IItemProps> = ({
 
           {/** Discount percent tag */}
           {
-              discount_price ? (
+              discount_price > 0 ? (
                 <div className="discount-percent">
                   <p>
                     -
@@ -141,9 +141,9 @@ const FoodItem: React.FC<IItemProps> = ({
             </div>
 
             <div className="item-price">
-              <p className="price-on">{formatPrice(discount_price || price)}</p>
+              <p className="price-on">{formatPrice(discount_price > 0 ? discount_price : price)}</p>
 
-              { discount_price ? <p className="price-off">{formatPrice(price)}</p> : null}
+              { discount_price > 0 ? <p className="price-off">{formatPrice(price)}</p> : null}
             </div>
           </ItemDataContent>
         </ItemContent>
