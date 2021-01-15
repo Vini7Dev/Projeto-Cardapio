@@ -51,51 +51,53 @@ const CreateFood: React.FC = () => {
 
           <CreateItemArea>
             <Form onSubmit={() => console.log('Submited')}>
-              <ItemAddImage
-                setSelectedImage={setSelectedImage}
-              />
+              <div id="form-inputs-area">
+                <ItemAddImage
+                  setSelectedImage={setSelectedImage}
+                />
 
-              <ItemInput
-                name="title"
-                label="Informe o nome do prato:"
-              />
+                <ItemInput
+                  name="title"
+                  label="Informe o nome do prato:"
+                />
 
-              <ItemTextArea
-                name="description"
-                label="Informe a descrição do produto:"
-                cols={30}
-                rows={3}
-                style={{ resize: 'none' }}
-              />
+                <ItemTextArea
+                  name="description"
+                  label="Informe a descrição do produto:"
+                  cols={30}
+                  rows={3}
+                  style={{ resize: 'none' }}
+                />
 
-              <ItemInput
-                name="price"
-                label="Informe o preço original do prato:"
-              />
+                <ItemInput
+                  name="price"
+                  label="Informe o preço original do prato:"
+                />
 
-              <ItemInput
-                name="discount_price"
-                label="Informe o preço com desconto (se houver):"
-              />
+                <ItemInput
+                  name="discount_price"
+                  label="Informe o preço com desconto (se houver):"
+                />
 
-              <ItemInput
-                name="category_name"
-                label="Informe a categoria do prato:"
-              />
+                <ItemInput
+                  name="category_name"
+                  label="Informe a categoria do prato:"
+                />
 
-              <ItemCheckbox
-                setIsChecked={toggleCheckboxCheck}
-                isChecked={checkboxChecked}
-              />
+                <ItemCheckbox
+                  setIsChecked={toggleCheckboxCheck}
+                  isChecked={checkboxChecked}
+                />
+              </div>
+
+              <div id="add-item-button">
+                <Button
+                  buttonName="Adicionar item"
+                  color="green"
+                />
+              </div>
             </Form>
           </CreateItemArea>
-
-          <div id="add-item-button">
-            <Button
-              buttonName="Adicionar item"
-              color="green"
-            />
-          </div>
 
           <MenuFooter
             trade="Fome Burguer"
