@@ -7,10 +7,17 @@ import React from 'react';
 // Component styles
 import { Container } from './styles';
 
-const FoodItemCategory: React.FC = ({ children }) => {
+interface IFoodItemCategoryProps {
+    title: string;
+}
+
+const FoodItemCategory: React.FC<IFoodItemCategoryProps> = ({
+    title,
+    children
+}) => {
     return (
       <Container>
-        <strong className="category-title">Lanches</strong>
+        <strong className="category-title">{title}</strong>
 
         <ul className="category-items-list">
           {children}

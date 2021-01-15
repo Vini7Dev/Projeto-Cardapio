@@ -36,6 +36,7 @@ const FoodItem: React.FC<IItemProps> = ({
     id,
     title,
     description,
+    image,
     image_url = '',
     price,
     discount_price = 0,
@@ -80,7 +81,7 @@ const FoodItem: React.FC<IItemProps> = ({
         {/** Item data content */}
         <ItemContent>
           {/** Image content */}
-          <ItemImageContent image_url={image_url || DefaultFoodImage}>
+          <ItemImageContent image_url={image ? image_url : DefaultFoodImage}>
             <div className="item-image" />
 
             {

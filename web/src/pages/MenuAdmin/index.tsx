@@ -140,28 +140,33 @@ const Menu: React.FC = () => {
 
           {/** Menu area */}
           <MenuArea>
-            <FoodItemCategory>
-              <FoodItem
-                admin_mode
-                id="1"
-                title="X-Bacon"
-                description="Pão, hamburguer, bacon, ..."
-                image_url=""
-                price={14.9}
-                discount_price={0}
-                enabled
-              />
-
-              <FoodItem
-                admin_mode
-                id="2"
-                title="X-Calabresa"
-                description=""
-                price={14.9}
-                discount_price={11.9}
-                enabled={false}
-              />
-            </FoodItemCategory>
+            {
+                // Creating a category section
+                organizedMenuItems.map(menuItems => (
+                  <FoodItemCategory
+                    title={menuItems.category_name}
+                    key={menuItems.category_name}
+                  >
+                    {
+                        // Creating a food item
+                        menuItems.items.map(data => (
+                          <FoodItem
+                            key={data.item.id}
+                            id={data.item.id}
+                            title={data.item.title}
+                            description={data.item.description}
+                            price={data.item.price}
+                            discount_price={data.item.discount_price}
+                            image={data.item.image}
+                            image_url={data.item.image_url}
+                            enabled={data.item.enabled}
+                            admin_mode
+                          />
+                        ))
+                    }
+                  </FoodItemCategory>
+                ))
+            }
           </MenuArea>
 
           {/** Add item button */}
