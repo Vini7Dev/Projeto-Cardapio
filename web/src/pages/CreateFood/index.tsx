@@ -3,7 +3,8 @@
  */
 
 import React, { useCallback, useState } from 'react';
-import { FiLogOut, FiArrowLeft, FiCamera, FiX } from 'react-icons/fi';
+import { FiLogOut, FiArrowLeft } from 'react-icons/fi';
+import { Form } from '@unform/web';
 
 import MenuHeader from '../../components/PageElements/MenuHeader';
 import MenuFooter from '../../components/PageElements/MenuFooter';
@@ -49,37 +50,44 @@ const CreateFood: React.FC = () => {
           />
 
           <CreateItemArea>
-            <ItemAddImage
-              setSelectedImage={setSelectedImage}
-            />
+            <Form onSubmit={() => console.log('Submited')}>
+              <ItemAddImage
+                setSelectedImage={setSelectedImage}
+              />
 
-            <ItemInput
-              label="Informe o nome do prato:"
-            />
+              <ItemInput
+                name="title"
+                label="Informe o nome do prato:"
+              />
 
-            <ItemTextArea
-              label="Informe a descrição do produto:"
-              cols={30}
-              rows={3}
-              style={{ resize: 'none' }}
-            />
+              <ItemTextArea
+                name="description"
+                label="Informe a descrição do produto:"
+                cols={30}
+                rows={3}
+                style={{ resize: 'none' }}
+              />
 
-            <ItemInput
-              label="Informe o preço original do prato:"
-            />
+              <ItemInput
+                name="price"
+                label="Informe o preço original do prato:"
+              />
 
-            <ItemInput
-              label="Informe o preço com desconto (se houver):"
-            />
+              <ItemInput
+                name="discount_price"
+                label="Informe o preço com desconto (se houver):"
+              />
 
-            <ItemInput
-              label="Informe a categoria do prato:"
-            />
+              <ItemInput
+                name="category_name"
+                label="Informe a categoria do prato:"
+              />
 
-            <ItemCheckbox
-              setIsChecked={toggleCheckboxCheck}
-              isChecked={checkboxChecked}
-            />
+              <ItemCheckbox
+                setIsChecked={toggleCheckboxCheck}
+                isChecked={checkboxChecked}
+              />
+            </Form>
           </CreateItemArea>
 
           <div id="add-item-button">

@@ -29,15 +29,17 @@ export const CreateItemSide = styled.main`
 `;
 
 export const CreateItemArea = styled.section`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
-    width: 95%;
-    margin: 25px auto;
-    border-radius: 10px;
+        width: 95%;
+        margin: 25px auto;
+        border-radius: 10px;
 
-    background-color: #FFFFFF;
-    box-shadow: 1px 1px 3px #757575;
+        background-color: #FFFFFF;
+        box-shadow: 1px 1px 3px #757575;
+    }
 `;
