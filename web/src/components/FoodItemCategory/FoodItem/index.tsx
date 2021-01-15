@@ -3,9 +3,13 @@
  */
 
 import React, { useCallback } from 'react';
+import { useHistory} from 'react-router-dom';
 import { FiTrash2, FiEdit3 } from 'react-icons/fi';
 
 import formatPrice from '../../../utils/formatPrice';
+
+import api from '../../../services/api';
+import { useToast } from '../../../hooks/toast';
 
 import DefaultFoodImage from '../../../assets/images/DefaultFoodImage.png';
 
@@ -42,10 +46,35 @@ const FoodItem: React.FC<IItemProps> = ({
     discount_price = 0,
     enabled
 }) => {
+    // Use toast functions
+    const toast = useToast();
+
+    // Use history navigation
+    const history = useHistory();
+
     // Delete item function
-    const handleDeleteItem = useCallback(() => {
-        alert(`Delete item ${id}`);
-    }, [id]);
+    const handleDeleteItem = useCallback(async () => {
+        try {
+            // Send a request to server to delete item
+            await api.delete(`/items/${id}`);
+
+            // Create success toast
+            toast.addToast({
+                title: 'Item apagado com sucesso!',
+                status: 'success',
+            });
+
+            // Reload window
+            history.push('/menu');
+        } catch(error) {
+            // Create error toast
+            toast.addToast({
+                title: 'Falha ao apagar o item.',
+                description: 'Tente novamente.',
+            });
+        }
+
+    }, [id, toast]);
 
     // Go to edit item page
     const handleEditItem = useCallback(() => {
