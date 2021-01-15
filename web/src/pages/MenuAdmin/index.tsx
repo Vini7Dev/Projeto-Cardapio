@@ -56,6 +56,11 @@ const Menu: React.FC = () => {
         history.push('/profile');
     }, [history]);
 
+    // Navigate to create food page
+    const handleGoToCreateFood = useCallback(() => {
+        history.push('/create-food');
+    }, [history]);
+
     return (
       <Container>
         {/** Options bar side */}
@@ -124,7 +129,7 @@ const Menu: React.FC = () => {
 
           {/** Add item button */}
           <AddItemButtonArea>
-            <button>+ Adicionar item</button>
+            <button onClick={handleGoToCreateFood}>+ Adicionar item</button>
           </AddItemButtonArea>
 
           {/** Menu footer */}

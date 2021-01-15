@@ -10,6 +10,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
 import api from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -45,6 +46,9 @@ const CreateFood: React.FC = () => {
 
     // Form reference
     const formRef = useRef<FormHandles>(null);
+
+    // Access auth data and functions
+    const auth = useAuth();
 
     // Access toast functions
     const toast = useToast();
@@ -137,14 +141,14 @@ const CreateFood: React.FC = () => {
       <Container>
         <OptionsBar
           buttonsArray={[
-            { text: 'Sair', icon: FiLogOut, action: () => console.log('OK') },
-            { text: 'Voltar', icon: FiArrowLeft, action: () => console.log('OK') },
+            { text: 'Sair', icon: FiLogOut, action: auth.logout },
+            { text: 'Voltar', icon: FiArrowLeft, action: history.goBack },
           ]}
         />
 
         <CreateItemSide>
           <MenuHeader
-            title="Hello"
+            title="Adicionar Item"
           />
 
           <CreateItemArea>
@@ -207,9 +211,9 @@ const CreateFood: React.FC = () => {
           </CreateItemArea>
 
           <MenuFooter
-            trade="Fome Burguer"
-            cnpj="12345678910234"
-            telephone="16999999999"
+            trade={auth.restaurant.trade}
+            cnpj={auth.restaurant.cnpj}
+            telephone={auth.restaurant.telephone}
           />
         </CreateItemSide>
       </Container>
