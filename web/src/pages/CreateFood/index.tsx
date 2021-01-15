@@ -2,7 +2,7 @@
  * Page: Create Food
  */
 
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { FiLogOut, FiArrowLeft, FiCamera, FiX } from 'react-icons/fi';
 
 import MenuHeader from '../../components/PageElements/MenuHeader';
@@ -12,7 +12,7 @@ import OptionsBar from '../../components/PageElements/OptionsBar';
 import Button from '../../components/InputAndButtons/Button';
 import ItemInput from '../../components/InputAndButtons/ItemInput';
 import ItemTextArea from '../../components/InputAndButtons/ItemTextArea';
-import ItemCheckBox from '../../components/InputAndButtons/ItemCheckBox';
+import ItemCheckbox from '../../components/InputAndButtons/ItemCheckBox';
 
 // Component styles
 import {
@@ -22,6 +22,14 @@ import {
 } from './styles';
 
 const CreateFood: React.FC = () => {
+    // Check Box state
+    const [checkboxChecked, setCheckboxChecked] = useState(false);
+
+    // Toggle check box check
+    const toggleCheckboxCheck = useCallback(() => {
+        setCheckboxChecked(!checkboxChecked);
+    }, [checkboxChecked]);
+
     return (
       <Container>
         <OptionsBar
@@ -70,7 +78,10 @@ const CreateFood: React.FC = () => {
               label="Informe a categoria do prato:"
             />
 
-            <ItemCheckBox />
+            <ItemCheckbox
+              setIsChecked={toggleCheckboxCheck}
+              isChecked={checkboxChecked}
+            />
           </CreateItemArea>
 
           <div id="add-item-button">

@@ -4,7 +4,11 @@
 
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface IItemCheckBoxProps {
+    isChecked: boolean;
+}
+
+export const Container = styled.div<IItemCheckBoxProps>`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +18,7 @@ export const Container = styled.div`
         font-size: 25px;
     }
 
-    span#custom-checkbox {
+    button#custom-checkbox {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -22,13 +26,21 @@ export const Container = styled.div`
         width: 40px;
         height: 40px;
 
+        border: none;
         border-radius: 5px;
 
-        background-color: #39B100;
+        // Change color of background when toggle checkbox selection
+        background-color: ${ props => props.isChecked ? '#39B100' : '#BCBCBC' };
+
         color: #FFFFFF;
 
         font-size: 50px;
         font-family: 'Archivo', 'sans-serif';
+
+        svg {
+            // Show or hide X icon when toggle checkbox selection
+            display: ${props => props.isChecked ? 'block' : 'none'}
+        }
     }
 
     margin-bottom: 25px;

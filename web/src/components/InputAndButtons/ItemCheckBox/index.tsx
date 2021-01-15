@@ -8,16 +8,26 @@ import { FiX } from 'react-icons/fi';
 // Component styles
 import { Container } from './styles';
 
-const ItemCheckBox: React.FC = () => {
-    return (
-      <Container>
-        <strong>Habilitado</strong>
+interface IItemCheckbockProps {
+    setIsChecked(): void;
+    isChecked: boolean;
+}
 
-        <span id="custom-checkbox">
+const ItemCheckbox: React.FC<IItemCheckbockProps> = ({
+    setIsChecked,
+    isChecked,
+}) => {
+    return (
+      <Container isChecked={isChecked}>
+        <strong>
+          { isChecked ? 'Habilitado' : 'Desabilitado' }
+        </strong>
+
+        <button id="custom-checkbox" onClick={setIsChecked}>
           <FiX />
-        </span>
+        </button>
       </Container>
     );
 }
 
-export default ItemCheckBox;
+export default ItemCheckbox;
