@@ -2,7 +2,7 @@
  * Page: Menu
  */
 
-import React , { useCallback, useEffect } from 'react';
+import React , { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FiLogOut, FiEdit3 } from 'react-icons/fi';
 
@@ -25,7 +25,31 @@ import {
     AddItemButtonArea,
 } from './styles';
 
+interface IFoodItemData {
+    item: {
+        id: string;
+        image: string;
+        image_url: string;
+        title: string;
+        description: string;
+        price: number;
+        discount_price: number;
+        enabled: boolean;
+        category: {
+            category_name: string;
+        }
+    }
+}
+
+interface IOrganizedMenuItems {
+    category_name: string;
+    items: IFoodItemData[];
+}
+
 const Menu: React.FC = () => {
+    // Organized menu items
+    const [organizedMenuItems, setOrganizedMenuItems] = useState<IOrganizedMenuItems[]>([]);
+
     // Use navigation with history
     const history = useHistory();
 
@@ -36,10 +60,34 @@ const Menu: React.FC = () => {
     useEffect(() => {
         const loadMenuItems = async () => {
             try {
+                // Get menu items from api
                 const response = await api.get(`/menus/${auth.restaurant.menu.code}`);
 
-                console.log(response.data);
+                // Select only menu items from response data
+                const menuItems = response.data as IFoodItemData[];
+
+                // Getting all items categories
+                const categories = [] as string[];
+                menuItems.forEach((menuItem) => {
+                    const indexFinded = categories.findIndex(category_name => category_name === menuItem.item.category.category_name);
+
+                    if(indexFinded === -1) {
+                        categories.push(menuItem.item.category.category_name);
+                    }
+                });
+
+                // Organize items with your respective category
+                const organizedItems = categories.map(category_name => {
+                    return {
+                        category_name,
+                        items: menuItems.filter(menuItem => menuItem.item.category.category_name === category_name),
+                    };
+                });
+
+                // Save organized menu items
+                setOrganizedMenuItems(organizedItems);
             } catch(error) {
+                // Create error toast
                 console.log(error);
             }
         }
