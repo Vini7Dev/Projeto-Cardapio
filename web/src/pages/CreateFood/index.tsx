@@ -10,6 +10,7 @@ import MenuFooter from '../../components/PageElements/MenuFooter';
 import OptionsBar from '../../components/PageElements/OptionsBar';
 
 import Button from '../../components/InputAndButtons/Button';
+import ItemAddImage from '../../components/InputAndButtons/ItemAddImage';
 import ItemInput from '../../components/InputAndButtons/ItemInput';
 import ItemTextArea from '../../components/InputAndButtons/ItemTextArea';
 import ItemCheckbox from '../../components/InputAndButtons/ItemCheckBox';
@@ -22,6 +23,9 @@ import {
 } from './styles';
 
 const CreateFood: React.FC = () => {
+    // Selected food image file
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
     // Check Box state
     const [checkboxChecked, setCheckboxChecked] = useState(false);
 
@@ -45,15 +49,9 @@ const CreateFood: React.FC = () => {
           />
 
           <CreateItemArea>
-            <div id="add-item-image">
-              <div id="image-preview" />
-
-              <button>
-                <FiCamera size={25} />
-
-                Adicionar imagem
-              </button>
-            </div>
+            <ItemAddImage
+              setSelectedImage={setSelectedImage}
+            />
 
             <ItemInput
               label="Informe o nome do prato:"
