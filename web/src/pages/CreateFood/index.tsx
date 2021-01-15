@@ -156,12 +156,14 @@ const CreateFood: React.FC = () => {
 
                 <ItemInput
                   name="title"
-                  label="Informe o nome do prato:"
+                  placeholder="Ex.: X-Burguer"
+                  label="Informe o título do alimento:"
                 />
 
                 <ItemTextArea
                   name="description"
-                  label="Informe a descrição do produto:"
+                  placeholder="Ex.: Pão, hamburguer, ..."
+                  label="Informe a descrição do alimento:"
                   cols={30}
                   rows={3}
                   style={{ resize: 'none' }}
@@ -169,13 +171,15 @@ const CreateFood: React.FC = () => {
 
                 <ItemInput
                   name="price"
+                  placeholder="Ex.: R$ 15,90"
                   type="decimal"
                   min="0"
-                  label="Informe o preço original do prato:"
+                  label="Informe o preço original do alimento:"
                 />
 
                 <ItemInput
                   name="discount_price"
+                  placeholder="Ex.: R$ 13,50"
                   type="decimal"
                   min="0"
                   label="Informe o preço com desconto (se houver):"
@@ -183,7 +187,8 @@ const CreateFood: React.FC = () => {
 
                 <ItemInput
                   name="category_name"
-                  label="Informe a categoria do prato:"
+                  placeholder="Ex.: Lanches"
+                  label="Informe a categoria do alimento:"
                 />
 
                 <ItemCheckbox
