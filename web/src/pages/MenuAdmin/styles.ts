@@ -90,7 +90,28 @@ export const MenuArea = styled.section`
     align-items: center;
     justify-content: center;
 
+    height: 100%;
+    min-height: 50vh;
+
     padding: 20px 0;
+
+    div#empty-message-container {
+        background-color: #FFFFFF;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 75%;
+        height: 200px;
+
+        border-radius: 10px;
+        box-shadow: 1px 1px 3px #757575;
+
+        h1 {
+            font-size: 30px;
+        }
+    }
 `;
 
 export const AddItemButtonArea = styled.div`

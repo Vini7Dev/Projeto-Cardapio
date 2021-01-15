@@ -143,7 +143,9 @@ const Menu: React.FC = () => {
 
           {/** Menu area */}
           <MenuArea>
+
             {
+                organizedMenuItems.length > 0 ? (
                 // Creating a category section
                 organizedMenuItems.map(menuItems => (
                   <FoodItemCategory
@@ -169,6 +171,11 @@ const Menu: React.FC = () => {
                     }
                   </FoodItemCategory>
                 ))
+                ) : (
+                  <div id="empty-message-container">
+                    <h1>Nenhum item cadastrado.</h1>
+                  </div>
+                )
             }
           </MenuArea>
 
