@@ -23,7 +23,11 @@ const ItemCheckbox: React.FC<IItemCheckbockProps> = ({
           { isChecked ? 'Habilitado' : 'Desabilitado' }
         </strong>
 
-        <button id="custom-checkbox" onClick={setIsChecked}>
+        <button
+          id="custom-checkbox"
+          type="button"
+          onClick={setIsChecked}
+        >
           <FiX />
         </button>
       </Container>
