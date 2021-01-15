@@ -94,7 +94,7 @@ export const ItemImageContent = styled.div<IImageProps>`
     div.item-image {
         /** Display image in background */
         ${
-            props => css`background: url(${props.image_url}) no-repeat center center;`
+            props => css`background: url(${props.image_url}) #FF7A00 no-repeat center;`
         }
         background-size: 100%;
 

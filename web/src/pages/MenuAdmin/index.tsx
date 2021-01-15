@@ -86,6 +86,9 @@ const Menu: React.FC = () => {
 
                 // Save organized menu items
                 setOrganizedMenuItems(organizedItems);
+
+                // Reload window
+                history.push('/menu');
             } catch(error) {
                 // Create error toast
                 console.log(error);
@@ -93,7 +96,7 @@ const Menu: React.FC = () => {
         }
 
         loadMenuItems();
-    }, [auth]);
+    }, [auth, history]);
 
     // Logout button
     const handleLogOut = useCallback(() => {

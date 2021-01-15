@@ -63,9 +63,6 @@ const FoodItem: React.FC<IItemProps> = ({
                 title: 'Item apagado com sucesso!',
                 status: 'success',
             });
-
-            // Reload window
-            history.push('/menu');
         } catch(error) {
             // Create error toast
             toast.addToast({
@@ -74,7 +71,7 @@ const FoodItem: React.FC<IItemProps> = ({
             });
         }
 
-    }, [id, toast, history]);
+    }, [id, toast]);
 
     // Go to edit item page
     const handleEditItem = useCallback(() => {
