@@ -35,8 +35,8 @@ import {
 interface ICreateFoodData {
     title: string;
     description: string;
-    price: number;
-    discount_price: number | null;
+    price: string;
+    discount_price: string | null;
     category_name: string;
 }
 
@@ -77,7 +77,11 @@ const CreateFood: React.FC = () => {
             formRef.current?.setErrors({});
 
             // Set discount price to 0 when as not informed
-            const setDiscountPrice = discount_price || 0;
+            const setDiscountPrice = discount_price || '0';
+
+            // Change comma to dot from price and discount price
+            const priceWithoutComma = Number(price.replace(/,/g, '.'));
+            const discountPriceWithoutComma = Number(setDiscountPrice.replace(/,/g, '.'));
 
             // Creating a validation schema
             const schema = Yup.object().shape({
@@ -92,8 +96,8 @@ const CreateFood: React.FC = () => {
             await schema.validate({
                 title,
                 description,
-                price,
-                discount_price: setDiscountPrice,
+                price: priceWithoutComma,
+                discount_price: discountPriceWithoutComma,
                 category_name,
             }, { abortEarly: false });
 
@@ -102,8 +106,8 @@ const CreateFood: React.FC = () => {
             formData.append('title', title);
             formData.append('description', description);
             formData.append('category_name', category_name);
-            formData.append('price', price.toString());
-            formData.append('discount_price', setDiscountPrice.toString());
+            formData.append('price', priceWithoutComma.toString());
+            formData.append('discount_price', discountPriceWithoutComma.toString());
             formData.append('enabled', checkboxChecked.toString());
             if(selectedImage) {
                 formData.append('image', selectedImage);
