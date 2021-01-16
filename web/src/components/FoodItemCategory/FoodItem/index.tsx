@@ -55,6 +55,14 @@ const FoodItem: React.FC<IItemProps> = ({
     // Delete item function
     const handleDeleteItem = useCallback(async () => {
         try {
+            // Get confirmation to remove item
+            const accept = confirm(`Deseja mesmo apagar o item "${title}" ?`);
+
+            // If no accept, cantel the operation
+            if(!accept) {
+                return ;
+            }
+
             // Send a request to server to delete item
             await api.delete(`/items/${id}`);
 
