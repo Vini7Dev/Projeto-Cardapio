@@ -114,7 +114,6 @@ const CreateFood: React.FC = () => {
             }
 
             // Send a request to the server to create a new food
-            /*
             await api.post('/items', formData);
 
             // Create a success toast
@@ -125,7 +124,6 @@ const CreateFood: React.FC = () => {
 
             // Go back to menu page
             history.push('/menu');
-            */
         } catch(error) {
             if(error instanceof Yup.ValidationError) {
                 // Get validation errors
@@ -155,6 +153,8 @@ const CreateFood: React.FC = () => {
         <CreateItemSide>
           <MenuHeader
             title="Adicionar Item"
+            logo={auth.restaurant.logo}
+            logo_url={auth.restaurant.logo_url}
           />
 
           <CreateItemArea>
