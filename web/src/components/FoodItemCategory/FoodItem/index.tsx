@@ -3,7 +3,7 @@
  */
 
 import React, { useCallback } from 'react';
-import { useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FiTrash2, FiEdit3 } from 'react-icons/fi';
 
 import formatPrice from '../../../utils/formatPrice';
@@ -63,6 +63,9 @@ const FoodItem: React.FC<IItemProps> = ({
                 title: 'Item apagado com sucesso!',
                 status: 'success',
             });
+
+            // Reload window
+            history.push('/');
         } catch(error) {
             // Create error toast
             toast.addToast({

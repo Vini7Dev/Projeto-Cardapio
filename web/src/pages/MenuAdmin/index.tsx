@@ -87,7 +87,7 @@ const Menu: React.FC = () => {
                 // Save organized menu items
                 setOrganizedMenuItems(organizedItems);
 
-                // Reload window
+                // Go to menu page
                 history.push('/menu');
             } catch(error) {
                 // Create error toast
