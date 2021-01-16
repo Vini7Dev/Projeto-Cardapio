@@ -80,7 +80,7 @@ const CreateFood: React.FC = () => {
             const setDiscountPrice = discount_price || '0';
 
             // Change comma to dot from price and discount price
-            const priceWithoutComma = Number(price.replace(/,/g, '.'));
+            const priceWithoutComma = Number(price.replace(/,/g, '.') || undefined);
             const discountPriceWithoutComma = Number(setDiscountPrice.replace(/,/g, '.'));
 
             // Creating a validation schema
@@ -114,6 +114,7 @@ const CreateFood: React.FC = () => {
             }
 
             // Send a request to the server to create a new food
+            /*
             await api.post('/items', formData);
 
             // Create a success toast
@@ -124,6 +125,7 @@ const CreateFood: React.FC = () => {
 
             // Go back to menu page
             history.push('/menu');
+            */
         } catch(error) {
             if(error instanceof Yup.ValidationError) {
                 // Get validation errors
