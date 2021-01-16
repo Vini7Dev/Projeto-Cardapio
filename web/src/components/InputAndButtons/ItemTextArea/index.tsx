@@ -4,9 +4,13 @@
 
 import React, { TextareaHTMLAttributes, useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
+import { FiAlertCircle } from 'react-icons/fi';
 
 // Component styles
-import { Container } from './styles';
+import {
+    Container,
+    ErrorAlert,
+} from './styles';
 
 interface IItemTextArea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     label: string;
@@ -32,8 +36,20 @@ const ItemTextArea: React.FC<IItemTextArea> = ({
     }, [fieldName, registerField]);
 
     return (
-      <Container>
-        <strong>{label}</strong>
+      <Container isError={!!error}>
+        <strong>
+          {
+              error && (
+                <ErrorAlert>
+                  <FiAlertCircle />
+
+                  <span>{error}</span>
+                </ErrorAlert>
+              )
+          }
+
+          {label}
+        </strong>
         <textarea
           name={name}
           ref={textAreaRef}
