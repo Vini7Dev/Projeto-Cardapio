@@ -4,9 +4,13 @@
 
 import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
+import { FiAlertCircle } from 'react-icons/fi';
 
 // Component styles
-import { Container } from './styles';
+import {
+    Container,
+    ErrorAlert,
+} from './styles';
 
 interface IItemInput extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
@@ -32,8 +36,20 @@ const ItemInput: React.FC<IItemInput> = ({
     }, [fieldName, registerField]);
 
     return (
-      <Container>
-        <strong>{label}</strong>
+      <Container isError={!!error}>
+        <strong>
+          {
+              error && (
+                <ErrorAlert>
+                  <FiAlertCircle />
+
+                  <span>{error}</span>
+                </ErrorAlert>
+              )
+          }
+
+          {label}
+        </strong>
         <input
           name={name}
           ref={inputRef}
