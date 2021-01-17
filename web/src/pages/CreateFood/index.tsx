@@ -12,6 +12,7 @@ import * as Yup from 'yup';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
+import { useLoad } from '../../hooks/load';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -53,6 +54,9 @@ const CreateFood: React.FC = () => {
     // Access toast functions
     const toast = useToast();
 
+    // Access load functions
+    const load = useLoad();
+
     // Selected food image file
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
@@ -72,6 +76,9 @@ const CreateFood: React.FC = () => {
         discount_price,
         category_name,
     }: ICreateFoodData) => {
+        // Start load screen
+        load.setLoad(true);
+
         try {
             // Reset form errors
             formRef.current?.setErrors({});
@@ -143,7 +150,10 @@ const CreateFood: React.FC = () => {
                 });
             }
         }
-    }, [checkboxChecked, history, selectedImage, toast]);
+
+        // Stop load screen
+        load.setLoad(false);
+    }, [checkboxChecked, history, selectedImage, toast, load]);
 
     return (
       <Container>

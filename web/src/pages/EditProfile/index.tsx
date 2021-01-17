@@ -17,6 +17,7 @@ import GoBackButton from '../../components/InputAndButtons/GoBackButton';
 
 import { useToast } from '../../hooks/toast';
 import { useAuth } from '../../hooks/auth';
+import { useLoad } from '../../hooks/load';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
@@ -45,6 +46,9 @@ const EditProfile: React.FC = () => {
     // Access toast functions
     const toast = useToast();
 
+    // Access load functions
+    const load = useLoad();
+
     // Logo file selected
     const [selectedLogo, setSelectedLogo] = useState<File | null>(null);
 
@@ -61,6 +65,9 @@ const EditProfile: React.FC = () => {
         confirm_password,
         current_password,
     }: IUpdateProfileData) => {
+        // Start load screen
+        load.setLoad(true);
+
         try {
             // Reset form errors
             formRef.current?.setErrors({});
@@ -98,7 +105,7 @@ const EditProfile: React.FC = () => {
             // Saving form data
             const formData = new FormData();
             formData.append('trade', trade);
-            formData.append('telephone', telephone);
+            formData.append('telephone', telephoneOnlyNumber);
             formData.append('current_password', current_password);
             if(new_password) {
                 formData.append('new_password', new_password);
@@ -137,7 +144,9 @@ const EditProfile: React.FC = () => {
             }
         }
 
-    }, [selectedLogo, auth, history, toast]);
+        // Stop load screen
+        load.setLoad(false);
+    }, [selectedLogo, auth, history, toast, load]);
 
     return (
       <Container>

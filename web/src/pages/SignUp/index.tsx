@@ -19,6 +19,7 @@ import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { useToast } from '../../hooks/toast';
+import { useLoad } from '../../hooks/load';
 
 // Component styles
 import { Container } from './styles';
@@ -42,6 +43,9 @@ const SignUp: React.FC = () => {
     // To use toast
     const toast = useToast();
 
+    // To use load
+    const load = useLoad();
+
     // Logo file selected
     const [selectedLogo, setSelectedLogo] = useState<File | null>(null);
 
@@ -59,6 +63,9 @@ const SignUp: React.FC = () => {
         password,
         confirm_password,
     }: ICreateRestaurant) => {
+        // Start load screen
+        load.setLoad(true);
+
         try {
             // Reset form errors
             formRef.current?.setErrors({});
@@ -134,7 +141,10 @@ const SignUp: React.FC = () => {
                 });
             }
         }
-    }, [selectedLogo, history, toast]);
+
+        // Stop load screen
+        load.setLoad(false);
+    }, [selectedLogo, history, toast, load]);
 
     return (
       <Container>

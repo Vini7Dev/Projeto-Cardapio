@@ -17,6 +17,7 @@ import Input from '../../components/InputAndButtons/Input';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
+import { useLoad } from '../../hooks/load';
 
 // Component styles
 import { Container } from './styles';
@@ -36,15 +37,20 @@ const SignIn: React.FC = () => {
     // Use authentication data and functions
     const auth = useAuth();
 
+    // To use load
+    const load = useLoad();
 
     // Submit Sign In form
     const handleSubmitSignIn = useCallback(async (data: ISignInCredentials) => {
-        // Getting form data
-        const { email, password } = data;
+        // Start load screen
+        load.setLoad(true);
 
         try {
             // Reset form errors
             formRef.current?.setErrors({});
+
+            // Getting form data
+            const { email, password } = data;
 
             // Creating a schema validation for the data
             const schema = Yup.object().shape({
@@ -75,7 +81,10 @@ const SignIn: React.FC = () => {
                 });
             }
         }
-    }, [auth, toast]);
+
+        // Stop load screen
+        load.setLoad(false);
+    }, [auth, toast, load]);
 
     return (
       <Container>

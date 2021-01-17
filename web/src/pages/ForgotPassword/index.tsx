@@ -16,6 +16,7 @@ import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { useToast } from '../../hooks/toast';
+import { useLoad } from '../../hooks/load';
 
 // Component styles
 import { Container } from './stylest';
@@ -34,10 +35,16 @@ const ForgotPassword: React.FC = () => {
     // To use toast
     const toast = useToast();
 
+    // To use load
+    const load = useLoad();
+
     // When submitting the form, send a request to receive a password reset email
     const handleSubmitForgotPasswordForm = useCallback(async ({
         email
     }: IForgotPasswordCredentials) => {
+        // Start load screen
+        load.setLoad(true);
+
         try {
             // Reset form errors
             formRef.current?.setErrors({});
@@ -77,7 +84,10 @@ const ForgotPassword: React.FC = () => {
                 });
             }
         }
-    }, [history, toast]);
+
+        // Stop load screen
+        load.setLoad(false);
+    }, [history, toast, load]);
 
     return (
       <Container>

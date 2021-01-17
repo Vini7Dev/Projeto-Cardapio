@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import { FiLogOut, FiEdit3 } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
-import { useLoad } from '../../hooks/load';
 import api from '../../services/api';
 
 import MenuHeader from '../../components/PageElements/MenuHeader';
@@ -57,9 +56,6 @@ const Menu: React.FC = () => {
     // Use authentication data and functions
     const auth = useAuth();
 
-    // Use load functions
-    const load = useLoad();
-
     // Load menu items
     useEffect(() => {
         const loadMenuItems = async () => {
@@ -90,19 +86,13 @@ const Menu: React.FC = () => {
 
                 // Save organized menu items
                 setOrganizedMenuItems(organizedItems);
-
-                // Stop load screen
-                load.setLoad(false);
             } catch(error) {
-                // Stop load screen
-                load.setLoad(false);
-
                 console.log(error);
             }
         }
 
         loadMenuItems();
-    }, [auth, history, load]);
+    }, [auth, history]);
 
     // Logout button
     const handleLogOut = useCallback(() => {

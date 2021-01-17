@@ -16,6 +16,7 @@ import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { useToast } from '../../hooks/toast';
+import { useLoad } from '../../hooks/load';
 
 // Component styles
 import { Container } from './stylest';
@@ -43,11 +44,17 @@ const ResetPassword: React.FC = () => {
     // To use toast
     const toast = useToast();
 
+    // To use load
+    const load = useLoad();
+
     // Reset passowrd when the form has submit
     const handleSubmitResetPasswordForm = useCallback(async ({
         new_password,
         confirm_password
     }: IResetPasswordCredentials) => {
+        // Start load
+        load.setLoad(true);
+
         try {
             // Reset form errors
             formRef.current?.setErrors({});
@@ -99,7 +106,10 @@ const ResetPassword: React.FC = () => {
                 });
             }
         }
-    }, [history, params, toast]);
+
+        // Stop load
+        load.setLoad(false);
+    }, [history, params, toast, load]);
 
     return (
       <Container>
