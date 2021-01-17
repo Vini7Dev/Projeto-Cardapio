@@ -2,21 +2,36 @@
  * Component: Item Add Image
  */
 
-import React, { useCallback, ChangeEvent, useState } from 'react';
+import React, { useCallback, ChangeEvent, useState, useEffect } from 'react';
 import { FiCamera } from 'react-icons/fi';
+
+import DefaultFoodImage from '../../../assets/images/DefaultFoodImage.png';
 
 // Component styles
 import { Container } from './styles';
 
 interface IItemAddImageProps {
     setSelectedImage(file: File): void;
+    defaultFileName?: string;
+    defaultFileURL?: string;
 }
 
 const ItemAddImage: React.FC<IItemAddImageProps> = ({
     setSelectedImage,
+    defaultFileName,
+    defaultFileURL
 }) => {
     // Logo URL state
     const [previewURL, setPreviewURL] = useState('');
+
+    // When exists a default file, update the image URL
+    useEffect(() => {
+        if(defaultFileName && defaultFileURL) {
+            setPreviewURL(defaultFileURL);
+        } else {
+            setPreviewURL(DefaultFoodImage);
+        }
+    }, [defaultFileName, defaultFileURL, setPreviewURL]);
 
     // Update image selected file
     const handleSelectFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
