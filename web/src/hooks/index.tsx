@@ -6,12 +6,15 @@ import React from 'react';
 
 import ToastProvider from './toast';
 import AuthProvider from './auth';
+import LoadProvider from './load';
 
 const ContextProvider: React.FC = ({ children }) => {
     return (
       <AuthProvider>
         <ToastProvider>
-          {children}
+          <LoadProvider>
+            {children}
+          </LoadProvider>
         </ToastProvider>
       </AuthProvider>
     )
