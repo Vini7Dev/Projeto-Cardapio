@@ -109,9 +109,14 @@ class CreateItemService {
         if (image) {
             // Check if image type file is valid
             const imageNameDotSepared = image.split(/[\s.]+/);
-            const imageExtention = imageNameDotSepared[imageNameDotSepared.length -1];
+            const imageExtention =
+                imageNameDotSepared[imageNameDotSepared.length - 1];
 
-            if(imageExtention !== 'png' && imageExtention !== 'jpg' && imageExtention !== 'jpeg') {
+            if (
+                imageExtention !== 'png' &&
+                imageExtention !== 'jpg' &&
+                imageExtention !== 'jpeg'
+            ) {
                 // Cancel the operation
                 throw new AppError('O tipo do arquivo enviado é inválido.');
             }

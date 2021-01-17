@@ -151,7 +151,6 @@ describe('CreateItemService', () => {
         expect(itemAndMenuItemPNG.item.image).toEqual('image.png');
         expect(itemAndMenuItemJPG.item.image).toEqual('image.jpg');
         expect(itemAndMenuItemJPEG.item.image).toEqual('image.jpeg');
-
     });
 
     it('should not be able to create a new item with invalid file extensions', async () => {
@@ -176,7 +175,7 @@ describe('CreateItemService', () => {
                 enabled: true,
                 category_name: 'Category 1',
                 restaurant_id: restaurant.id,
-            })
+            }),
         ).rejects.toBeInstanceOf(AppError);
     });
 

@@ -19,13 +19,26 @@ const itemsRoutes = Router();
 const itemsController = new ItemsController();
 
 // Items routes
-// Ensure Authenticated Middleware
-itemsRoutes.use(ensureAuth);
+// Get item data
+itemsRoutes.get(
+    // Route
+    '/:item_id',
+    // Validation data
+    celebrate({
+        [Segments.PARAMS]: {
+            item_id: Joi.string().uuid().required(),
+        },
+    }),
+    // Run controller method
+    itemsController.index,
+);
 
 // Create a new item
 itemsRoutes.post(
     // Route
     '/',
+    // Ensure authenticated middleware
+    ensureAuth,
     // Upload file
     uploadFile.single('image'),
     // Validation data
@@ -47,6 +60,8 @@ itemsRoutes.post(
 itemsRoutes.put(
     // Route
     '/',
+    // Ensure authenticated middleware
+    ensureAuth,
     // Upload file
     uploadFile.single('image'),
     // Validation data
@@ -69,14 +84,16 @@ itemsRoutes.put(
 itemsRoutes.delete(
     // Route
     '/:item_id',
+    // Ensure authenticated middleware
+    ensureAuth,
     // Validation data
     celebrate({
         [Segments.PARAMS]: {
             item_id: Joi.string().uuid().required(),
-        }
+        },
     }),
     // Run controller method
-    itemsController.delete
+    itemsController.delete,
 );
 
 export default itemsRoutes;

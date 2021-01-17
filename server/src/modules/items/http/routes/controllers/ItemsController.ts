@@ -6,12 +6,28 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 
+import GetItemDataService from '../../../services/GetItemDataService';
 import CreateItemService from '../../../services/CreateItemService';
 import UpdateItemService from '../../../services/UpdateItemService';
 import DeleteItemService from '../../../services/DeleteItemService';
 
 // Controler
 class FoodsController {
+    // Get food data
+    public async index(request: Request, response: Response) {
+        // Instanctiate Create Item Service
+        const getItemDataService = container.resolve(GetItemDataService);
+
+        // Get item id from request;
+        const { item_id } = request.params;
+
+        // Item data
+        const itemData = await getItemDataService.execute(item_id);
+
+        // Returning response
+        return response.json(itemData).status(200);
+    }
+
     // Create one food
     public async create(request: Request, response: Response) {
         // Instanctiate Create Item Service
