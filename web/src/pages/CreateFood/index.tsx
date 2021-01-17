@@ -182,16 +182,14 @@ const CreateFood: React.FC = () => {
                 <ItemInput
                   name="price"
                   placeholder="Ex.: R$ 15,90"
-                  type="decimal"
-                  min="0"
+                  type="price"
                   label="Informe o preço original do alimento:"
                 />
 
                 <ItemInput
                   name="discount_price"
                   placeholder="Ex.: R$ 13,50"
-                  type="decimal"
-                  min="0"
+                  type="price"
                   label="Informe o preço com desconto (se houver):"
                 />
 

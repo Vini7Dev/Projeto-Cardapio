@@ -2,9 +2,11 @@
  * Component: Item Text
  */
 
-import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
+import React, { InputHTMLAttributes, useCallback, useEffect, useRef, FocusEvent } from 'react';
 import { useField } from '@unform/core';
 import { FiAlertCircle } from 'react-icons/fi';
+
+import formatPrice from '../../../utils/formatPrice';
 
 // Component styles
 import {
@@ -20,6 +22,7 @@ interface IItemInput extends InputHTMLAttributes<HTMLInputElement> {
 const ItemInput: React.FC<IItemInput> = ({
     label,
     name,
+    type,
     ...rest
 }) => {
     // Input reference in form
@@ -34,6 +37,29 @@ const ItemInput: React.FC<IItemInput> = ({
             path: 'value',
         });
     }, [fieldName, registerField]);
+
+    // Start price input example
+    useEffect(() => {
+        // Check if input type is price
+        if(type === 'price') {
+            // Getting input element
+            const inputElement = document.getElementById(name) as HTMLInputElement;
+
+            // Set input default value
+            inputElement.value = formatPrice(defaultValue || 0);
+        }
+    }, [type, name, defaultValue]);
+
+    // Format input value when input is blur
+    const handleSetIsBlur = useCallback((e: FocusEvent<HTMLInputElement>) => {
+        // Getting input value
+        const inputValue = e.target.value;
+
+        // If input type is price, format value
+        if(type === 'price' && !inputValue.includes('$')) {
+            e.target.value = formatPrice(Number(e.target.value.replace(',', '.')));
+        }
+    }, [type]);
 
     return (
       <Container isError={!!error}>
@@ -51,9 +77,12 @@ const ItemInput: React.FC<IItemInput> = ({
           {label}
         </strong>
         <input
+          id={name}
           name={name}
+          type={type}
           ref={inputRef}
           defaultValue={defaultValue}
+          onBlur={handleSetIsBlur}
           {...rest}
         />
       </Container>
