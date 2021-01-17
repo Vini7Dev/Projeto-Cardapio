@@ -85,7 +85,10 @@ const CreateFood: React.FC = () => {
 
             // Getting only number from price and discount price
             const priceAsNumber = price.split('R$')[1];
-            const discountPriceAsNumber = price.split('R$')[1];
+            let discountPriceAsNumber = '0';
+            if (discount_price) {
+                [, discountPriceAsNumber] = discount_price.split('R$');
+            }
 
             // Set discount price to 0 when as not informed
             const setDiscountPrice = discountPriceAsNumber || '0';
