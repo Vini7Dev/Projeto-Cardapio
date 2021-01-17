@@ -25,7 +25,7 @@ class FoodsController {
         const itemData = await getItemDataService.execute(item_id);
 
         // Returning response
-        return response.json(itemData).status(200);
+        return response.json(classToClass(itemData)).status(200);
     }
 
     // Create one food
