@@ -15,6 +15,7 @@ export const Container = styled.div<IItemTextAreaProps>`
 
     strong {
         margin-left: 15px;
+        margin-bottom: 5px;
 
         font-size: 25px;
         line-height: 25px;
