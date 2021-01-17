@@ -82,7 +82,7 @@ const FoodItem: React.FC<IItemProps> = ({
             });
         }
 
-    }, [id, toast]);
+    }, [id, toast, history, title]);
 
     // Go to edit item page
     const handleEditItem = useCallback(() => {

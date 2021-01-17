@@ -76,11 +76,15 @@ const CreateFood: React.FC = () => {
             // Reset form errors
             formRef.current?.setErrors({});
 
+            // Getting only number from price and discount price
+            const priceAsNumber = price.split('R$')[1];
+            const discountPriceAsNumber = price.split('R$')[1];
+
             // Set discount price to 0 when as not informed
-            const setDiscountPrice = discount_price || '0';
+            const setDiscountPrice = discountPriceAsNumber || '0';
 
             // Change comma to dot from price and discount price
-            const priceWithoutComma = Number(price.replace(/,/g, '.') || undefined);
+            const priceWithoutComma = Number(priceAsNumber.replace(/,/g, '.') || undefined);
             const discountPriceWithoutComma = Number(setDiscountPrice.replace(/,/g, '.'));
 
             // Creating a validation schema
