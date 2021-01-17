@@ -18,6 +18,7 @@ import ResetPassword from '../pages/ResetPassword';
 import MenuAdmin from '../pages/MenuAdmin';
 import EditProfile from '../pages/EditProfile';
 import CreateFood from '../pages/CreateFood';
+import UpdateFood from '../pages/UpdateFood';
 
 const Routes: React.FC = () => {
     return (
@@ -33,6 +34,7 @@ const Routes: React.FC = () => {
         <MyRoutes path="/menu" component={MenuAdmin} exact isPrivate />
         <MyRoutes path="/profile" component={EditProfile} exact isPrivate />
         <MyRoutes path="/create-food" component={CreateFood} isPrivate />
+        <MyRoutes path="/update-food/:item_id" component={UpdateFood} isPrivate />
       </Switch>
     );
 }
