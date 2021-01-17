@@ -88,20 +88,20 @@ const SignIn: React.FC = () => {
           <Form onSubmit={handleSubmitSignIn} ref={formRef}>
             <Input
               name="email"
+              type="email"
               placeholder="Informe seu e-mail"
               icon={FiAtSign}
               borderTopLeft={25}
               borderTopRight={25}
-              type="email"
             />
 
             <Input
               name="password"
+              type="password"
               placeholder="Informe sua senha"
               icon={FiLock}
               borderBottomLeft={25}
               borderBottonRigth={25}
-              type="password"
             />
 
             {/** Create section */}

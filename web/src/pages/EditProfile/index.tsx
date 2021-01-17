@@ -167,6 +167,7 @@ const EditProfile: React.FC = () => {
 
               <Input
                 name="telephone"
+                type="tel"
                 placeholder="Telefone para contato"
                 icon={FiPhone}
                 borderBottomLeft={25}

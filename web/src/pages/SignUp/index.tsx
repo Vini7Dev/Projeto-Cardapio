@@ -159,12 +159,14 @@ const SignUp: React.FC = () => {
 
               <Input
                 name="cnpj"
+                type="cnpj"
                 placeholder="CNPJ"
                 icon={FiCreditCard}
               />
 
               <Input
                 name="telephone"
+                type="tel"
                 placeholder="Telefone para contato"
                 icon={FiPhone}
                 borderBottomLeft={25}

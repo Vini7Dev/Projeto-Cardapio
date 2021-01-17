@@ -7,6 +7,9 @@ import { useField } from '@unform/core';
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 
+import formatCNPJ from '../../../utils/formatCNPJ';
+import formatTelephone from '../../../utils/formatTelephone';
+
 // Component styles
 import { Container, ErrorAlert } from './styles';
 
@@ -24,6 +27,7 @@ const Input: React.FC<IInputProps> = ({
     name,
     placeholder,
     icon: Icon,
+    type,
     borderTopLeft = 0,
     borderTopRight = 0,
     borderBottomLeft = 0,
@@ -61,6 +65,19 @@ const Input: React.FC<IInputProps> = ({
         }
     }, [name]);
 
+    useEffect(() => {
+        // Getting input element
+        const inputElement = document.getElementById(name) as HTMLInputElement;
+
+        // Getting input value
+        const inputValue = inputElement.value;
+
+        // If input type is a telephone, format input value
+        if(type === 'tel') {
+            inputElement.value = formatTelephone(inputValue);
+        }
+    }, [name, type]);
+
     // Enable focus in input
     const handleSetIsFocus = useCallback(() => {
         setIsFocus(true);
@@ -71,9 +88,21 @@ const Input: React.FC<IInputProps> = ({
         // Setting the focus to false
         setIsFocus(false);
 
+        // Getting input value
+        const inputValue = e.target.value;
+
+        // If input type is a telephone, format input value
+        if(type === 'tel' && !inputValue.includes('(')) {
+            e.target.value = formatTelephone(inputValue);
+        }
+        // If input type is a cnpj, format input value
+        else if(type === 'cnpj' && !inputValue.includes('.')) {
+            e.target.value = formatCNPJ(inputValue);
+        }
+
         // Define whether the input has filled
         setIsFilled(!! e.target.value.length);
-    }, [setIsFocus, setIsFilled]);
+    }, [setIsFocus, setIsFilled, type]);
 
     return (
       <Container
@@ -88,7 +117,9 @@ const Input: React.FC<IInputProps> = ({
         { Icon && <Icon size={40} /> }
 
         <input
+          id={name}
           name={name}
+          type={type}
           onBlur={handleSetIsBlur}
           onFocus={handleSetIsFocus}
           ref={inputRef}
