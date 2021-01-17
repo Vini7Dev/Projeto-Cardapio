@@ -8,17 +8,20 @@ interface IItemCheckBoxProps {
     isChecked: boolean;
 }
 
-export const Container = styled.div<IItemCheckBoxProps>`
+export const Container = styled.button<IItemCheckBoxProps>`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border: none;
+    background: none;
 
     strong {
         margin-right: 10px;
         font-size: 25px;
     }
 
-    button#custom-checkbox {
+    div#custom-checkbox {
         display: flex;
         align-items: center;
         justify-content: center;
