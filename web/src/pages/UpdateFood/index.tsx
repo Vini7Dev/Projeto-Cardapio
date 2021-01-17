@@ -2,8 +2,8 @@
  * Page: Create Food
  */
 
-import React, { useCallback, useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { FiLogOut, FiArrowLeft } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -15,6 +15,7 @@ import { useToast } from '../../hooks/toast';
 import { useLoad } from '../../hooks/load';
 
 import getValidationErrors from '../../utils/getValidationErrors';
+import formatPrice from '../../utils/formatPrice';
 
 import MenuHeader from '../../components/PageElements/MenuHeader';
 import MenuFooter from '../../components/PageElements/MenuFooter';
@@ -38,12 +39,40 @@ interface IUpdateFoodData {
     description: string;
     price: string;
     discount_price: string | null;
+}
+
+interface IRouteParams {
+  item_id: string;
+}
+
+interface IItemData {
+  title: string;
+  description: string;
+  price: number;
+  discount_price: number;
+  image: string;
+  image_url: string;
+  enabled: boolean;
+  category: {
     category_name: string;
+  }
 }
 
 const UpdateFood: React.FC = () => {
+    // Item data
+    const [itemData, setItemData] = useState<IItemData>({} as IItemData);
+
+    // Selected food image file
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
+    // Check Box state
+    const [checkboxChecked, setCheckboxChecked] = useState(false);
+
     // Use navigation hsitory
     const history = useHistory();
+
+    // Access route params
+    const params = useParams();
 
     // Form reference
     const formRef = useRef<FormHandles>(null);
@@ -57,11 +86,45 @@ const UpdateFood: React.FC = () => {
     // Access load functions
     const load = useLoad();
 
-    // Selected food image file
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    // To update input price and discount price value
+    const handleUpdateInputPriceValue = useCallback((value: string | number, name: string) => {
+        // Getting input element
+        const inputElement = document.getElementById(name) as HTMLInputElement;
 
-    // Check Box state
-    const [checkboxChecked, setCheckboxChecked] = useState(true);
+        // Set input price formated value
+        inputElement.value = formatPrice(Number(value));
+    }, []);
+
+    // Load item data
+    useEffect(() => {
+        const loadItemData = async () => {
+            try {
+                // Getting item id from route params
+                const { item_id } = params as IRouteParams;
+
+                // Getting item data from server
+                const item = await api.get<IItemData>(`/items/${item_id}`);
+
+                // Saving item data
+                setItemData(item.data);
+                setCheckboxChecked(item.data.enabled);
+                handleUpdateInputPriceValue(item.data.price, 'price');
+                handleUpdateInputPriceValue(item.data.discount_price, 'discount_price');
+            }
+            catch(error) {
+                console.log(error);
+            }
+        }
+
+        // Start load screen
+        load.setLoad(true);
+
+        // Load item data
+        loadItemData();
+
+        // Stop load screen
+        load.setLoad(false);
+    }, [params, handleUpdateInputPriceValue, load]);
 
     // Toggle check box check
     const toggleCheckboxCheck = useCallback(() => {
@@ -74,7 +137,6 @@ const UpdateFood: React.FC = () => {
         description,
         price,
         discount_price,
-        category_name,
     }: IUpdateFoodData) => {
         // Start load screen
         load.setLoad(true);
@@ -103,7 +165,6 @@ const UpdateFood: React.FC = () => {
                 description: Yup.string().required('A descrição é obrigatória.'),
                 price: Yup.number().min(0, 'O preço não pode ser negativo.').required('O preço é obrigatório'),
                 discount_price: Yup.number().min(0, 'O valor do desconto não pode ser negativo.'),
-                category_name: Yup.string().max(35, 'O nome da categoria deve ter no máximo 35 caracteres.').required('O nome da categoria é obrigatório.'),
             });
 
             // Validate data
@@ -112,16 +173,16 @@ const UpdateFood: React.FC = () => {
                 description,
                 price: priceWithoutComma,
                 discount_price: discountPriceWithoutComma,
-                category_name,
             }, { abortEarly: false });
+
+            // Getting item id from route params
+            const { item_id } = params as IRouteParams;
 
             // Creatint a form data object
             const formData = new FormData();
-            // formData.append('item_id', item_id)
-
+            formData.append('item_id', item_id)
             formData.append('title', title);
             formData.append('description', description);
-            formData.append('category_name', category_name);
             formData.append('price', priceWithoutComma.toString());
             formData.append('discount_price', discountPriceWithoutComma.toString());
             formData.append('enabled', checkboxChecked.toString());
@@ -130,7 +191,7 @@ const UpdateFood: React.FC = () => {
             }
 
             // Send a request to the server to update food data
-            await api.post('/items', formData);
+            await api.put('/items', formData);
 
             // Create a success toast
             toast.addToast({
@@ -140,6 +201,7 @@ const UpdateFood: React.FC = () => {
 
             // Go back to menu page
             history.push('/menu');
+
         } catch(error) {
             if(error instanceof Yup.ValidationError) {
                 // Get validation errors
@@ -158,7 +220,7 @@ const UpdateFood: React.FC = () => {
 
         // Stop load screen
         load.setLoad(false);
-    }, [checkboxChecked, history, selectedImage, toast, load]);
+    }, [checkboxChecked, history, selectedImage, toast, load, params]);
 
     return (
       <Container>
@@ -171,7 +233,7 @@ const UpdateFood: React.FC = () => {
 
         <CreateItemSide>
           <MenuHeader
-            title="Atualizar Item"
+            title="Editar Item"
             logo={auth.restaurant.logo}
             logo_url={auth.restaurant.logo_url}
           />
@@ -181,18 +243,22 @@ const UpdateFood: React.FC = () => {
               <div id="form-inputs-area">
                 <ItemAddImage
                   setSelectedImage={setSelectedImage}
+                  defaultFileName={itemData.image}
+                  defaultFileURL={itemData.image_url}
                 />
 
                 <ItemInput
                   name="title"
                   placeholder="Ex.: X-Burguer"
                   label="Informe o título do alimento:"
+                  defaultValue={itemData.title}
                 />
 
                 <ItemTextArea
                   name="description"
                   placeholder="Ex.: Pão, hamburguer, ..."
                   label="Informe a descrição do alimento:"
+                  defaultValue={itemData.description}
                   cols={30}
                   rows={3}
                   style={{ resize: 'none' }}
@@ -201,6 +267,7 @@ const UpdateFood: React.FC = () => {
                 <ItemInput
                   name="price"
                   placeholder="Ex.: R$ 15,90"
+                  defaultValue={itemData.price}
                   type="price"
                   label="Informe o preço original do alimento:"
                 />
@@ -208,14 +275,9 @@ const UpdateFood: React.FC = () => {
                 <ItemInput
                   name="discount_price"
                   placeholder="Ex.: R$ 13,50"
+                  defaultValue={itemData.discount_price}
                   type="price"
                   label="Informe o preço com desconto (se houver):"
-                />
-
-                <ItemInput
-                  name="category_name"
-                  placeholder="Ex.: Lanches"
-                  label="Informe a categoria do alimento:"
                 />
 
                 <ItemCheckbox

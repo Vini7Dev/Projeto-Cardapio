@@ -86,8 +86,8 @@ const FoodItem: React.FC<IItemProps> = ({
 
     // Go to edit item page
     const handleEditItem = useCallback(() => {
-        alert(`Edit item ${id}`);
-    }, [id]);
+        history.push(`/update-food/${id}`);
+    }, [id, history]);
 
     // Calcule discount percentage
     const handleCalculeDiscountPercent = useCallback(() => {
