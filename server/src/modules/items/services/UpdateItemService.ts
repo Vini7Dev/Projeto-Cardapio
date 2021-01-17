@@ -83,7 +83,7 @@ class UpdateItemService {
         // Updating and saving the new image file in storage
         if (image) {
             // Check if image type file is valid
-            const imageNameDotSepared = image.split(/[\s.]+/);
+            const imageNameDotSepared = image.toLowerCase().split(/[\s.]+/);
             const imageExtention =
                 imageNameDotSepared[imageNameDotSepared.length - 1];
 

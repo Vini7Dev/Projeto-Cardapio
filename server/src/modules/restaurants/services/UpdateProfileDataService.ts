@@ -69,7 +69,7 @@ class UpdateProfileDataService {
         // Saving updated logo file in storage
         if (logo !== restaurant.logo && logo !== '') {
             // Check if logo type file is valid
-            const logoNameDotSepared = logo.split(/[\s.]+/);
+            const logoNameDotSepared = logo.toLowerCase().split(/[\s.]+/);
             const logoExtention =
                 logoNameDotSepared[logoNameDotSepared.length - 1];
 
