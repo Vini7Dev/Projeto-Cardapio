@@ -10,7 +10,6 @@ export interface IUpdateItemDTO {
     description: string;
     price: number;
     discount_price: number;
-    category_name: string;
     enabled: boolean;
 }
 

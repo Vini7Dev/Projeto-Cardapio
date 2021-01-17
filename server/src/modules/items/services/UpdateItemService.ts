@@ -45,7 +45,6 @@ class UpdateItemService {
         description,
         price,
         discount_price,
-        category_name,
         enabled,
     }: IUpdateItemDTO): Promise<Item> {
         // Check if restaurant exists
@@ -73,27 +72,6 @@ class UpdateItemService {
             );
         }
 
-        // Search for a category already registered in database
-        const findSameCategoryInDataBase = await this.categoriesRepository.findByName(
-            category_name,
-        );
-
-        // Define the category id
-        let category_id = 0;
-
-        // If not exists this category in database, register
-        if (!findSameCategoryInDataBase) {
-            const createdCategory = await this.categoriesRepository.create(
-                category_name,
-            );
-
-            // Saving the category id
-            category_id = createdCategory.id;
-        } else {
-            // Saving the category id
-            category_id = findSameCategoryInDataBase.id;
-        }
-
         // Updating item data
         itemToUpdate.restaurant_id = restaurant_id;
         itemToUpdate.title = title;
@@ -101,15 +79,19 @@ class UpdateItemService {
         itemToUpdate.price = price;
         itemToUpdate.discount_price = discount_price;
         itemToUpdate.enabled = enabled;
-        itemToUpdate.category_id = category_id;
 
         // Updating and saving the new image file in storage
         if (image) {
             // Check if image type file is valid
             const imageNameDotSepared = image.split(/[\s.]+/);
-            const imageExtention = imageNameDotSepared[imageNameDotSepared.length -1];
+            const imageExtention =
+                imageNameDotSepared[imageNameDotSepared.length - 1];
 
-            if(imageExtention !== 'png' && imageExtention !== 'jpg' && imageExtention !== 'jpeg') {
+            if (
+                imageExtention !== 'png' &&
+                imageExtention !== 'jpg' &&
+                imageExtention !== 'jpeg'
+            ) {
                 // Cancel the operation
                 throw new AppError('O tipo do arquivo enviado é inválido.');
             }

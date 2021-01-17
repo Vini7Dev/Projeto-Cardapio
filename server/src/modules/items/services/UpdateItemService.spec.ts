@@ -114,7 +114,6 @@ describe('UpdateItemService', () => {
             price: 15,
             discount_price: 11,
             enabled: false,
-            category_name: 'Category 1',
             restaurant_id: restaurant.id,
         });
 
@@ -130,7 +129,6 @@ describe('UpdateItemService', () => {
             price: 15,
             discount_price: 11,
             enabled: false,
-            category_name: 'Category 2',
             restaurant_id: restaurant.id,
         });
 
@@ -138,7 +136,7 @@ describe('UpdateItemService', () => {
         expect(itemCategoryUpdated.title).toEqual('Food Updated Again');
     });
 
-    it("sshould be able to update item with all image file extensions accepted", async () => {
+    it('sshould be able to update item with all image file extensions accepted', async () => {
         // Creating a new restaurant
         const restaurant = await createRestaurantService.execute({
             trade: 'Restaurant',
@@ -170,7 +168,6 @@ describe('UpdateItemService', () => {
             price: 15,
             discount_price: 11,
             enabled: false,
-            category_name: 'Category 1',
             restaurant_id: restaurant.id,
         });
 
@@ -186,7 +183,6 @@ describe('UpdateItemService', () => {
             price: 15,
             discount_price: 11,
             enabled: false,
-            category_name: 'Category 1',
             restaurant_id: restaurant.id,
         });
 
@@ -202,7 +198,6 @@ describe('UpdateItemService', () => {
             price: 15,
             discount_price: 11,
             enabled: false,
-            category_name: 'Category 1',
             restaurant_id: restaurant.id,
         });
 
@@ -243,9 +238,8 @@ describe('UpdateItemService', () => {
                 price: 10,
                 discount_price: 0,
                 enabled: true,
-                category_name: 'Category 1',
                 restaurant_id: restaurant.id,
-            })
+            }),
         ).rejects.toBeInstanceOf(AppError);
     });
 
@@ -281,7 +275,6 @@ describe('UpdateItemService', () => {
             price: 15,
             discount_price: 11,
             enabled: false,
-            category_name: 'Category',
             restaurant_id: restaurant.id,
         });
 
@@ -323,7 +316,6 @@ describe('UpdateItemService', () => {
                 price: 15,
                 discount_price: 11,
                 enabled: false,
-                category_name: 'Category 2',
                 restaurant_id: 'non-exists-restaurant',
             }),
         ).rejects.toBeInstanceOf(AppError);
@@ -350,7 +342,6 @@ describe('UpdateItemService', () => {
                 price: 15,
                 discount_price: 11,
                 enabled: false,
-                category_name: 'Category 2',
                 restaurant_id: restaurant.id,
             }),
         ).rejects.toBeInstanceOf(AppError);
@@ -399,7 +390,6 @@ describe('UpdateItemService', () => {
                 price: 15,
                 discount_price: 11,
                 enabled: false,
-                category_name: 'Category 2',
                 restaurant_id: restaurantUnauthorized.id,
             }),
         ).rejects.toBeInstanceOf(AppError);

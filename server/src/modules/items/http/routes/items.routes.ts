@@ -73,7 +73,6 @@ itemsRoutes.put(
             price: Joi.number().precision(10).required(),
             discount_price: Joi.number().precision(10).required(),
             enabled: Joi.boolean().required(),
-            category_name: Joi.string().max(35).required(),
         },
     }),
     // Run controller mehtod

@@ -86,7 +86,6 @@ class FoodsController {
             description,
             price,
             discount_price,
-            category_name,
             enabled,
         } = request.body;
 
@@ -108,7 +107,6 @@ class FoodsController {
             description,
             price,
             discount_price,
-            category_name,
             enabled,
         });
 
