@@ -60,8 +60,9 @@ export const Container = styled.div<IItemAddImageProps>`
             color: #FFFFFF;
 
             font-family: 'Poppins', 'sans-serif';
-            font-size: 20px;
+            font-size: 18px;
             line-height: 15px;
+            text-align: center;
 
             transition: background-color 0.2s;
 
@@ -85,9 +86,11 @@ export const Container = styled.div<IItemAddImageProps>`
             background-size: 75%;
         }
 
-        label {
-            width: 80%;
-            font-size: 15px;
+        div#add-file-input-area {
+            label#add-file-label {
+                width: 80%;
+                font-size: 16px;
+            }
         }
     }
 `;

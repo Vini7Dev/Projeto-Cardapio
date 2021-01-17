@@ -65,6 +65,7 @@ const Input: React.FC<IInputProps> = ({
         }
     }, [name]);
 
+    // Format telephone input value
     useEffect(() => {
         // Getting input element
         const inputElement = document.getElementById(name) as HTMLInputElement;
