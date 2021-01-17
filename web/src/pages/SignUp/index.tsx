@@ -22,7 +22,7 @@ import { useToast } from '../../hooks/toast';
 import { useLoad } from '../../hooks/load';
 
 // Component styles
-import { Container } from './styles';
+import { Container, AnimationContainer } from './styles';
 
 interface ICreateRestaurant {
     trade: string;
@@ -150,7 +150,7 @@ const SignUp: React.FC = () => {
       <Container>
         <GoBackButton />
 
-        <div id="page-content">
+        <AnimationContainer>
           <h1>Cadastrar-se</h1>
 
           {/** Sign Up form */}
@@ -227,7 +227,7 @@ const SignUp: React.FC = () => {
               size="small"
             />
           </Link>
-        </div>
+        </AnimationContainer>
       </Container>
     )
 }

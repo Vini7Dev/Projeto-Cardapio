@@ -20,7 +20,7 @@ import { useToast } from '../../hooks/toast';
 import { useLoad } from '../../hooks/load';
 
 // Component styles
-import { Container } from './styles';
+import { Container, AnimationContainer } from './styles';
 
 interface ISignInCredentials {
     email: string;
@@ -90,7 +90,7 @@ const SignIn: React.FC = () => {
       <Container>
         <GoBackButton />
 
-        <div id="page-content">
+        <AnimationContainer>
           <h1>Entrar</h1>
 
           {/** Sign In form */}
@@ -133,7 +133,7 @@ const SignIn: React.FC = () => {
               size="small"
             />
           </Link>
-        </div>
+        </AnimationContainer>
       </Container>
     )
 }

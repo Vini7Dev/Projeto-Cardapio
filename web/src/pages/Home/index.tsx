@@ -8,12 +8,12 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/InputAndButtons/Button';
 
 // Components styles
-import { Container } from './styles';
+import { Container, AnimationContainer } from './styles';
 
 const Home: React.FC = () => {
     return (
       <Container>
-        <div id="page-content">
+        <AnimationContainer>
           <h1>Você deseja:</h1>
 
           {/** Navigation choice */}
@@ -31,7 +31,7 @@ const Home: React.FC = () => {
               color="brown"
             />
           </Link>
-        </div>
+        </AnimationContainer>
       </Container>
     );
 };

@@ -19,7 +19,7 @@ import { useToast } from '../../hooks/toast';
 import { useLoad } from '../../hooks/load';
 
 // Component styles
-import { Container } from './stylest';
+import { Container, AnimationContainer } from './stylest';
 
 interface IResetPasswordCredentials {
     new_password: string;
@@ -113,7 +113,7 @@ const ResetPassword: React.FC = () => {
 
     return (
       <Container>
-        <div id="page-content">
+        <AnimationContainer>
           <h1>Alterar a senha</h1>
 
           {/** Reset password form */}
@@ -139,7 +139,7 @@ const ResetPassword: React.FC = () => {
             {/** Reset password button */}
             <Button buttonName="Alterar" />
           </Form>
-        </div>
+        </AnimationContainer>
       </Container>
     )
 }

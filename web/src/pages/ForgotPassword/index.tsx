@@ -19,7 +19,7 @@ import { useToast } from '../../hooks/toast';
 import { useLoad } from '../../hooks/load';
 
 // Component styles
-import { Container } from './stylest';
+import { Container, AnimationContainer } from './stylest';
 
 interface IForgotPasswordCredentials {
     email: string;
@@ -91,7 +91,7 @@ const ForgotPassword: React.FC = () => {
 
     return (
       <Container>
-        <div id="page-content">
+        <AnimationContainer>
           <h1>Recuperar senha</h1>
 
           {/** Forgot password form */}
@@ -120,7 +120,7 @@ const ForgotPassword: React.FC = () => {
               size="small"
             />
           </Link>
-        </div>
+        </AnimationContainer>
       </Container>
     )
 }

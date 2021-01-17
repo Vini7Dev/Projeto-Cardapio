@@ -2,7 +2,18 @@
  * Styles: Home
  */
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const appearFromLeft = keyframes`
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+`;
 
 export const Container = styled.div`
     height: 100vh;
@@ -12,9 +23,12 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    div#page-content {
-        width: 60%;
-    }
+`;
+
+export const AnimationContainer = styled.div`
+    animation: ${appearFromLeft} 1s;
+
+    width: 60%;
 
     h1 {
         color: #FFFFFF;
@@ -25,13 +39,12 @@ export const Container = styled.div`
         text-decoration: none;
     }
 
-    @media (max-width: 768px) {
-        div#page-content {
-            width: 90%;
 
-            h1 {
-                font-size: 50px;
-            }
+    @media (max-width: 768px) {
+        width: 90%;
+
+        h1 {
+            font-size: 50px;
         }
     }
 `;

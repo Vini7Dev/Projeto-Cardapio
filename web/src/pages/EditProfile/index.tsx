@@ -23,7 +23,7 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
 
 // Component styles
-import { Container } from './styles';
+import { Container, AnimationContainer } from './styles';
 
 interface IUpdateProfileData {
     trade: string;
@@ -152,7 +152,7 @@ const EditProfile: React.FC = () => {
       <Container>
         <GoBackButton />
 
-        <div id="page-content">
+        <AnimationContainer>
           <h1>Editar os dados</h1>
 
           {/** Sign Up form */}
@@ -224,7 +224,7 @@ const EditProfile: React.FC = () => {
               buttonName="Atualizar os dados"
             />
           </Form>
-        </div>
+        </AnimationContainer>
       </Container>
     );
 }
