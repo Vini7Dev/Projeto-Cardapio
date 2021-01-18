@@ -25,6 +25,11 @@ import {
     AddItemButtonArea,
 } from './styles';
 
+interface IMenuResponse {
+    restaurant: object;
+    menu: IFoodItemData[];
+}
+
 interface IFoodItemData {
     item: {
         id: string;
@@ -60,15 +65,16 @@ const Menu: React.FC = () => {
     useEffect(() => {
         const loadMenuItems = async () => {
             try {
+
                 // Get menu items from api
                 const response = await api.get(`/menus/${auth.restaurant.menu.code}`);
 
                 // Select only menu items from response data
-                const menuItems = response.data as IFoodItemData[];
+                const { menu } = response.data as IMenuResponse;
 
                 // Getting all items categories
                 const categories = [] as string[];
-                menuItems.forEach((menuItem) => {
+                menu.forEach((menuItem) => {
                     const indexFinded = categories.findIndex(category_name => category_name === menuItem.item.category.category_name);
 
                     if(indexFinded === -1) {
@@ -80,7 +86,7 @@ const Menu: React.FC = () => {
                 const organizedItems = categories.map(category_name => {
                     return {
                         category_name,
-                        items: menuItems.filter(menuItem => menuItem.item.category.category_name === category_name),
+                        items: menu.filter(menuItem => menuItem.item.category.category_name === category_name),
                     };
                 });
 
