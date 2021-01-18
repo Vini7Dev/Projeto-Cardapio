@@ -10,6 +10,7 @@ import AppError from '../../../shared/errors/AppError';
 
 import IMenusRepository from '../repositories/IMenusRepository';
 import IMenuItemsRepository from '../repositories/IMenuItemsRepository';
+import IRestaurantsRepository from '../../restaurants/repositories/IRestaurantsRepository';
 import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
 
 import MenuItem from '../typeorm/entities/MenuItem';
@@ -23,6 +24,9 @@ class GetMenuItemsService {
         @inject('MenuItemsRepository')
         private menuItemsRepository: IMenuItemsRepository,
 
+        @inject('RestaurantsRepository')
+        private restaurantsRepository: IRestaurantsRepository,
+
         @inject('CacheProvider')
         private cacheProvider: ICacheProvider,
     ) {}
@@ -35,6 +39,11 @@ class GetMenuItemsService {
         if (!menuFinded) {
             throw new AppError('O cardápio não existe.');
         }
+
+        // Getting restaurant owner data
+        const restaurantOwner = await this.restaurantsRepository.findByMenuId(
+            menuFinded.id,
+        );
 
         // Try to get data from cache
         const cacheKey = `menus:${menuFinded.id}`;
@@ -52,7 +61,10 @@ class GetMenuItemsService {
         }
 
         // Returning response
-        return menuItems;
+        return {
+            restaurantOwner,
+            menuItems,
+        };
     }
 }
 

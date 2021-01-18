@@ -56,6 +56,18 @@ class RestaurantsRepository implements IRestaurantsRepository {
         return restaurantFinded;
     }
 
+    // Find one restaurant with menu id
+    public async findByMenuId(
+        menu_id: string,
+    ): Promise<Restaurant | undefined> {
+        const restaurantFinded = await this.repository.findOne({
+            where: { menu_id },
+            relations: ['menu'],
+        });
+
+        return restaurantFinded;
+    }
+
     // Creating a new restaurant
     public async create(
         restaurantData: ICreateRestaurantDTO,

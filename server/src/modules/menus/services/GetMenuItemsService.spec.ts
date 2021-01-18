@@ -60,6 +60,7 @@ describe('GetMenuItemsService', () => {
         getMenuItemsService = new GetMenuItemsService(
             menusRepository,
             menuItemsRepository,
+            restaurantsRepository,
             cacheProvider,
         );
 

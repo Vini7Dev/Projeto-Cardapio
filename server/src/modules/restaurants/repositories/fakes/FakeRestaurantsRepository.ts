@@ -45,6 +45,17 @@ class FakeRestaurantsRepository implements IRestaurantsRepository {
         return restaurantFinded;
     }
 
+    // Find restaurant by menu id
+    public async findByMenuId(
+        menu_id: string,
+    ): Promise<Restaurant | undefined> {
+        const restaurantFinded = this.repository.find(
+            restaurant => restaurant.menu_id === menu_id,
+        );
+
+        return restaurantFinded;
+    }
+
     // Create restaurant
     public async create(
         restaurantData: ICreateRestaurantDTO,

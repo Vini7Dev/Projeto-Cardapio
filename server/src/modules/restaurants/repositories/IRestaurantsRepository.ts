@@ -11,6 +11,7 @@ interface IRestaurantsRepository {
     findById(id: string): Promise<Restaurant | undefined>; // Find restaurant by id
     findByEmail(email: string): Promise<Restaurant | undefined>; // Find restaurant by e-mail
     findByCNPJ(cnpj: string): Promise<Restaurant | undefined>; // Find restaurant by CNPJ
+    findByMenuId(menu_id: string): Promise<Restaurant | undefined>; // Find restaurant by menu id
     create(restaurantData: ICreateRestaurantDTO): Promise<Restaurant>; // Create restaurant
     update(restaurantData: Restaurant): Promise<Restaurant>; // Update restaurant
 }

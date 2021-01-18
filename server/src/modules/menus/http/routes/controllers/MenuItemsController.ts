@@ -19,12 +19,12 @@ class MenuItemsController {
         const { menu_code } = request.params;
 
         // Gerring items from menu
-        const items = await getMenuItemsService.execute(Number(menu_code));
+        const menuItems = await getMenuItemsService.execute(Number(menu_code));
 
         // Add image_url attribute for each item data
         let parsedItemsData;
-        if (items) {
-            parsedItemsData = items.map(item => {
+        if (menuItems.menuItems) {
+            parsedItemsData = menuItems.menuItems.map(item => {
                 const parsedItem = classToClass(item.item);
 
                 return {
@@ -35,7 +35,12 @@ class MenuItemsController {
         }
 
         // Returning response
-        return response.json(parsedItemsData).status(200);
+        return response
+            .json({
+                restaurantOwner: menuItems.restaurantOwner,
+                menu: parsedItemsData,
+            })
+            .status(200);
     }
 }
 
