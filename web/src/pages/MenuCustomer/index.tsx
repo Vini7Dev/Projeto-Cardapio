@@ -1,12 +1,11 @@
 /**
- * Page: Menu
+ * Page: Menu Customer
  */
 
 import React , { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { FiLogOut, FiEdit3 } from 'react-icons/fi';
+import { useHistory, useParams } from 'react-router-dom';
+import { FiChevronLeft } from 'react-icons/fi';
 
-import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
 import MenuHeader from '../../components/PageElements/MenuHeader';
@@ -15,6 +14,8 @@ import OptionsBar from '../../components/PageElements/OptionsBar';
 
 import FoodItemCategory from '../../components/FoodItemCategory';
 import FoodItem from '../../components/FoodItemCategory/FoodItem';
+
+import formatTelephone from '../../utils/formatTelephone';
 
 // Component styles
 import {
@@ -26,8 +27,22 @@ import {
 } from './styles';
 
 interface IMenuResponse {
-    restaurantOwner: object;
+    restaurantOwner: IRestaurantData;
     menu: IFoodItemData[];
+}
+
+interface IRestaurantData {
+    id: string;
+    trade: string;
+    cnpj: string;
+    telephone: string;
+    email: string;
+    logo: string;
+    logo_url: string;
+    menu: {
+        id: string;
+        code: number;
+    };
 }
 
 interface IFoodItemData {
@@ -51,26 +66,41 @@ interface IOrganizedMenuItems {
     items: IFoodItemData[];
 }
 
-const Menu: React.FC = () => {
+interface IRouteParams {
+    menu_code: string;
+}
+
+const MenuCustomer: React.FC = () => {
+    // Restaurant data state
+    const [restaurantData, setRestaurantData] = useState<IRestaurantData>({} as IRestaurantData);
+
     // Organized menu items
     const [organizedMenuItems, setOrganizedMenuItems] = useState<IOrganizedMenuItems[]>([]);
 
     // Use navigation with history
     const history = useHistory();
 
-    // Use authentication data and functions
-    const auth = useAuth();
+    // Access route params
+    const params = useParams();
 
     // Load menu items
     useEffect(() => {
         const loadMenuItems = async () => {
             try {
+                // Getting menu code from route params
+                const { menu_code } = params as IRouteParams;
+
+                // Remove codification
+                const parsedCode = parseInt(menu_code, 16) - 100000;
 
                 // Get menu items from api
-                const response = await api.get(`/menus/${auth.restaurant.menu.code}`);
+                const response = await api.get(`/menus/${parsedCode}`);
 
                 // Select only menu items from response data
-                const { menu } = response.data as IMenuResponse;
+                const {
+                    restaurantOwner,
+                    menu
+                } = response.data as IMenuResponse;
 
                 // Getting all items categories
                 const categories = [] as string[];
@@ -92,27 +122,20 @@ const Menu: React.FC = () => {
 
                 // Save organized menu items
                 setOrganizedMenuItems(organizedItems);
+
+                // Saving restaurants data
+                setRestaurantData(restaurantOwner);
             } catch(error) {
                 console.log(error);
             }
         }
 
         loadMenuItems();
-    }, [auth, history]);
+    }, [history, restaurantData, params]);
 
-    // Logout button
-    const handleLogOut = useCallback(() => {
-        auth.logout();
-    }, [auth]);
-
-    // Navigate to edit profile page
-    const handleGoToEditProfile = useCallback(() => {
-        history.push('/profile');
-    }, [history]);
-
-    // Navigate to create food page
-    const handleGoToCreateFood = useCallback(() => {
-        history.push('/create-food');
+    // Handle go back
+    const handleGoToBack = useCallback(() => {
+        history.goBack();
     }, [history]);
 
     return (
@@ -120,8 +143,7 @@ const Menu: React.FC = () => {
         {/** Options bar side */}
         <OptionsBar
           buttonsArray={[
-                { text: 'Sair', icon: FiLogOut, action: handleLogOut },
-                { text: 'Editar Conta', icon: FiEdit3, action: handleGoToEditProfile },
+                { text: 'Voltar', icon: FiChevronLeft, action: handleGoToBack },
             ]}
         />
 
@@ -130,17 +152,16 @@ const Menu: React.FC = () => {
           {/** Menu header */}
           <MenuHeader
             title={
-                `Cardápio - ${auth.restaurant.trade}`
+                `Cardápio - ${restaurantData.trade || 'Carregando...'}`
             }
-            logo={auth.restaurant.logo}
-            logo_url={auth.restaurant.logo_url}
+            logo={restaurantData.logo || 'Carregando...'}
+            logo_url={restaurantData.logo_url || 'Carregando...'}
           />
 
           {/** Menu code */}
           <MenuCode id="menu-code">
             <p>Código do cardápio:</p>
-            <strong>{(auth.restaurant.menu.code + 100000).toString(16).toUpperCase()}</strong>
-            <button>Copiar Link</button>
+            <strong>{(restaurantData.menu ? restaurantData.menu.code + 100000 : 'Carregando...').toString(16).toUpperCase()}</strong>
           </MenuCode>
 
           {/** Menu area */}
@@ -156,20 +177,24 @@ const Menu: React.FC = () => {
                   >
                     {
                         // Creating a food item
-                        menuItems.items.map(data => (
-                          <FoodItem
-                            key={data.item.id}
-                            id={data.item.id}
-                            title={data.item.title}
-                            description={data.item.description}
-                            price={data.item.price}
-                            discount_price={data.item.discount_price}
-                            image={data.item.image}
-                            image_url={data.item.image_url}
-                            enabled={data.item.enabled}
-                            admin_mode
-                          />
-                        ))
+                        menuItems.items.map(data => {
+                            if(data.item.enabled) {
+                                return (
+                                  <FoodItem
+                                    key={data.item.id}
+                                    id={data.item.id}
+                                    title={data.item.title}
+                                    description={data.item.description}
+                                    price={data.item.price}
+                                    discount_price={data.item.discount_price}
+                                    image={data.item.image}
+                                    image_url={data.item.image_url}
+                                    enabled={data.item.enabled}
+                                  />
+                                );
+                            }
+                            return (null);
+                        })
                     }
                   </FoodItemCategory>
                 ))
@@ -183,18 +208,18 @@ const Menu: React.FC = () => {
 
           {/** Add item button */}
           <AddItemButtonArea>
-            <button onClick={handleGoToCreateFood}>+ Adicionar item</button>
+            <button>{restaurantData.telephone ? formatTelephone(restaurantData.telephone) : 'Carregando...'}</button>
           </AddItemButtonArea>
 
           {/** Menu footer */}
           <MenuFooter
-            trade={auth.restaurant.trade}
-            cnpj={auth.restaurant.cnpj}
-            telephone={auth.restaurant.telephone}
+            trade={restaurantData.trade || 'Carregando...'}
+            cnpj={restaurantData.cnpj || 'Carregando...'}
+            telephone={restaurantData.telephone || 'Carregando...'}
           />
         </MenuSide>
       </Container>
     )
 }
 
-export default Menu;
+export default MenuCustomer;
