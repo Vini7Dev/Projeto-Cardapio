@@ -5,6 +5,8 @@
 import React from 'react';
 import { IconBaseProps } from 'react-icons';
 
+import LogoImg from '../../../assets/images/Logo.png';
+
 // Component styles
 import { Container } from './styles';
 
@@ -23,6 +25,12 @@ const OptionsBar: React.FC<IOptionsBarProps> = ({
 }) => {
     return (
       <Container>
+        <div>
+          <img id="logo" src={LogoImg} alt="Menue" />
+
+          <p>Seu cardápio virtual é aqui!</p>
+        </div>
+
         {
              buttonsArray?.map(({
                  text,

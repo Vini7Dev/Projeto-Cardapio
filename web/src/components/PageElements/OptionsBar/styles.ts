@@ -11,6 +11,21 @@ export const Container = styled.aside`
 
     padding: 15px 15px;
 
+    div {
+        text-align: center;
+
+        img#logo {
+            width: 50%;
+
+            border-radius: 50%;
+        }
+
+        p {
+            color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+    }
+
     a {
         text-decoration: none;
         margin-top: 10px;

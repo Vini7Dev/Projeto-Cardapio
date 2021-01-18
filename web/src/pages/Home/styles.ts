@@ -23,12 +23,36 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
 
+    div#logo {
+        margin-top: 50px;
+
+        img {
+            display: block;
+            width: 45%;
+            margin: 0 auto;
+            border-radius: 0 0 50px 50px;
+        }
+
+        p {
+            text-align: center;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        div#logo img {
+            width: 75%;
+        }
+    }
 `;
 
 export const AnimationContainer = styled.div`
     animation: ${appearFromLeft} 1s;
 
     width: 60%;
+    padding: 50px 0;
+
     h1 {
         color: #FFFFFF;
         font-size: 60px;

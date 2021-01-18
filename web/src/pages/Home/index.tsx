@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import Button from '../../components/InputAndButtons/Button';
 
-import Logo from "../../components/Logo";
+import LogoImg from "../../assets/images/Logo.png";
 
 // Components styles
 import { Container, AnimationContainer } from './styles';
@@ -16,7 +16,11 @@ const Home: React.FC = () => {
     return (
       <Container>
         <AnimationContainer>
-          <Logo />
+          <div id="logo">
+            <img src={LogoImg} alt="Menue" />
+
+            <p>Seu cardápio virtual é aqui!</p>
+          </div>
 
           <h1>Você deseja:</h1>
 
