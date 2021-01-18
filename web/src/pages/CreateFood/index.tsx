@@ -97,6 +97,13 @@ const CreateFood: React.FC = () => {
             const priceWithoutComma = Number(priceAsNumber.replace(/,/g, '.') || undefined);
             const discountPriceWithoutComma = Number(setDiscountPrice.replace(/,/g, '.'));
 
+            // Make sure the price is less than the discounted price
+            if(priceWithoutComma < discountPriceWithoutComma) {
+                alert('Atenção! O desconto não pode ser maior que o preço normal.');
+
+                throw new Error('O desconto não pode ser maior que o preço normal.');
+            }
+
             // Creating a validation schema
             const schema = Yup.object().shape({
                 title: Yup.string().max(35, 'O título deve ter no máximo 35 caracteres.').required('O título é obrigatório.'),
