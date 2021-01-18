@@ -1,6 +1,6 @@
 # Para iniciar
 
-### Crie o container para o de dados:
+### Crie o container para o banco de dados:
 - docker run --name menue -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d -t postgres
 
 **Dica:** um bom Software para realizar as próximas ações é o **DBeaver**.
