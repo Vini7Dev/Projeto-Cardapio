@@ -1,7 +1,0 @@
-Create the DataBases with Docker:
-Application Database: docker run --name menue -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d -t postgres
-    Create a data base named: menue
-    Add extention "uuid-ossp"
-    User: postgres
-    password: postgres
-Cache Database: docker run --name redis -p 6379:6379 -d -t redis:alpine
