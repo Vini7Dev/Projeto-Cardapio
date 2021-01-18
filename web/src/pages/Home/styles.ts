@@ -29,7 +29,6 @@ export const AnimationContainer = styled.div`
     animation: ${appearFromLeft} 1s;
 
     width: 60%;
-
     h1 {
         color: #FFFFFF;
         font-size: 60px;

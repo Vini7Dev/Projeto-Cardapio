@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 
 import Button from '../../components/InputAndButtons/Button';
 
+import Logo from "../../components/Logo";
+
 // Components styles
 import { Container, AnimationContainer } from './styles';
 
@@ -14,6 +16,8 @@ const Home: React.FC = () => {
     return (
       <Container>
         <AnimationContainer>
+          <Logo />
+
           <h1>Você deseja:</h1>
 
           {/** Navigation choice */}
