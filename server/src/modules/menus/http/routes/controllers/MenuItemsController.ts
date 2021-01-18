@@ -37,7 +37,7 @@ class MenuItemsController {
         // Returning response
         return response
             .json({
-                restaurantOwner: menuItems.restaurantOwner,
+                restaurantOwner: classToClass(menuItems.restaurantOwner),
                 menu: parsedItemsData,
             })
             .status(200);
