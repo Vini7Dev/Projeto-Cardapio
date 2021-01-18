@@ -115,6 +115,22 @@ const Menu: React.FC = () => {
         history.push('/create-food');
     }, [history]);
 
+    // Copy menu url
+    const handleCopyMenuURL = useCallback(() => {
+        // Creating range
+        const range = document.createRange();
+
+        // Select the element with URL
+        range.selectNode(document.getElementById('menu-link') as HTMLInputElement);
+
+        // Create selection
+        window.getSelection()?.removeAllRanges();
+        window.getSelection()?.addRange(range);
+
+        // Run copy text
+        document.execCommand('copy');
+    }, []);
+
     return (
       <Container>
         {/** Options bar side */}
@@ -140,7 +156,12 @@ const Menu: React.FC = () => {
           <MenuCode id="menu-code">
             <p>Código do cardápio:</p>
             <strong>{(auth.restaurant.menu.code + 100000).toString(16).toUpperCase()}</strong>
-            <button>Copiar Link</button>
+            <button onClick={handleCopyMenuURL}>Copiar Link</button>
+            <p id="menu-link">
+              {
+                `http://localhost:3000/menu/${(auth.restaurant.menu.code + 100000).toString(16).toUpperCase()}`
+              }
+            </p>
           </MenuCode>
 
           {/** Menu area */}

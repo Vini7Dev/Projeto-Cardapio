@@ -67,6 +67,13 @@ export const MenuCode = styled.section`
         background-color: ${shade(0.2, '#39B100')};
     }
 
+    p#menu-link {
+        line-height: 40px;
+        text-align: center;
+        font-size: 20px;
+        font-family: 'Poppins', 'sans-serif';
+    }
+
     @media (max-width: 768px) {
         p {
             font-size: 20px;
