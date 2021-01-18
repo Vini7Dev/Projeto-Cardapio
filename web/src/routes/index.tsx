@@ -13,6 +13,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
+import MenuCode from '../pages/MenuCode';
 
 // Pages - Authenticated
 import MenuAdmin from '../pages/MenuAdmin';
@@ -29,6 +30,7 @@ const Routes: React.FC = () => {
         <MyRoutes path="/signup" component={SignUp} exact />
         <MyRoutes path="/forgot-password" component={ForgotPassword} exact />
         <MyRoutes path="/reset-password/:token" component={ResetPassword} exact />
+        <MyRoutes path="/menu-code" component={MenuCode} exact />
 
         {/** Authenticated routes */}
         <MyRoutes path="/menu" component={MenuAdmin} exact isPrivate />
