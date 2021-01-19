@@ -3,7 +3,7 @@
  */
 
 import React, { useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiAtSign, FiLock } from 'react-icons/fi'
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
@@ -30,6 +30,9 @@ interface ISignInCredentials {
 const SignIn: React.FC = () => {
     // Form reference
     const formRef = useRef<FormHandles>(null);
+
+    // Navigate with history
+    const history = useHistory();
 
     // To use toast
     const toast = useToast();
@@ -66,6 +69,9 @@ const SignIn: React.FC = () => {
                 email,
                 password,
             });
+
+            // Go to menu page
+            history.push('/menu');
         } catch(error) {
             if(error instanceof Yup.ValidationError) {
                 // Getting validation errors
@@ -84,7 +90,7 @@ const SignIn: React.FC = () => {
 
         // Stop load screen
         load.setLoad(false);
-    }, [auth, toast, load]);
+    }, [auth, toast, load, history]);
 
     return (
       <Container>
@@ -114,7 +120,11 @@ const SignIn: React.FC = () => {
             />
 
             {/** Create section */}
-            <Button buttonName="Entrar" type="submit" />
+            <Button
+              buttonName="Entrar"
+              data-testid="submit-button"
+              type="submit"
+            />
           </Form>
 
           {/** Forgot password option */}
