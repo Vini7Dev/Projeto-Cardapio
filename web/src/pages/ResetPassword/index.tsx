@@ -137,7 +137,10 @@ const ResetPassword: React.FC = () => {
             />
 
             {/** Reset password button */}
-            <Button buttonName="Alterar" />
+            <Button
+              buttonName="Alterar"
+              data-testid="submit-button"
+            />
           </Form>
         </AnimationContainer>
       </Container>

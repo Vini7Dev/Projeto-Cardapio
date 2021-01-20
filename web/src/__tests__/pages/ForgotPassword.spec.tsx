@@ -95,7 +95,7 @@ describe('Page: Forgot Password', () => {
         // Render page
         const { getByPlaceholderText, getByTestId } = render(<ForgotPassword />);
 
-        // Gettinf form input and submit button
+        // Getting form input and submit button
         const emailInput = getByPlaceholderText('Informe seu e-mail');
         const submitButton = getByTestId('submit-button');
 

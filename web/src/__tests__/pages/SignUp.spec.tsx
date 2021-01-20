@@ -147,6 +147,7 @@ describe('Page: SignUp', () => {
     });
 
     it('should be able to display a notification error when registration fails', async () => {
+        // Create error
         mockedAddToast.mockImplementationOnce(() => {
             throw new Error('Registration error example');
         });
