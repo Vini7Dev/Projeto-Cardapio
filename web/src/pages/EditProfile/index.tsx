@@ -162,6 +162,7 @@ const EditProfile: React.FC = () => {
               setSelectedFile={handleSetSelectedLogo}
               defaultFileName={auth.restaurant.logo}
               defaultFileURL={auth.restaurant.logo_url}
+              data-testid="add-logo"
             />
 
             <InputGroup label="Dados do restaurante:">
@@ -189,7 +190,7 @@ const EditProfile: React.FC = () => {
             <InputGroup label="Alterar a senha (opcional):">
               <Input
                 name="new_password"
-                placeholder="Senha"
+                placeholder="Nova senha"
                 icon={FiLock}
                 borderTopLeft={25}
                 borderTopRight={25}
@@ -222,6 +223,7 @@ const EditProfile: React.FC = () => {
             {/** Create account button */}
             <Button
               buttonName="Atualizar os dados"
+              data-testid="submit-button"
             />
           </Form>
         </AnimationContainer>
