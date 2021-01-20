@@ -49,7 +49,7 @@ describe('Page: SignIn', () => {
         mockedHistoryPush.mockClear();
     });
 
-    it('should be able to login', async () => {
+    it('should be able to signin', async () => {
         // Render page
         const { getByPlaceholderText, getByTestId } = render(<SignIn />);
 
@@ -71,7 +71,7 @@ describe('Page: SignIn', () => {
         });
     });
 
-    it('should not be able to login with invalid credentials', async () => {
+    it('should not be able to signin with invalid credentials', async () => {
         // Render page
         const { getByPlaceholderText, getByTestId } = render(<SignIn />);
 
@@ -93,7 +93,7 @@ describe('Page: SignIn', () => {
         });
     });
 
-    it('should be able to display a notification error when login fails', async () => {
+    it('should be able to display a notification error when signin fails', async () => {
         // Condigure auth login mock to fails
         mockedLogin.mockImplementation(() => {
             throw new Error('Login fails error');
