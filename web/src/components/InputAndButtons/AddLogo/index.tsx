@@ -19,7 +19,8 @@ interface IAddLogoProps {
 const AddLogo: React.FC<IAddLogoProps> = ({
     setSelectedFile,
     defaultFileName,
-    defaultFileURL
+    defaultFileURL,
+    ...rest
 }) => {
     // Logo URL state
     const [imageURL, setImageURL] = useState('');
@@ -35,15 +36,17 @@ const AddLogo: React.FC<IAddLogoProps> = ({
 
     // Update logo selected file
     const handleSelectFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        // Getting file data
-        const fileSelected = e.target.files?.item(0);
+        if(e.target.files) {
+            // Getting file data
+            const fileSelected = e.target.files[0];
 
-        if(fileSelected) {
-            // Update data from selected logo file
-            setSelectedFile(fileSelected);
+            if(fileSelected) {
+                // Update data from selected logo file
+                setSelectedFile(fileSelected);
 
-            // Update preview image URL
-            setImageURL(URL.createObjectURL(fileSelected));
+                // Update preview image URL
+                setImageURL(URL.createObjectURL(fileSelected));
+            }
         }
     }, [setSelectedFile]);
 
@@ -59,6 +62,7 @@ const AddLogo: React.FC<IAddLogoProps> = ({
             type="file"
             accept=".png, .jpg, .jpeg"
             onChange={handleSelectFile}
+            {...rest}
           />
         </label>
       </Container>

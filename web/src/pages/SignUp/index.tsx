@@ -156,7 +156,10 @@ const SignUp: React.FC = () => {
           {/** Sign Up form */}
           <Form onSubmit={handleSubmitSignUp} ref={formRef}>
             {/** Restaurant data */}
-            <AddLogo setSelectedFile={handleSetSelectedLogo} />
+            <AddLogo
+              data-testid="add-logo"
+              setSelectedFile={handleSetSelectedLogo}
+            />
 
             <InputGroup label="Dados do restaurante:">
               <Input
@@ -214,6 +217,7 @@ const SignUp: React.FC = () => {
 
             {/** Create account button */}
             <Button
+              data-testid="submit-button"
               buttonName="Cadastrar-se"
             />
           </Form>
