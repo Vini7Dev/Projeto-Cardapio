@@ -19,7 +19,8 @@ interface IItemAddImageProps {
 const ItemAddImage: React.FC<IItemAddImageProps> = ({
     setSelectedImage,
     defaultFileName,
-    defaultFileURL
+    defaultFileURL,
+    ...rest
 }) => {
     // Logo URL state
     const [previewURL, setPreviewURL] = useState('');
@@ -35,15 +36,17 @@ const ItemAddImage: React.FC<IItemAddImageProps> = ({
 
     // Update image selected file
     const handleSelectFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        // Getting file data
-        const fileSelected = e.target.files?.item(0);
+        if(e.target.files) {
+            // Getting file data
+            const fileSelected = e.target.files[0];
 
-        if(fileSelected) {
-            // Update data from selected image file
-            setSelectedImage(fileSelected);
+            if(fileSelected) {
+                // Update data from selected image file
+                setSelectedImage(fileSelected);
 
-            // Update preview image URL
-            setPreviewURL(URL.createObjectURL(fileSelected));
+                // Update preview image URL
+                setPreviewURL(URL.createObjectURL(fileSelected));
+            }
         }
     }, [setSelectedImage]);
 
@@ -63,6 +66,7 @@ const ItemAddImage: React.FC<IItemAddImageProps> = ({
               id="add-file-input"
               onChange={handleSelectFile}
               accept=".png, .jpg, .jpeg"
+              {...rest}
             />
           </label>
         </div>

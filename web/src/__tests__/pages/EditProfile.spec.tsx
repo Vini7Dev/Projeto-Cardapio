@@ -52,6 +52,10 @@ jest.mock('../../hooks/toast', () => {
 });
 
 describe('Page: Edit Profile', () => {
+    beforeEach(() => {
+        mockedHistoryPush.mockClear();
+    });
+
     it('should be able to edit restaurant profile data without update password and logo', async () => {
         // Render page
         const { getByPlaceholderText, getByTestId } = render(<EditProfile />);

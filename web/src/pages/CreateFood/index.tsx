@@ -186,6 +186,7 @@ const CreateFood: React.FC = () => {
               <div id="form-inputs-area">
                 <ItemAddImage
                   setSelectedImage={setSelectedImage}
+                  data-testid="add-image"
                 />
 
                 <ItemInput
@@ -224,6 +225,7 @@ const CreateFood: React.FC = () => {
                 />
 
                 <ItemCheckbox
+                  data-testid="enable-checkbox"
                   setIsChecked={toggleCheckboxCheck}
                   isChecked={checkboxChecked}
                 />
@@ -233,6 +235,7 @@ const CreateFood: React.FC = () => {
                 <Button
                   buttonName="Adicionar item"
                   color="green"
+                  data-testid="submit-button"
                 />
               </div>
             </Form>

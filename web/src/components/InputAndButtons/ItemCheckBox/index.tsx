@@ -16,12 +16,14 @@ interface IItemCheckbockProps {
 const ItemCheckbox: React.FC<IItemCheckbockProps> = ({
     setIsChecked,
     isChecked,
+    ...rest
 }) => {
     return (
       <Container
         isChecked={isChecked}
         onClick={setIsChecked}
         type="button"
+        {...rest}
       >
         <strong>
           { isChecked ? 'Habilitado' : 'Desabilitado' }
