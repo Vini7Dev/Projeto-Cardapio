@@ -3,18 +3,17 @@
  */
 
 import React from 'react';
+import MockAdapter from 'axios-mock-adapter';
 import { fireEvent, render, waitFor } from '@testing-library/react';
+
+import api from '../../services/api';
 
 import ResetPassword from '../../pages/ResetPassword';
 
+const apiMock = new MockAdapter(api);
+
 const mockedHistoryPush = jest.fn();
 const mockedAddToast = jest.fn();
-
-jest.mock('../../services/api', () => {
-    return {
-        post: jest.fn(),
-    };
-});
 
 jest.mock('react-router-dom', () => {
     return {
@@ -44,6 +43,9 @@ jest.mock('../../hooks/toast', () => {
 describe('Page: Reset Password', () => {
     beforeEach(() => {
         mockedHistoryPush.mockClear();
+
+        // Define Api response
+        apiMock.onPost('/password/reset').reply(200);
     });
 
     it('should be able to reset password', async () => {

@@ -3,9 +3,14 @@
  */
 
 import React from 'react';
+import MockAdapter from 'axios-mock-adapter';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
+import api from '../../services/api';
+
 import ForgotPassword from '../../pages/ForgotPassword';
+
+const apiMock = new MockAdapter(api);
 
 const mockedHistoryPush = jest.fn();
 const mockedAddToast = jest.fn();
@@ -16,12 +21,6 @@ jest.mock('react-router-dom', () => {
             push: mockedHistoryPush,
         }),
         Link: ({ children }: { children: React.ReactNode }) => children,
-    };
-});
-
-jest.mock('../../services/api', () => {
-    return {
-        post: jest.fn(),
     };
 });
 
@@ -44,6 +43,9 @@ jest.mock('../../hooks/toast', () => {
 describe('Page: Forgot Password', () => {
     beforeEach(() => {
         mockedHistoryPush.mockClear();
+
+        // Degine Api response
+        apiMock.onPost('/password/forgot').reply(200);
     });
 
     it('should be able to send an request to reset password', async () => {

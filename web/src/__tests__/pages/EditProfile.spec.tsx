@@ -3,20 +3,17 @@
  */
 
 import React from 'react';
+import MockAdapter from 'axios-mock-adapter';
 import { fireEvent, render, waitFor } from '@testing-library/react';
+
+import api from '../../services/api';
 
 import EditProfile from '../../pages/EditProfile';
 
+const apiMock = new MockAdapter(api);
+
 const mockedHistoryPush = jest.fn();
 const mockedAddToast = jest.fn();
-
-jest.mock('../../services/api', () => {
-    return {
-        put: () => ({
-            data: {},
-        }),
-    };
-});
 
 jest.mock('react-router-dom', () => {
     return {
@@ -54,6 +51,9 @@ jest.mock('../../hooks/toast', () => {
 describe('Page: Edit Profile', () => {
     beforeEach(() => {
         mockedHistoryPush.mockClear();
+
+        // Define Api response
+        apiMock.onPut('/profile').reply(200, { data: {} });
     });
 
     it('should be able to edit restaurant profile data without update password and logo', async () => {

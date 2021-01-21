@@ -3,18 +3,17 @@
  */
 
 import React from 'react';
+import MockAdapter from 'axios-mock-adapter';
 import { fireEvent, render, waitFor } from '@testing-library/react';
+
+import api from '../../services/api';
 
 import CreateFood from '../../pages/CreateFood';
 
 const mockedHistoryPush = jest.fn();
 const mockedAddToast = jest.fn();
 
-jest.mock('../../services/api', () => {
-    return {
-        post: jest.fn(),
-    };
-});
+const apiMock = new MockAdapter(api);
 
 jest.mock('react-router-dom', () => {
     return {
@@ -58,6 +57,9 @@ jest.mock('../../hooks/toast', () => {
 describe('Page: Create Food', () => {
     beforeEach(() => {
         mockedHistoryPush.mockClear();
+
+        // Define API return
+        apiMock.onPost('/items').reply(200);
     });
 
     it('should be able to create a new food without image', async () => {

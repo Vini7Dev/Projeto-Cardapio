@@ -65,7 +65,6 @@ const Menu: React.FC = () => {
     useEffect(() => {
         const loadMenuItems = async () => {
             try {
-
                 // Get menu items from api
                 const response = await api.get(`/menus/${auth.restaurant.menu.code}`);
 
@@ -98,7 +97,7 @@ const Menu: React.FC = () => {
         }
 
         loadMenuItems();
-    }, [auth, history]);
+    }, [auth]);
 
     // Logout button
     const handleLogOut = useCallback(() => {
