@@ -1,3 +1,5 @@
+<img src="screenshots/Logo.png" width="300" />
+
 # Projeto - Menue
 ## Cadastre seu cardápio On-line!
 
@@ -17,7 +19,7 @@ Veja as fotos da aplicação no fim do readme ou dentro da pasta "screenshots".
 - Banco de Dados: Postgress;
 - ORM: TypeORM;
 - Cache: Redis;
-- Testes Automatizados: Jest;
+- Testes Automatizados;
 - ESLint e Prettier;
 - Documentação dos códigos em inglês;
 - Docker (Veja os comandos para instalar os containers na pasta "to_start" na raiz do projeto).
@@ -28,6 +30,7 @@ Na pasta "server" contem todo o back-end da aplicação.
 - ReactJS (Todas as páginas são responsivas);
 - Linguagem: Typescripty;
 - Estilos: Styled Components;
+- Testes Automatizados;
 - ESLint e Prettier;
 - Documentação dos códigos em inglês.
 
@@ -35,16 +38,20 @@ Na pasta "web" contem todo o front-end da aplicação.
 
 ### Para Rodar:
 
-Com o Docker instalado, acesse a pasta "to_start" e abra o arquivo "install_containers", siga o passo a passo para instalar os containers da forma correta.
+Com o Docker instalado, acesse a pasta "to_start" e abra o arquivo "README.md", siga o passo a passo para instalar os containers da forma correta.
 
 Em seguida, com o terminal aberto dentro da pasta "web" do projeto, instale as dependências do front-end, depois abra na pasta "server" e repita a ação para o back-end.
 
+Crie seu arquivo de variáveis ambiente (.env) na pasta "server", seguindo o arquivo de exemplo ".env.example" que se encontra nesta mesma pasta.
+
 Por fim, basta abrir um terminal na pasta "server" e rodar o script "server", e com outro terminal rodar o script "start" dentro da pasta "web".
+
+### Variáveis ambiente
 
 ### Screenshots Web Desktop
 
-[ ] A adicionar
+[Web-Desktop](screenshots/web_desktop/)
 
 ### Screenshots Web Mobile
 
-[ ] A adicionar
+[Web-Mobile](screenshots/web_mobile/)
