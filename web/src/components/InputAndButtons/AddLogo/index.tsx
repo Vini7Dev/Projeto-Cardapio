@@ -58,6 +58,7 @@ const AddLogo: React.FC<IAddLogoProps> = ({
           <FiPlus size={40} color="#FFFFFF" />
 
           <input
+            data-testid="file-input"
             id="file-input"
             type="file"
             accept=".png, .jpg, .jpeg"
