@@ -46,8 +46,6 @@ Crie seu arquivo de variáveis ambiente (.env) na pasta "server", seguindo o arq
 
 Por fim, basta abrir um terminal na pasta "server" e rodar o script "server", e com outro terminal rodar o script "start" dentro da pasta "web".
 
-### Variáveis ambiente
-
 ### Screenshots Web Desktop
 
 [Web-Desktop](screenshots/web_desktop/)
