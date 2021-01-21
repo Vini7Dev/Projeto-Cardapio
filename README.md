@@ -16,7 +16,7 @@ Veja as fotos da aplicação no fim do readme ou dentro da pasta "screenshots".
 **Back-end:**
 - NodeJS;
 - Linguagem: Typescripty;
-- Banco de Dados: Postgress;
+- Banco de Dados: Postgres;
 - ORM: TypeORM;
 - Cache: Redis;
 - Testes Automatizados;
