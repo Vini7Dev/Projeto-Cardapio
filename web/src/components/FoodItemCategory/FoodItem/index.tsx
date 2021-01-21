@@ -109,7 +109,7 @@ const FoodItem: React.FC<IItemProps> = ({
         {/** Remove item button */}
         {
             admin_mode && (
-            <RemoveItemButton onClick={handleDeleteItem}>
+            <RemoveItemButton onClick={handleDeleteItem} data-testid="delete-button">
               <FiTrash2 />
             </RemoveItemButton>
             )
@@ -162,7 +162,7 @@ const FoodItem: React.FC<IItemProps> = ({
         {/** Edit item button */}
         {
             admin_mode && (
-            <EditItemButton onClick={handleEditItem}>
+            <EditItemButton onClick={handleEditItem} data-testid="edit-button">
               <FiEdit3 />
               Editar
             </EditItemButton>
