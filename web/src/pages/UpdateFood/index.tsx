@@ -252,6 +252,7 @@ const UpdateFood: React.FC = () => {
                   setSelectedImage={setSelectedImage}
                   defaultFileName={itemData.image}
                   defaultFileURL={itemData.image_url}
+                  data-testid="add-image"
                 />
 
                 <ItemInput
@@ -290,6 +291,7 @@ const UpdateFood: React.FC = () => {
                 <ItemCheckbox
                   setIsChecked={toggleCheckboxCheck}
                   isChecked={checkboxChecked}
+                  data-testid="enable-checkbox"
                 />
               </div>
 
@@ -297,6 +299,7 @@ const UpdateFood: React.FC = () => {
                 <Button
                   buttonName="Salvar alterações"
                   color="green"
+                  data-testid="submit-button"
                 />
               </div>
             </Form>

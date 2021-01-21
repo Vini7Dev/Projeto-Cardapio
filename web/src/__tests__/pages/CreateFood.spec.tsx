@@ -163,7 +163,7 @@ describe('Page: Create Food', () => {
         });
     });
 
-    it('should be able to display a notification error when request to update profile fails', async () => {
+    it('should be able to display a notification error when request to create food fails', async () => {
         // Cancel alert function
         global.alert = jest.fn();
 
