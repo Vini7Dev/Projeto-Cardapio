@@ -6,9 +6,9 @@ import React from 'react';
 import MockAdapter from 'axios-mock-adapter';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import api from '../../services/api';
+import api from '../../../services/api';
 
-import FoodItem from '../../components/FoodItemCategory/FoodItem';
+import FoodItem from '../../../components/FoodItemCategory/FoodItem';
 
 const apiMock = new MockAdapter(api);
 
@@ -23,7 +23,7 @@ jest.mock('react-router-dom', () => {
     };
 });
 
-jest.mock('../../hooks/toast', () => {
+jest.mock('../../../hooks/toast', () => {
     return {
         useToast: () => ({
             addToast: mockedAddToast,

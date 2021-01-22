@@ -5,7 +5,7 @@
 import React from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import Button from '../../components/InputAndButtons/Button';
+import Button from '../../../components/InputAndButtons/Button';
 
 describe('Component: Button', () => {
     it('should be able to render component', async () => {

@@ -5,7 +5,7 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 
-import InputGroup from '../../components/InputAndButtons/InputGroup';
+import InputGroup from '../../../components/InputAndButtons/InputGroup';
 
 describe('Component: Input Group', () => {
     it('should be able to render component', async () => {

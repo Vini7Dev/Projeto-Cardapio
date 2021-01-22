@@ -5,7 +5,7 @@
 import React from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import ItemTextArea from '../../components/InputAndButtons/ItemTextArea';
+import ItemTextArea from '../../../components/InputAndButtons/ItemTextArea';
 
 jest.mock('@unform/core', () => {
     return {

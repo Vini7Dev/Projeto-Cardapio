@@ -5,7 +5,7 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 
-import ItemCheckbox from '../../components/InputAndButtons/ItemCheckBox';
+import ItemCheckbox from '../../../components/InputAndButtons/ItemCheckBox';
 
 const mockedSetIsCheck = jest.fn();
 

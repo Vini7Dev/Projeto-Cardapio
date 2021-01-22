@@ -5,7 +5,7 @@
 import React from 'react';
 import { render, waitFor, fireEvent } from '@testing-library/react';
 
-import GoBackButton from '../../components/InputAndButtons/GoBackButton';
+import GoBackButton from '../../../components/InputAndButtons/GoBackButton';
 
 const mockedHistoryGoBack = jest.fn();
 

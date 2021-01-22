@@ -5,7 +5,7 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 
-import FoodItemCategory from '../../components/FoodItemCategory';
+import FoodItemCategory from '../../../components/FoodItemCategory';
 
 describe('Component: Food Item Category', () => {
     it('should be able to render component', async () => {

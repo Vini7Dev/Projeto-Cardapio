@@ -5,7 +5,7 @@
 import React from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import ItemInput from '../../components/InputAndButtons/ItemInput';
+import ItemInput from '../../../components/InputAndButtons/ItemInput';
 
 jest.mock('@unform/core', () => {
     return {
