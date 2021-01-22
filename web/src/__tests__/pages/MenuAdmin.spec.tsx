@@ -81,7 +81,7 @@ describe('Page: Menu Admin', () => {
     it('should be able to render page', async () => {
         act(async () => {
             // Render page
-            const { getByText } =render(<MenuAdmin />);
+            const { getByText } = render(<MenuAdmin />);
 
             // Select one page element
             const element = getByText('+ Adicionar item');
@@ -99,7 +99,7 @@ describe('Page: Menu Admin', () => {
 
         act(async () => {
             // Render page
-            const { getByTestId } =render(<MenuAdmin />);
+            const { getByTestId } = render(<MenuAdmin />);
 
             // Getting copy link button
             const copyButton = getByTestId('copy-link-url');
@@ -117,7 +117,7 @@ describe('Page: Menu Admin', () => {
     it('should be able navigate to create food page', async () => {
         act(async () => {
             // Render page
-            const { getByText } =render(<MenuAdmin />);
+            const { getByText } = render(<MenuAdmin />);
 
             // Getting add item button
             const addItemButton = getByText('+ Adicionar item');
@@ -135,7 +135,7 @@ describe('Page: Menu Admin', () => {
     it('should be able navigate to logout', async () => {
         act(async () => {
             // Render page
-            const { getAllByTestId } =render(<MenuAdmin />);
+            const { getAllByTestId } = render(<MenuAdmin />);
 
             // Getting option buttons
             const optionButton = getAllByTestId('option-button');
@@ -153,7 +153,7 @@ describe('Page: Menu Admin', () => {
     it('should be able navigate to edit profile page', async () => {
         act(async () => {
             // Render page
-            const { getAllByTestId } =render(<MenuAdmin />);
+            const { getAllByTestId } = render(<MenuAdmin />);
 
             // Getting option buttons
             const optionButton = getAllByTestId('option-button');
