@@ -155,7 +155,7 @@ const Menu: React.FC = () => {
           <MenuCode id="menu-code">
             <p>Código do cardápio:</p>
             <strong>{(auth.restaurant.menu.code + 100000).toString(16).toUpperCase()}</strong>
-            <button onClick={handleCopyMenuURL}>Copiar Link</button>
+            <button onClick={handleCopyMenuURL} data-testid="copy-link-url">Copiar Link</button>
             <p id="menu-link">
               {
                 `http://localhost:3000/menu/${(auth.restaurant.menu.code + 100000).toString(16).toUpperCase()}`
@@ -165,7 +165,6 @@ const Menu: React.FC = () => {
 
           {/** Menu area */}
           <MenuArea>
-
             {
                 organizedMenuItems.length > 0 ? (
                 // Creating a category section

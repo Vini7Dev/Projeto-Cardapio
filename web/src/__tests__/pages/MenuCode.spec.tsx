@@ -9,7 +9,6 @@ import MenuCode from '../../pages/MenuCode';
 
 const mockedHistoryPush = jest.fn();
 
-
 jest.mock('react-router-dom', () => {
     return {
         useHistory: () => ({

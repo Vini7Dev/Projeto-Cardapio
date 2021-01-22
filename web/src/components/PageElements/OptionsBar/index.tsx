@@ -37,7 +37,7 @@ const OptionsBar: React.FC<IOptionsBarProps> = ({
                  icon: Icon,
                  action
              }, index) => (
-               <button key={index.toString()} onClick={action}>
+               <button data-testid="option-button" key={index.toString()} onClick={action}>
                  { Icon && <Icon /> }
 
                  { text }
