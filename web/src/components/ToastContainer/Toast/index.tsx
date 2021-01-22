@@ -39,7 +39,7 @@ const Toast: React.FC<IToastProps> = ({
 
     return (
       <Container status={status} style={styles}>
-        <button onClick={handleRemoveToastOnClick}>
+        <button onClick={handleRemoveToastOnClick} data-testid="toast-button">
           <h1>{title}</h1>
           <p>{description}</p>
         </button>

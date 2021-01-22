@@ -1,5 +1,5 @@
 /**
- * Test: Menu Footer
+ * Test: Toast Container
  */
 
 import React from 'react';
