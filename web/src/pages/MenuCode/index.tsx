@@ -51,13 +51,11 @@ const MenuCode: React.FC = () => {
             // Navigate to menu clien page
             history.push(`/menu/${menu_code}`);
         } catch(error) {
-            if(error instanceof Yup.ValidationError) {
-                // Getting validation errors
-                const validationErrors = getValidationErrors(error);
+            // Getting validation errors
+            const validationErrors = getValidationErrors(error);
 
-                // Setting errors in form
-                formRef.current?.setErrors(validationErrors);
-            }
+            // Setting errors in form
+            formRef.current?.setErrors(validationErrors);
         }
     }, [history]);
 
@@ -84,6 +82,7 @@ const MenuCode: React.FC = () => {
 
               <Button
                 buttonName="Acessar"
+                data-testid="submit-button"
               />
             </InputGroup>
           </Form>
