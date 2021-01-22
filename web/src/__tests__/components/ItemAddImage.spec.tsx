@@ -1,30 +1,30 @@
 /**
- * Test: Add Logo
+ * Test: Item Add Image
  */
 
 import React from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import AddLogo from '../../components/InputAndButtons/AddLogo';
+import ItemAddImage from '../../components/InputAndButtons/ItemAddImage';
 
-describe('Component: Add Logo', () => {
+describe('Component: Item Add Image', () => {
     it('should be able to select file', async () => {
         // Skip URL generation
         global.URL.createObjectURL = jest.fn();
 
         // Render component
-        const { getByTestId } = render(<AddLogo
-          setSelectedFile={jest.fn()}
+        const { getByTestId } = render(<ItemAddImage
+          setSelectedImage={jest.fn()}
         />)
 
-        // Getting add logo input
-        const addLogoInput = getByTestId('file-input');
+        // Getting input
+        const input = getByTestId('add-file-input');
 
         // File example
         const file = new File(['test'], 'test');
 
         // Select file
-        fireEvent.change(addLogoInput, { target: { files: [ file ] } });
+        fireEvent.change(input, { target: { files: [ file ] } });
 
         // Expect try to generate URL
         await waitFor(() => {
@@ -37,14 +37,14 @@ describe('Component: Add Logo', () => {
         global.URL.createObjectURL = jest.fn();
 
         // Render component
-        const { getByTestId } = render(<AddLogo
-          setSelectedFile={jest.fn()}
+        const { getByTestId } = render(<ItemAddImage
+          setSelectedImage={jest.fn()}
           defaultFileName="Example"
           defaultFileURL="URL Example"
         />)
 
-        // Getting element
-        const input = getByTestId('file-input');
+        // Getting input
+        const input = getByTestId('add-file-input');
 
         // Expect component exists
         await waitFor(() => {
@@ -57,15 +57,15 @@ describe('Component: Add Logo', () => {
         global.URL.createObjectURL = jest.fn();
 
         // Render component
-        const { getByTestId } = render(<AddLogo
-          setSelectedFile={jest.fn()}
+        const { getByTestId } = render(<ItemAddImage
+          setSelectedImage={jest.fn()}
         />)
 
-        // Getting add logo input
-        const addLogoInput = getByTestId('file-input');
+        // Getting input
+        const input = getByTestId('add-file-input');
 
         // Select file
-        fireEvent.change(addLogoInput, { target: { files: false } });
+        fireEvent.change(input, { target: { files: false } });
 
         // Expect try to generate URL
         await waitFor(() => {
@@ -78,15 +78,15 @@ describe('Component: Add Logo', () => {
         global.URL.createObjectURL = jest.fn();
 
         // Render component
-        const { getByTestId } = render(<AddLogo
-          setSelectedFile={jest.fn()}
+        const { getByTestId } = render(<ItemAddImage
+          setSelectedImage={jest.fn()}
         />)
 
-        // Getting add logo input
-        const addLogoInput = getByTestId('file-input');
+        // Getting input
+        const input = getByTestId('add-file-input');
 
         // Select file
-        fireEvent.change(addLogoInput, { target: undefined });
+        fireEvent.change(input, undefined);
 
         // Expect try to generate URL
         await waitFor(() => {

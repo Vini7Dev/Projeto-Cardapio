@@ -64,6 +64,7 @@ const ItemAddImage: React.FC<IItemAddImageProps> = ({
             <input
               type="file"
               id="add-file-input"
+              data-testid="add-file-input"
               onChange={handleSelectFile}
               accept=".png, .jpg, .jpeg"
               {...rest}
