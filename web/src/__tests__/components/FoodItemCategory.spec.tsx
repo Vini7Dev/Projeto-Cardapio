@@ -17,6 +17,7 @@ describe('Component: Food Item Category', () => {
         // Gettin element
         const element = getByTestId('food-item-category');
 
+        // Expect component exists
         await waitFor(() => {
             expect(element).toBeTruthy();
         });
