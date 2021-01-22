@@ -14,7 +14,7 @@ const GoBackButton: React.FC = () => {
     const history = useHistory();
 
     return (
-      <Container onClick={() => history.goBack()}>
+      <Container onClick={() => history.goBack()} data-testid="go-back-button">
         <FiArrowLeft size={50} />
       </Container>
     );
