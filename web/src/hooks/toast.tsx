@@ -15,6 +15,7 @@ interface IToastData {
 }
 
 interface IProviderValue {
+    toasts: IToastData[],
     addToast(toastData: Omit<IToastData, 'id'>): void;
     removeToast(id: string): void;
 }
@@ -66,7 +67,8 @@ const ToastProvider: React.FC = ({ children }) => {
     return (
       <ToastContext.Provider value={{
           addToast,
-          removeToast }}
+          removeToast,
+          toasts }}
       >
         {children}
         <ToastContainer toasts={toasts} />
