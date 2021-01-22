@@ -86,7 +86,7 @@ export const MenuArea = styled.section`
     }
 `;
 
-export const AddItemButtonArea = styled.div`
+export const TelephoneDisplay = styled.div`
     display: flex;
     justify-content: center;
 

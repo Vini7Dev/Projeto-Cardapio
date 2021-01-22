@@ -23,7 +23,7 @@ import {
     MenuSide,
     MenuCode,
     MenuArea,
-    AddItemButtonArea,
+    TelephoneDisplay,
 } from './styles';
 
 interface IMenuResponse {
@@ -207,9 +207,11 @@ const MenuCustomer: React.FC = () => {
           </MenuArea>
 
           {/** Add item button */}
-          <AddItemButtonArea>
-            <button>{restaurantData.telephone ? formatTelephone(restaurantData.telephone) : 'Carregando...'}</button>
-          </AddItemButtonArea>
+          <TelephoneDisplay>
+            <button data-testid="telephone-display">
+              {restaurantData.telephone ? formatTelephone(restaurantData.telephone) : 'Carregando...'}
+            </button>
+          </TelephoneDisplay>
 
           {/** Menu footer */}
           <MenuFooter
