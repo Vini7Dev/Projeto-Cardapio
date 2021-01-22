@@ -2,8 +2,8 @@
  * Test: Menu Footer
  */
 
-import { render, waitFor } from '@testing-library/react';
 import React from 'react';
+import { render, waitFor } from '@testing-library/react';
 
 import MenuFooter from '../../../components/PageElements/MenuFooter';
 
