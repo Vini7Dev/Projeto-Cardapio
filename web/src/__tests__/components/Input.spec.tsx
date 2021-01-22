@@ -62,7 +62,7 @@ describe('Component: Input', () => {
 
     it('should be able to format a telephone value', async () => {
         // Render component
-        const { getByPlaceholderText, getByTestId } = render(<Input
+        const { getByPlaceholderText } = render(<Input
           name="Name Example"
           placeholder="Placeholder Example"
           type="tel"
@@ -85,7 +85,7 @@ describe('Component: Input', () => {
 
     it('should be able to format a CNPJ value', async () => {
         // Render component
-        const { getByPlaceholderText, getByTestId } = render(<Input
+        const { getByPlaceholderText } = render(<Input
           name="Name Example"
           placeholder="Placeholder Example"
           type="cnpj"
