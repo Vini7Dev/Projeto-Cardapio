@@ -7,7 +7,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 
 import AddLogo from '../../components/InputAndButtons/AddLogo';
 
-describe('Component: AddLogo', () => {
+describe('Component: Add Logo', () => {
     it('should be able to select file', async () => {
         // Skip URL generation
         global.URL.createObjectURL = jest.fn();

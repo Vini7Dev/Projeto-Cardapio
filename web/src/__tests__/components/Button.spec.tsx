@@ -7,7 +7,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 
 import Button from '../../components/InputAndButtons/Button';
 
-describe('Component: Food Item Category', () => {
+describe('Component: Button', () => {
     it('should be able to render component', async () => {
         // Render component
         const { getByText } = render(<Button

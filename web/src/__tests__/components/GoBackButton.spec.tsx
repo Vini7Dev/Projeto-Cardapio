@@ -17,7 +17,7 @@ jest.mock('react-router-dom', () => {
     };
 });
 
-describe('Component: Food Item Category', () => {
+describe('Component: Go Back Button', () => {
     it('should be able to go back', async () => {
         // Render component
         const { getByTestId } = render(<GoBackButton />);
