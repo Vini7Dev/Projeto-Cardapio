@@ -9,6 +9,7 @@ import { LoadScreen } from './styles/loadStyles';
 
 interface IProviderValue {
     setLoad(loading: boolean): void;
+    isLoading: boolean;
 }
 
 const LoadContext = createContext<IProviderValue>({} as IProviderValue);
@@ -30,7 +31,7 @@ const LoadProvider: React.FC = ({ children }) => {
     }, []);
 
     return (
-      <LoadContext.Provider value={{ setLoad }}>
+      <LoadContext.Provider value={{ setLoad, isLoading }}>
         <LoadScreen>
           {children}
           {
