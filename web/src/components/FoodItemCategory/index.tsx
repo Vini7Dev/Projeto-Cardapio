@@ -16,7 +16,7 @@ const FoodItemCategory: React.FC<IFoodItemCategoryProps> = ({
     children
 }) => {
     return (
-      <Container>
+      <Container data-testid="food-item-category">
         <strong className="category-title">{title}</strong>
 
         <ul className="category-items-list">

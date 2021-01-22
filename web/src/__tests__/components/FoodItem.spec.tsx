@@ -130,7 +130,6 @@ describe('Component: Food Item', () => {
           description="Description Example"
           price={10}
           discount_price={5}
-          enabled
           admin_mode
         />);
 

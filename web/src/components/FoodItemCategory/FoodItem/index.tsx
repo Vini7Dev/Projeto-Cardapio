@@ -32,7 +32,7 @@ interface IItemProps {
     image_url?: string;
     price: number;
     discount_price?: number;
-    enabled: boolean;
+    enabled?: boolean;
 }
 
 const FoodItem: React.FC<IItemProps> = ({
