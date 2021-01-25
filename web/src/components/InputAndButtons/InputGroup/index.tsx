@@ -13,8 +13,8 @@ interface IInputGroupProps extends DOMAttributes<HTMLDivElement> {
 
 const InputGroup: React.FC<IInputGroupProps> = ({ label, children }: IInputGroupProps) => {
     return (
-      <Container>
-        <h3>{label}</h3>
+      <Container name={label}>
+        <legend>{label}</legend>
 
         {children}
       </Container>
