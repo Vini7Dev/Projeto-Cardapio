@@ -1,4 +1,4 @@
-<img src="screenshots/Logo.png" width="300" />
+<img src="screenshots/Logo.png" width="300" style="margin: 0 auto; display: block" />
 
 # Projeto - Menue
 ## Cadastre seu cardápio On-line!
