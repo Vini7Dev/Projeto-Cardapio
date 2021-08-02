@@ -15,7 +15,7 @@ Veja as fotos da aplicação no fim do readme ou dentro da pasta "screenshots".
 ### Tecnologias utilizadas
 **Back-end:**
 - NodeJS;
-- Linguagem: Typescripty;
+- Linguagem: Typescript;
 - Banco de Dados: Postgres;
 - ORM: TypeORM;
 - Cache: Redis;
