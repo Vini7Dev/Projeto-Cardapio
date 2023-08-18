@@ -48,8 +48,8 @@ Por fim, basta abrir um terminal na pasta "server" e rodar o script "server", e 
 
 ### Screenshots Web Desktop
 
-[Web-Desktop](screenshots/web_desktop/)
+[Web-Desktop](screenshots/web_desktop/README.md)
 
 ### Screenshots Web Mobile
 
-[Web-Mobile](screenshots/web_mobile/)
+[Web-Mobile](screenshots/web_mobile/README.md)
